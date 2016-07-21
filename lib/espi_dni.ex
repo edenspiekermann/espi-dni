@@ -13,6 +13,7 @@ defmodule EspiDni do
       supervisor(EspiDni.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(EspiDni.Worker, [arg1, arg2, arg3]),
+      worker(EspiDni.SlackRtm, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
