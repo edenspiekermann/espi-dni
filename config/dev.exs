@@ -38,3 +38,6 @@ config :espi_dni, EspiDni.Repo,
   database: "espi_dni_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Use add local dev secrets
+import_config "dev.secret.exs"
