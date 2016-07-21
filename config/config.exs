@@ -27,3 +27,8 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :ueberauth, Ueberauth,
+  providers: [
+    slack: { Ueberauth.Strategy.Slack, [default_scope: "commands,bot"] }
+  ]
