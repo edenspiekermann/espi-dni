@@ -19,6 +19,13 @@ defmodule EspiDni.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", EspiDni do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", EspiDni do
   #   pipe_through :api
