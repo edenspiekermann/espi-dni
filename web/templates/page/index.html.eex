@@ -1,6 +1,11 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2><%= gettext "Welcome to %{name}", name: "PostBot" %></h2>
+  <p class="lead">A slackbot to help you keep track of article performance</p>
+  <p>
+    <%= link to: auth_path(@conn, :request, :slack) do %>
+      <img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+    <% end %>
+  </p>
 </div>
 
 <div class="row marketing">

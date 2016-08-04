@@ -30,5 +30,8 @@ config :phoenix, :generators,
 
 config :ueberauth, Ueberauth,
   providers: [
-    slack: { Ueberauth.Strategy.Slack, [default_scope: "commands,bot"] }
+    slack: { Ueberauth.Strategy.Slack, [
+        default_scope: "bot,commands,users:read,team:read"
+      ]
+    }
   ]
