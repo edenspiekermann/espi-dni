@@ -1,5 +1,6 @@
 defmodule EspiDni.AuthController do
   use EspiDni.Web, :controller
+  alias EspiDni.TeamFromAuth
   plug Ueberauth
 
   def request(conn, _params) do
@@ -14,18 +15,17 @@ defmodule EspiDni.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
-    IO.inspect(_fails)
     conn
     |> put_flash(:error, "Failed to authenticate.")
     |> redirect(to: "/")
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case UserFromAuth.find_or_create(auth) do
-      {:ok, user} ->
+    case TeamFromAuth.find_or_create(auth) do
+      {:ok, team} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
-        |> put_session(:current_user, user)
+        |> put_session(:current_team, team)
         |> redirect(to: "/")
       {:error, reason} ->
         conn
