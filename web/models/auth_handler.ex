@@ -10,8 +10,12 @@ defmodule EspiDni.AuthHandler do
   def init_from_auth(%Auth{} = auth) do
     with {:ok, team} <- TeamFromAuth.find_or_create(auth),
          {:ok, user} <- UserFromAuth.find_or_create(auth, team) do
-         {:ok, team, user}
+      {:ok, team, user}
     end
+    |> case do
+        {:ok, team, user} -> {:ok, team, user}
+        {:error, changeset} -> {:error, changeset}
+      end
   end
 
 end
