@@ -12,7 +12,7 @@ defmodule EspiDni.User do
     timestamps
   end
 
-  @required_fields ~w(slack_id username)
+  @required_fields ~w(slack_id username team_id)
   @optional_fields ~w(email timezone name)
 
   @doc """

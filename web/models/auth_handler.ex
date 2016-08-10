@@ -5,10 +5,12 @@ defmodule EspiDni.AuthHandler do
   """
   alias Ueberauth.Auth
   alias EspiDni.TeamFromAuth
+  alias EspiDni.UserFromAuth
 
   def init_from_auth(%Auth{} = auth) do
-    with {:ok, team} <- TeamFromAuth.find_or_create(auth) do
-         {:ok, team}
+    with {:ok, team} <- TeamFromAuth.find_or_create(auth),
+         {:ok, user} <- UserFromAuth.find_or_create(auth, team) do
+         {:ok, team, user}
     end
   end
 
