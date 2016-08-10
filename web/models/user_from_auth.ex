@@ -8,7 +8,6 @@ defmodule EspiDni.UserFromAuth do
   alias EspiDni.Repo
   alias EspiDni.User
 
-
   def find_or_create(%Auth{} = auth, team) do
     auth
     |> user_params
@@ -38,7 +37,7 @@ defmodule EspiDni.UserFromAuth do
   end
 
   defp user_by_slack_id(slack_id) do
-    Repo.one(from u in User, where: u.slack_id == ^slack_id)
+    Repo.get_by(User, slack_id: slack_id)
   end
 
   defp name_from_auth(auth) do

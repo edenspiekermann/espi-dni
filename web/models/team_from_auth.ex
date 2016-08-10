@@ -35,7 +35,7 @@ defmodule EspiDni.TeamFromAuth do
   end
 
   defp team_by_slack_id(slack_id) do
-    Repo.one(from t in Team, where: t.slack_id == ^slack_id)
+    Repo.get_by(Team, slack_id: slack_id)
   end
 
   defp bot_token(auth) do
