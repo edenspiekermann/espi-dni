@@ -8,7 +8,6 @@ defmodule EspiDni.TeamFromAuth do
   alias EspiDni.Repo
   alias EspiDni.Team
 
-
   def find_or_create(%Auth{} = auth) do
     auth
     |> team_params
