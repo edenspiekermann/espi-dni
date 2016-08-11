@@ -27,11 +27,18 @@ defmodule EspiDni.AuthController do
         |> put_flash(:info, "Successfully authenticated.")
         |> put_session(:current_team, team)
         |> put_session(:current_user, user)
+        |> start_bot
         |> redirect(to: "/")
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
         |> redirect(to: "/")
     end
+  end
+
+  defp start_bot(conn) do
+    team = get_session(conn, :current_team)
+    EspiDni.BotSupervisor.start_bot(team.token)
+    conn
   end
 end
