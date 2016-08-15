@@ -1,0 +1,18 @@
+<h2>Show article</h2>
+
+<ul>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @article.url %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @article.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: article_path(@conn, :edit, @article) %>
+<%= link "Back", to: article_path(@conn, :index) %>
