@@ -18,6 +18,7 @@ defmodule EspiDni.Router do
 
     get "/", PageController, :index
     resources "/teams", TeamController
+    resources "/users", UserController
   end
 
   scope "/auth", EspiDni do

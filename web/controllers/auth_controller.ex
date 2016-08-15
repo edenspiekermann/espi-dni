@@ -1,6 +1,6 @@
 defmodule EspiDni.AuthController do
   use EspiDni.Web, :controller
-  alias EspiDni.TeamFromAuth
+  alias EspiDni.AuthHandler
   plug Ueberauth
 
   def request(conn, _params) do
@@ -21,16 +21,24 @@ defmodule EspiDni.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case TeamFromAuth.find_or_create(auth) do
-      {:ok, team} ->
+    case AuthHandler.init_from_auth(auth) do
+      {:ok, team, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
         |> put_session(:current_team, team)
+        |> put_session(:current_user, user)
+        |> start_bot
         |> redirect(to: "/")
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
         |> redirect(to: "/")
     end
+  end
+
+  defp start_bot(conn) do
+    team = get_session(conn, :current_team)
+    EspiDni.BotSupervisor.start_bot(team.token)
+    conn
   end
 end
