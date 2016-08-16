@@ -13,6 +13,14 @@ defmodule EspiDni.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :webhook do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :put_secure_browser_headers
+    plug EspiDni.Plugs.RequireSlackToken
+  end
+
   scope "/", EspiDni do
     pipe_through :browser # Use the default browser stack
 
@@ -20,6 +28,12 @@ defmodule EspiDni.Router do
     resources "/teams", TeamController
     resources "/users", UserController
     resources "/articles", ArticleController
+  end
+
+  scope "/slack/articles", EspiDni do
+    pipe_through :webhook
+
+    post "/new", WebhookController, :article_registration
   end
 
   scope "/auth", EspiDni do
