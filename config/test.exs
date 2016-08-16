@@ -15,3 +15,10 @@ config :espi_dni, EspiDni.Repo,
   database: "espi_dni_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :espi_dni, EspiDni.RequireSlackToken,
+  slack_token: "test-slack-token"
+
+config :ueberauth, Ueberauth.Strategy.Slack.OAuth,
+  client_id: "test",
+  client_secret: "test"
