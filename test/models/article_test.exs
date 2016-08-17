@@ -3,8 +3,8 @@ defmodule EspiDni.ArticleTest do
 
   alias EspiDni.Article
 
-  @valid_attrs %{url: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{url: "http://www.example.com/foo"}
+  @invalid_attrs %{url: "not a url"}
 
   test "changeset with valid attributes" do
     changeset = Article.changeset(%Article{}, @valid_attrs)
