@@ -16,7 +16,7 @@ config :espi_dni, EspiDni.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :espi_dni, EspiDni.RequireSlackToken,
+config :espi_dni, EspiDni.Plugs.RequireSlackToken,
   slack_token: "test-slack-token"
 
 config :ueberauth, Ueberauth.Strategy.Slack.OAuth,
