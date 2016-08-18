@@ -7,8 +7,16 @@ defmodule EspiDni.Plugs.SetSlackUser do
   end
 
   def call(conn, repo) do
-    slack_id = conn.params["user_id"]
-    user = slack_id && repo.get_by(EspiDni.User, slack_id: slack_id)
-    assign(conn, :current_user, user)
+    case repo.get_by(EspiDni.User, slack_id: user_id(conn)) do
+      nil ->
+        conn |> send_resp(404, "Unknown User") |> halt
+      user ->
+        assign(conn, :current_user, user)
+    end
   end
+
+  defp user_id(conn) do
+    conn.params["user_id"] || get_in(conn.assigns, [:payload, "user", "id"]) || ""
+  end
+
 end
