@@ -26,6 +26,7 @@ defmodule EspiDni.ConnCase do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import EspiDni.Router.Helpers
+      import EspiDni.TestHelpers
 
       # The default endpoint for testing
       @endpoint EspiDni.Endpoint

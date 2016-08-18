@@ -3,7 +3,12 @@ defmodule EspiDni.TeamTest do
 
   alias EspiDni.Team
 
-  @valid_attrs %{slack_id: "some content", token: "some content", url: "some content"}
+  @valid_attrs %{
+    name: "somename",
+    slack_id: "some content",
+    token: "some content",
+    url: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

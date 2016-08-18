@@ -11,16 +11,17 @@ defmodule EspiDni.SlackRtm do
 
   def handle_message(message = %{type: "message"}, slack) do
     if message.user != slack.me.id do
+      IO.inspect(message)
       send_message("I got a message!", message.channel, slack)
     end
   end
 
   def handle_message(message = %{type: "message"}, slack) do
-    send_message("I got a message!", message.channel, slack)
+    # send_message("I got a message!", message.channel, slack)
   end
 
   def handle_message(message, _slack) do
-    IO.inspect(message)
+    # IO.inspect(message)
   end
 
   def handle_info({:message, text, channel}, slack) do

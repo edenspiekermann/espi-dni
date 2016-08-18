@@ -2,7 +2,7 @@ defmodule EspiDni.UserControllerTest do
   use EspiDni.ConnCase
 
   alias EspiDni.User
-  @valid_attrs %{email: "some content", name: "some content", slack_id: "some content", timezone: "some content", username: "some content"}
+  @valid_attrs %{team_id: 1, email: "some content", name: "some content", slack_id: "some content", timezone: "some content", username: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

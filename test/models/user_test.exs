@@ -3,7 +3,14 @@ defmodule EspiDni.UserTest do
 
   alias EspiDni.User
 
-  @valid_attrs %{email: "some content", name: "some content", slack_id: "some content", timezone: "some content", username: "some content"}
+  @valid_attrs %{
+    email: "some content",
+    name: "some content",
+    slack_id: "some content",
+    timezone: "some content",
+    username: "some content",
+    team_id: 1
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
