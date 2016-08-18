@@ -6,6 +6,7 @@ defmodule EspiDni.Team do
     field :name,     :string
     field :url,      :string
     field :slack_id, :string
+    has_many :users, EspiDni.User
 
     timestamps
   end

@@ -26,5 +26,10 @@ defmodule EspiDni.TestHelpers do
     |> Ecto.build_assoc(:users, user_attrs)
     |> Repo.insert!()
   end
+
+  def slack_token do
+    Application.get_env(:espi_dni, EspiDni.Plugs.RequireSlackToken)[:slack_token]
+  end
+
 end
 

@@ -20,7 +20,7 @@ defmodule EspiDni.Article do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_url(:url, message: "URL is not a valid URL!")
+    |> validate_url(:url, message: "#{params.url} is not a valid URL!")
   end
 
 
