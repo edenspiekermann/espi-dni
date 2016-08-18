@@ -17,6 +17,9 @@ defmodule EspiDni.Router do
     plug :accepts, ["json"]
     plug :fetch_session
     plug :put_secure_browser_headers
+    plug EspiDni.Plugs.ParseSlackPayload
+    plug EspiDni.Plugs.RequireSlackToken
+    plug EspiDni.Plugs.SetSlackUser, repo: EspiDni.Repo
   end
 
   scope "/", EspiDni do
