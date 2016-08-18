@@ -7,6 +7,7 @@ defmodule EspiDni.Plugs.ParseSlackPayloadTest do
       conn(:get, "/", %{})
       |> EspiDni.Plugs.ParseSlackPayload.call(%{})
 
+    assert get_in(conn.assigns, [:payload, "token"]) == nil
     refute conn.halted
   end
 
