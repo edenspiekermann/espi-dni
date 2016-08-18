@@ -29,7 +29,7 @@ defmodule EspiDni.SlackArticleControllerTest do
     assert text_response(conn, 200) =~ "invalid_url is not a valid URL"
   end
 
-  test "does stuff", %{conn: conn, user: user} do
+  test "returns an article confirmation response", %{conn: conn, user: user} do
     params = %{command: "/add", token: slack_token, user_id: user.slack_id, text: "http://example.com" }
     conn = post conn, slack_article_path(conn, :new), params
 
