@@ -13,9 +13,9 @@ defmodule EspiDni.Plugs.ParseSlackPayloadTest do
 
   test "parses and sets the payload" do
     conn =
-      conn(:get, "/", %{payload: "{\"foo\": \"bar\" }"})
+      conn(:get, "/", %{payload: Poison.encode!(%{"foo" => "bar"})})
       |> EspiDni.Plugs.ParseSlackPayload.call(%{})
 
-    conn.assigns.payload == %{"foo" => "bar"}
+    assert conn.assigns.payload == %{"foo" => "bar"}
   end
 end

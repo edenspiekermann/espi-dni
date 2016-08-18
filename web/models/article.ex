@@ -23,7 +23,6 @@ defmodule EspiDni.Article do
     |> validate_url(:url, message: "#{params.url} is not a valid URL!")
   end
 
-
   def validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

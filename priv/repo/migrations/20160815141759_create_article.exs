@@ -8,7 +8,7 @@ defmodule EspiDni.Repo.Migrations.CreateArticle do
 
       timestamps
     end
-    create index(:articles, [:user_id])
 
+    create index(:articles, [:user_id])
   end
 end

@@ -2,7 +2,7 @@ defmodule EspiDni.TestHelpers do
   alias EspiDni.Repo
 
   def insert_team(attrs \\ %{}) do
-    changes = Dict.merge(%{
+    changes = Map.merge(%{
       token: "supersecret",
       name: "Some User",
       url: "http://espi-dni.slack.com/foobar",
@@ -15,7 +15,7 @@ defmodule EspiDni.TestHelpers do
   end
 
   def insert_user(team, attrs \\ %{}) do
-    user_attrs = Dict.merge(%{
+    user_attrs = Map.merge(%{
       slack_id: "token#{Base.encode16(:crypto.rand_bytes(8))}",
       username: "username",
       email: "email@email.com",
@@ -30,6 +30,4 @@ defmodule EspiDni.TestHelpers do
   def slack_token do
     Application.get_env(:espi_dni, EspiDni.Plugs.RequireSlackToken)[:slack_token]
   end
-
 end
-
