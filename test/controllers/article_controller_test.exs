@@ -2,8 +2,8 @@ defmodule EspiDni.ArticleControllerTest do
   use EspiDni.ConnCase
 
   alias EspiDni.Article
-  @valid_attrs %{url: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{url: "http://www.example.com"}
+  @invalid_attrs %{url: "invalid"}
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, article_path(conn, :index)
@@ -27,7 +27,7 @@ defmodule EspiDni.ArticleControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{}
+    article = Repo.insert! %Article{url: "http://www.example.com"}
     conn = get conn, article_path(conn, :show, article)
     assert html_response(conn, 200) =~ "Show article"
   end
@@ -39,26 +39,26 @@ defmodule EspiDni.ArticleControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{}
+    article = Repo.insert! %Article{url: "http://www.example.com"}
     conn = get conn, article_path(conn, :edit, article)
     assert html_response(conn, 200) =~ "Edit article"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    article = Repo.insert! %Article{}
+    article = Repo.insert! %Article{url: "http://www.something.com"}
     conn = put conn, article_path(conn, :update, article), article: @valid_attrs
     assert redirected_to(conn) == article_path(conn, :show, article)
     assert Repo.get_by(Article, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    article = Repo.insert! %Article{}
+    article = Repo.insert! %Article{url: "http://www.example.com"}
     conn = put conn, article_path(conn, :update, article), article: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit article"
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{}
+    article = Repo.insert! %Article{url: "http://www.something.com"}
     conn = delete conn, article_path(conn, :delete, article)
     assert redirected_to(conn) == article_path(conn, :index)
     refute Repo.get(Article, article.id)

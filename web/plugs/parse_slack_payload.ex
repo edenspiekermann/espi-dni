@@ -6,7 +6,7 @@ defmodule EspiDni.Plugs.ParseSlackPayload do
 
   def call(conn = %Plug.Conn{params: %{"payload" => payload}}, _opts) do
     case Poison.decode(payload) do
-      { :ok, parsed_payload } ->
+      {:ok, parsed_payload} ->
         assign(conn, :payload, parsed_payload)
       _ ->
         conn

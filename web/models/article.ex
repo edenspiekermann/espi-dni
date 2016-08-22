@@ -20,14 +20,15 @@ defmodule EspiDni.Article do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_url(:url, message: "#{params.url} is not a valid URL!")
+    |> validate_url(:url)
   end
 
   def validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do
         {:ok, _} -> []
-        {:error, msg} -> [{field, options[:message] || "invalid url: #{inspect msg}"}]
+        {:error, msg} ->
+          [{field, options[:message] || "#{url} is not a valid URL!"}]
       end
     end
   end
