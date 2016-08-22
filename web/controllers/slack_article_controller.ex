@@ -3,7 +3,7 @@ defmodule EspiDni.SlackArticleController do
 
   alias EspiDni.Article
 
-  def new(conn, %{"command" => "/add", "text" => url } = params) do
+  def new(conn, %{"command" => "/add", "text" => url} = params) do
     changeset = Article.changeset(%Article{}, %{url: url, user: conn.assigns.current_user.id})
     if changeset.valid? do
       render(conn, "confirm.json", url: url)
