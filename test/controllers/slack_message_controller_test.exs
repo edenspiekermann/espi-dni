@@ -7,7 +7,7 @@ defmodule EspiDni.SlackMessageControllerTest do
   end
 
   test "returns a 401 for an invalid token", %{conn: conn} do
-    params = %{ payload: Poison.encode!(%{"token" => "invalid"})}
+    params = %{payload: Poison.encode!(%{"token" => "invalid"})}
     conn = post conn, slack_message_path(conn, :new), params
 
     assert conn.status == 401
@@ -15,7 +15,7 @@ defmodule EspiDni.SlackMessageControllerTest do
   end
 
   test "returns a 404 for an unknown user", %{conn: conn} do
-    params = %{ payload: Poison.encode!(%{"token" => slack_token, user_id: "invalid"})}
+    params = %{payload: Poison.encode!(%{"token" => slack_token, user_id: "invalid"})}
     conn = post conn, slack_message_path(conn, :new), params
 
     assert conn.status == 404
@@ -26,11 +26,11 @@ defmodule EspiDni.SlackMessageControllerTest do
     payload = Poison.encode!(
       %{
           token: slack_token,
-          user: %{ id: user.slack_id},
+          user: %{id: user.slack_id},
           callback_id: "invalid"
       }
     )
-    conn = post conn, slack_message_path(conn, :new), %{ payload: payload}
+    conn = post conn, slack_message_path(conn, :new), %{payload: payload}
 
     assert conn.status == 400
     assert conn.resp_body =~ "Unknown Action"
@@ -40,12 +40,12 @@ defmodule EspiDni.SlackMessageControllerTest do
     payload = Poison.encode!(
       %{
         token: slack_token,
-        user: %{ id: user.slack_id},
+        user: %{id: user.slack_id},
         callback_id: "confirm_article",
         actions: [ %{name: "no", value: "url"} ]
       }
     )
-    conn = post conn, slack_message_path(conn, :new), %{ payload: payload}
+    conn = post conn, slack_message_path(conn, :new), %{payload: payload}
 
     assert text_response(conn, 200) =~ "ok, can you try adding it with `/add` again please?"
   end
@@ -54,12 +54,12 @@ defmodule EspiDni.SlackMessageControllerTest do
     payload = Poison.encode!(
       %{
         token: slack_token,
-        user: %{ id: user.slack_id},
+        user: %{id: user.slack_id},
         callback_id: "confirm_article",
         actions: [ %{name: "yes", value: "http://www.example.com"} ]
       }
     )
-    conn = post conn, slack_message_path(conn, :new), %{ payload: payload}
+    conn = post conn, slack_message_path(conn, :new), %{payload: payload}
     assert Repo.get_by(EspiDni.Article, url: "http://www.example.com")
 
     assert text_response(conn, 200) =~ "ok, great, I've registered http://www.example.com"

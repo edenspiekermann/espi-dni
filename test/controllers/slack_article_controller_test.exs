@@ -7,7 +7,7 @@ defmodule EspiDni.SlackArticleControllerTest do
   end
 
   test "returns a 401 for an invalid token", %{conn: conn} do
-    params = %{ command: "/add", token: "invalid" }
+    params = %{command: "/add", token: "invalid"}
     conn = post conn, slack_article_path(conn, :new), params
 
     assert conn.status == 401

@@ -16,7 +16,7 @@ defmodule EspiDni.ArticleTest do
     refute changeset.valid?
   end
 
-  test "changeset with url missing" do
+  test "changeset with url missing is invalid" do
     changeset = Article.changeset(%Article{}, %{})
     refute changeset.valid?
   end
