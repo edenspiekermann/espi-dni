@@ -2,8 +2,13 @@ defmodule EspiDni.TeamControllerTest do
   use EspiDni.ConnCase
 
   alias EspiDni.Team
-  @valid_attrs %{slack_id: "some content", token: "some content", url: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{slack_id: "some content", token: "some content", name: "teamname", url: "some content"}
+  @invalid_attrs %{ token: "", slack_id: "", name: "" }
+
+  setup do
+    team = insert_team
+    {:ok, conn: conn, team: team}
+  end
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, team_path(conn, :index)
@@ -26,8 +31,7 @@ defmodule EspiDni.TeamControllerTest do
     assert html_response(conn, 200) =~ "New team"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    team = Repo.insert! %Team{}
+  test "shows chosen resource", %{conn: conn, team: team} do
     conn = get conn, team_path(conn, :show, team)
     assert html_response(conn, 200) =~ "Show team"
   end
@@ -38,27 +42,23 @@ defmodule EspiDni.TeamControllerTest do
     end
   end
 
-  test "renders form for editing chosen resource", %{conn: conn} do
-    team = Repo.insert! %Team{}
+  test "renders form for editing chosen resource", %{conn: conn, team: team} do
     conn = get conn, team_path(conn, :edit, team)
     assert html_response(conn, 200) =~ "Edit team"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    team = Repo.insert! %Team{}
+  test "updates chosen resource and redirects when data is valid", %{conn: conn, team: team} do
     conn = put conn, team_path(conn, :update, team), team: @valid_attrs
     assert redirected_to(conn) == team_path(conn, :show, team)
     assert Repo.get_by(Team, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    team = Repo.insert! %Team{}
+  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn, team: team} do
     conn = put conn, team_path(conn, :update, team), team: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit team"
   end
 
-  test "deletes chosen resource", %{conn: conn} do
-    team = Repo.insert! %Team{}
+  test "deletes chosen resource", %{conn: conn, team: team} do
     conn = delete conn, team_path(conn, :delete, team)
     assert redirected_to(conn) == team_path(conn, :index)
     refute Repo.get(Team, team.id)

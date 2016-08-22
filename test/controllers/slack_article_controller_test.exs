@@ -33,7 +33,7 @@ defmodule EspiDni.SlackArticleControllerTest do
     params = %{command: "/add", token: slack_token, user_id: user.slack_id, text: "http://example.com" }
     conn = post conn, slack_article_path(conn, :new), params
 
-    assert body = json_response(conn, 200)
+    body = json_response(conn, 200)
     assert "Okay, you'd like to register the article at http://example.com?" =~ body["text"]
   end
 end
