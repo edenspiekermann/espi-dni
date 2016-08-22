@@ -1,5 +1,7 @@
 # EspiDni
 
+[ ![Codeship Status for edenspiekermann/espi_dni](https://codeship.com/projects/1b91ad70-4acf-0134-f11c-26219e586aaf/status)](https://codeship.com/projects/169763)
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
