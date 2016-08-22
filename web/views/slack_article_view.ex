@@ -22,7 +22,7 @@ defmodule EspiDni.SlackArticleView do
               name: "no",
               text: "Nope",
               type: "button",
-              value: "no"
+              value: "#{url}"
             }
           ]
         }
