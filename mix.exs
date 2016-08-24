@@ -39,7 +39,9 @@ defmodule EspiDni.Mixfile do
      {:slack, "~> 0.7.0"},
      {:ueberauth_slack, "~> 0.3"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:credo, "~> 0.4", only: [:dev, :test]}
+   ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

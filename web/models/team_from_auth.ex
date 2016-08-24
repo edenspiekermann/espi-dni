@@ -26,10 +26,12 @@ defmodule EspiDni.TeamFromAuth do
   defp create_or_update(%{slack_id: slack_id} = params) do
     case team_by_slack_id(slack_id) do
       nil ->
-        Team.changeset(%Team{}, params)
+        %Team{}
+        |> Team.changeset(params)
         |> Repo.insert
       existing_team ->
-        Team.changeset(existing_team, params)
+        existing_team
+        |> Team.changeset(params)
         |> Repo.update
     end
   end

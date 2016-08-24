@@ -28,10 +28,12 @@ defmodule EspiDni.UserFromAuth do
   defp create_or_update(%{slack_id: slack_id} = params) do
     case user_by_slack_id(slack_id) do
       nil ->
-        User.changeset(%User{}, params)
+        %User{}
+        |> User.changeset(params)
         |> Repo.insert
       existing_team ->
-        User.changeset(existing_team, params)
+        existing_team
+        |> User.changeset(params)
         |> Repo.update
     end
   end
