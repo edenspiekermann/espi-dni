@@ -9,7 +9,8 @@ defmodule EspiDni.AuthHandler do
 
   def init_from_auth(%Auth{} = auth) do
     with {:ok, team} <- TeamFromAuth.find_or_create(auth),
-         {:ok, user} <- UserFromAuth.find_or_create(auth, team) do
+         {:ok, user} <- UserFromAuth.find_or_create(auth, team),
+         {:ok, user} <- send_welcome_message(user) do
       {:ok, team, user}
     end
     |> case do
@@ -18,4 +19,10 @@ defmodule EspiDni.AuthHandler do
       end
   end
 
+  defp send_welcome_message(user) do
+    case EspiDni.SlackWeb.send_message(user, "Wilkommen person") do
+      %{"ok" => true } -> {:ok, user}
+      %{"ok" => false } -> {:error, user}
+    end
+  end
 end
