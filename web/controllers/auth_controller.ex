@@ -20,7 +20,7 @@ defmodule EspiDni.AuthController do
     |> redirect(to: "/")
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => "slack"} = _params) do
     case AuthHandler.init_from_auth(auth) do
       {:ok, team, user} ->
         conn
@@ -34,6 +34,11 @@ defmodule EspiDni.AuthController do
         |> put_flash(:error, reason)
         |> redirect(to: "/")
     end
+  end
+
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => "google"} = _params) do
+    conn
+    |> put_flash(:info, "Successfully authenticated with google.")
   end
 
   defp start_bot(conn) do
