@@ -6,6 +6,7 @@ defmodule EspiDni.AuthHandler do
   alias Ueberauth.Auth
   alias EspiDni.TeamFromAuth
   alias EspiDni.UserFromAuth
+  import EspiDni.Gettext
 
   def init_from_auth(%Auth{} = auth) do
     with {:ok, team} <- TeamFromAuth.find_or_create(auth),
@@ -20,9 +21,13 @@ defmodule EspiDni.AuthHandler do
   end
 
   defp send_welcome_message(user) do
-    case EspiDni.SlackWeb.send_message(user, "Wilkommen person") do
+    case EspiDni.SlackWeb.send_message(user, message) do
       %{"ok" => true } -> {:ok, user}
       %{"ok" => false } -> {:error, user}
     end
+  end
+
+  defp message do
+    gettext "Initial Greeting"
   end
 end

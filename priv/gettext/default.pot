@@ -13,7 +13,7 @@ msgstr ""
 
 #: web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}"
-msgstr "somethign somethign to %{name}"
+msgstr ""
 
 msgid "Initial Greeting"
 msgstr ""
