@@ -43,7 +43,7 @@ defmodule EspiDni.AuthController do
 
   defp start_bot(conn) do
     team = get_session(conn, :current_team)
-    EspiDni.BotSupervisor.start_bot(team.token)
+    EspiDni.BotSupervisor.start_bot(team.slack_token)
     conn
   end
 end

@@ -14,7 +14,7 @@
   <tbody>
 <%= for team <- @teams do %>
     <tr>
-      <td><%= team.token %></td>
+      <td><%= team.slack_token %></td>
       <td><%= team.name %></td>
       <td><%= team.url %></td>
       <td><%= team.slack_id %></td>

@@ -13,7 +13,7 @@ defmodule EspiDni.Team do
     timestamps
   end
 
-  @required_fields ~w(token name slack_id)
+  @required_fields ~w(slack_token name slack_id)
   @optional_fields ~w(url)
 
   @doc """

@@ -16,10 +16,10 @@ defmodule EspiDni.TeamFromAuth do
 
   defp team_params(auth) do
     %{
-      slack_id: auth.credentials.other.team_id,
-      token:    bot_token(auth),
-      name:     auth.credentials.other.team,
-      url:      auth.credentials.other.team_url
+      slack_id:    auth.credentials.other.team_id,
+      slack_token: bot_token(auth),
+      name:        auth.credentials.other.team,
+      url:         auth.credentials.other.team_url
     }
   end
 
