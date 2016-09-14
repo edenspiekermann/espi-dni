@@ -1,6 +1,7 @@
 defmodule EspiDni.AuthController do
   use EspiDni.Web, :controller
   alias EspiDni.AuthHandler
+  alias EspiDni.GoogleAuthHandler
   plug Ueberauth
 
   def request(conn, _params) do
@@ -37,8 +38,18 @@ defmodule EspiDni.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => "google"} = _params) do
-    conn
-    |> put_flash(:info, "Successfully authenticated with google.")
+    team = get_session(conn, :current_team)
+
+    case GoogleAuthHandler.update_from_auth(team, auth) do
+      {:ok, team} ->
+        conn
+        |> put_flash(:info, "Team updated successfully.")
+        |> redirect(to: "/")
+      {:error, changeset} ->
+        conn
+        |> put_flash(:info, "A problem occurred")
+        |> redirect(to: "/")
+    end
   end
 
   defp start_bot(conn) do
@@ -46,4 +57,5 @@ defmodule EspiDni.AuthController do
     EspiDni.BotSupervisor.start_bot(team.slack_token)
     conn
   end
+
 end
