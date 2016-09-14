@@ -6,7 +6,7 @@ defmodule EspiDni.TeamTest do
   @valid_attrs %{
     name: "somename",
     slack_id: "some content",
-    token: "some content",
+    slack_token: "some content",
     url: "some content"
   }
   @invalid_attrs %{}

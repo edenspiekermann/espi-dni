@@ -17,7 +17,7 @@ defmodule EspiDni.SlackWeb do
     Repo.one(
       from team in Team,
       where: team.id == ^user.team_id,
-      select: team.token
+      select: team.slack_token
     )
   end
 

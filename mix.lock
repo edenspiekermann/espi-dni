@@ -30,5 +30,6 @@
   "slack": {:hex, :slack, "0.7.0", "f25c7b9153eafa9bc2d7175982871848388858501a9e2e696e5477b8a6b930f2", [:mix], [{:exjsx, "~> 3.2.0", [hex: :exjsx, optional: false]}, {:httpoison, "~> 0.8.0", [hex: :httpoison, optional: false]}]},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0", "edee20847c42e379bf91261db474ffbe373f8acb56e9079acb6038d4e0bf414f", [:rebar, :make], []},
   "ueberauth": {:hex, :ueberauth, "0.3.0", "d8f8573dc15f2623d22b0c3f360ffbe9db6e2d1e75b79803c3ee7e5964175e58", [:mix], [{:plug, "~> 1.0", [hex: :plug, optional: false]}]},
+  "ueberauth_google": {:hex, :ueberauth_google, "0.3.0", "938fbda9a668e1df44fc5df3673195e0ef1703cb00ab440bf02a9bb30b172e7a", [:mix], [{:oauth2, "~> 0.5", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.2", [hex: :ueberauth, optional: false]}]},
   "ueberauth_slack": {:hex, :ueberauth_slack, "0.3.0", "ec8f6c96e1d41a458a00b5d8cd918c1f387998884fe4636e67dd88b1bd06f928", [:mix], [{:oauth2, "~> 0.5", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.2", [hex: :ueberauth, optional: false]}]},
   "websocket_client": {:git, "https://github.com/jeremyong/websocket_client", "f6892c8b55004008ce2d52be7d98b156f3e34569", []}}

@@ -6,9 +6,9 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :token, class: "control-label" %>
-    <%= text_input f, :token, class: "form-control" %>
-    <%= error_tag f, :token %>
+    <%= label f, :slack_token, class: "control-label" %>
+    <%= text_input f, :slack_token, class: "form-control" %>
+    <%= error_tag f, :slack_token %>
   </div>
 
   <div class="form-group">

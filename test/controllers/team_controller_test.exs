@@ -2,8 +2,8 @@ defmodule EspiDni.TeamControllerTest do
   use EspiDni.ConnCase
 
   alias EspiDni.Team
-  @valid_attrs %{slack_id: "some content", token: "some content", name: "teamname", url: "some content"}
-  @invalid_attrs %{token: "", slack_id: "", name: ""}
+  @valid_attrs %{slack_id: "some content", slack_token: "some content", name: "teamname", url: "some content"}
+  @invalid_attrs %{slack_token: "", slack_id: "", name: ""}
 
   setup do
     team = insert_team

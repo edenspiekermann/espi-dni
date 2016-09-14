@@ -19,7 +19,7 @@ defmodule EspiDni.Mixfile do
   def application do
     [mod: {EspiDni, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack]]
+                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack, :ueberauth_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,6 +38,7 @@ defmodule EspiDni.Mixfile do
      {:gettext, "~> 0.9"},
      {:slack, "~> 0.7.0"},
      {:ueberauth_slack, "~> 0.3"},
+     {:ueberauth_google, "~> 0.3"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
@@ -52,6 +53,8 @@ defmodule EspiDni.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
   end
 end

@@ -33,5 +33,9 @@ config :ueberauth, Ueberauth,
     slack: { Ueberauth.Strategy.Slack, [
         default_scope: "bot,commands,users:read,team:read"
       ]
+    },
+    google: { Ueberauth.Strategy.Google, [
+        default_scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/analytics"
+      ]
     }
   ]

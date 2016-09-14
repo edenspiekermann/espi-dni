@@ -22,6 +22,7 @@ defmodule EspiDni.ModelCase do
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
       import EspiDni.ModelCase
+      import EspiDni.TestHelpers
     end
   end
 

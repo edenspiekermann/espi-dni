@@ -3,7 +3,7 @@ defmodule EspiDni.TestHelpers do
 
   def insert_team(attrs \\ %{}) do
     changes = Map.merge(%{
-      token: "supersecret",
+      slack_token: "supersecret",
       name: "Some User",
       url: "http://espi-dni.slack.com/foobar",
       slack_id: "token#{Base.encode16(:crypto.rand_bytes(8))}",
