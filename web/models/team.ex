@@ -14,7 +14,7 @@ defmodule EspiDni.Team do
   end
 
   @required_fields ~w(slack_token name slack_id)
-  @optional_fields ~w(url)
+  @optional_fields ~w(url google_token google_refresh_token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
