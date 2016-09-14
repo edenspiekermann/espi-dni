@@ -1,4 +1,4 @@
-defmodule EspiDni.AuthHandler do
+defmodule EspiDni.SlackAuthHandler do
 
   @moduledoc """
   Create or retreive the team and user from an auth request

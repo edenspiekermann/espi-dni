@@ -1,6 +1,6 @@
 defmodule EspiDni.AuthController do
   use EspiDni.Web, :controller
-  alias EspiDni.AuthHandler
+  alias EspiDni.SlackAuthHandler
   alias EspiDni.GoogleAuthHandler
   plug Ueberauth
 
@@ -22,7 +22,7 @@ defmodule EspiDni.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => "slack"} = _params) do
-    case AuthHandler.init_from_auth(auth) do
+    case SlackAuthHandler.init_from_auth(auth) do
       {:ok, team, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
