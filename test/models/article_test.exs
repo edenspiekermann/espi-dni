@@ -3,12 +3,22 @@ defmodule EspiDni.ArticleTest do
 
   alias EspiDni.Article
 
-  @valid_attrs %{url: "http://www.example.com/foo"}
+  @valid_attrs %{url: "http://www.example.com/foo?param=bar"}
   @invalid_attrs %{url: "not a url"}
 
   test "changeset with valid attributes" do
     changeset = Article.changeset(%Article{}, @valid_attrs)
     assert changeset.valid?
+  end
+
+  test "changset sets the article path" do
+    changeset = Article.changeset(%Article{}, @valid_attrs)
+    assert get_change(changeset, :path) == "/foo"
+  end
+
+  test "changset sets the article path for a root url" do
+    changeset = Article.changeset(%Article{}, %{url: "http://www.example.com"})
+    assert get_change(changeset, :path) == "/"
   end
 
   test "changeset with invalid attributes" do

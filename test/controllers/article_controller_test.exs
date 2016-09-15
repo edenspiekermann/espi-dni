@@ -27,7 +27,7 @@ defmodule EspiDni.ArticleControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com"}
+    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
     conn = get conn, article_path(conn, :show, article)
     assert html_response(conn, 200) =~ "Show article"
   end
@@ -39,26 +39,27 @@ defmodule EspiDni.ArticleControllerTest do
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com"}
+    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
     conn = get conn, article_path(conn, :edit, article)
     assert html_response(conn, 200) =~ "Edit article"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.something.com"}
+    article = Repo.insert! %Article{url: "http://www.something.com/path", path: "/path"}
+
     conn = put conn, article_path(conn, :update, article), article: @valid_attrs
     assert redirected_to(conn) == article_path(conn, :show, article)
     assert Repo.get_by(Article, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com"}
+    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
     conn = put conn, article_path(conn, :update, article), article: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit article"
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.something.com"}
+    article = Repo.insert! %Article{url: "http://www.something.com/path", path: "/path"}
     conn = delete conn, article_path(conn, :delete, article)
     assert redirected_to(conn) == article_path(conn, :index)
     refute Repo.get(Article, article.id)
