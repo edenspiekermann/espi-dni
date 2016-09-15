@@ -27,6 +27,18 @@ defmodule EspiDni.TestHelpers do
     |> Repo.insert!()
   end
 
+  def insert_article(user, attrs \\ %{}) do
+    article_attrs = Map.merge(%{
+      url: "http://www.example.com/foobar",
+      path: "/somepath",
+      user: user,
+    }, attrs)
+
+    user
+    |> Ecto.build_assoc(:articles, article_attrs)
+    |> Repo.insert!()
+  end
+
   def slack_token do
     Application.get_env(:espi_dni, EspiDni.Plugs.RequireSlackToken)[:slack_token]
   end

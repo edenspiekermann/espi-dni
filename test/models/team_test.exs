@@ -11,6 +11,12 @@ defmodule EspiDni.TeamTest do
   }
   @invalid_attrs %{}
 
+  setup do
+    team = insert_team
+    user = insert_user(team)
+    {:ok, team: team, user: user}
+  end
+
   test "changeset with valid attributes" do
     changeset = Team.changeset(%Team{}, @valid_attrs)
     assert changeset.valid?
@@ -19,5 +25,16 @@ defmodule EspiDni.TeamTest do
   test "changeset with invalid attributes" do
     changeset = Team.changeset(%Team{}, @invalid_attrs)
     refute changeset.valid?
+  end
+
+  test "article_paths with no articles", %{team: team, user: user} do
+    assert Team.article_paths(team) == []
+  end
+
+  test "article_paths with articles", %{team: team, user: user} do
+    insert_article(user, %{path: "/foobar"})
+    insert_article(user, %{path: "/"})
+    insert_article(user, %{path: "/foo/baz/bar/"})
+    assert Enum.sort(Team.article_paths(team)) == Enum.sort(["/foobar", "/", "/foo/baz/bar/"])
   end
 end
