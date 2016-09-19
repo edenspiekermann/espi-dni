@@ -3,7 +3,7 @@ defmodule EspiDni.ArticleTest do
 
   alias EspiDni.Article
 
-  @valid_attrs %{url: "http://www.example.com/foo?param=bar"}
+  @valid_attrs %{url: "http://www.example.com/foo?param=bar", user_id: 123}
   @invalid_attrs %{url: "not a url"}
 
   test "changeset with valid attributes" do

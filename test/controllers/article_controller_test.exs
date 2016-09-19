@@ -5,6 +5,12 @@ defmodule EspiDni.ArticleControllerTest do
   @valid_attrs %{url: "http://www.example.com"}
   @invalid_attrs %{url: "invalid"}
 
+  setup do
+    user = insert_team |> insert_user
+    article = insert_article(user)
+    {:ok, conn: conn, article: article, user: user}
+  end
+
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, article_path(conn, :index)
     assert html_response(conn, 200) =~ "Listing articles"
@@ -15,19 +21,22 @@ defmodule EspiDni.ArticleControllerTest do
     assert html_response(conn, 200) =~ "New article"
   end
 
-  test "creates resource and redirects when data is valid", %{conn: conn} do
+  test "creates resource and redirects when data is valid", %{user: user} do
+    conn = assign(conn(), :current_user, user)
     conn = post conn, article_path(conn, :create), article: @valid_attrs
+
     assert redirected_to(conn) == article_path(conn, :index)
     assert Repo.get_by(Article, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not create resource and renders errors when data is invalid", %{user: user} do
+    conn = assign(conn(), :current_user, user)
     conn = post conn, article_path(conn, :create), article: @invalid_attrs
+
     assert html_response(conn, 200) =~ "New article"
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
+  test "shows chosen resource", %{conn: conn, article: article} do
     conn = get conn, article_path(conn, :show, article)
     assert html_response(conn, 200) =~ "Show article"
   end
@@ -38,28 +47,24 @@ defmodule EspiDni.ArticleControllerTest do
     end
   end
 
-  test "renders form for editing chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
+  test "renders form for editing chosen resource", %{conn: conn, article: article} do
     conn = get conn, article_path(conn, :edit, article)
     assert html_response(conn, 200) =~ "Edit article"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.something.com/path", path: "/path"}
-
+  test "updates chosen resource and redirects when data is valid", %{conn: conn, article: article} do
     conn = put conn, article_path(conn, :update, article), article: @valid_attrs
+
     assert redirected_to(conn) == article_path(conn, :show, article)
     assert Repo.get_by(Article, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.example.com/path", path: "/path"}
+  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn, article: article} do
     conn = put conn, article_path(conn, :update, article), article: @invalid_attrs
     assert html_response(conn, 200) =~ "Edit article"
   end
 
-  test "deletes chosen resource", %{conn: conn} do
-    article = Repo.insert! %Article{url: "http://www.something.com/path", path: "/path"}
+  test "deletes chosen resource", %{conn: conn, article: article} do
     conn = delete conn, article_path(conn, :delete, article)
     assert redirected_to(conn) == article_path(conn, :index)
     refute Repo.get(Article, article.id)

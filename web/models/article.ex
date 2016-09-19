@@ -9,7 +9,7 @@ defmodule EspiDni.Article do
     timestamps
   end
 
-  @required_fields ~w(url)
+  @required_fields ~w(url user_id)
   @optional_fields ~w(path)
 
   @doc """
