@@ -1,7 +1,6 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 @font-face {
   font-family: 'RealText';
-  <%= static_path(@conn, "/images/background.png") %>
   src: url("/fonts/RealTextWebPro.woff") format("woff");
   font-weight: normal;
   font-style: normal;
