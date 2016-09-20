@@ -23,8 +23,8 @@
 
   <header class="clearfix">
     <div class="header container">
-      <img class="header-logo-espi" src="/images/edenspiekermann.png" alt="edenspiekermann" />
-      <img class="header-logo-dni" src="/images/dni_logogoogle_-01_720.png" alt="DNI" />
+      <img class="header-logo-espi" src="/images/edenspiekermann.png" alt="Edenspiekermann logo" />
+      <img class="header-logo-dni" src="/images/dni_logogoogle_-01_720.png" alt="Google Digital News Initiative logo" />
     </div>
   </header>
 

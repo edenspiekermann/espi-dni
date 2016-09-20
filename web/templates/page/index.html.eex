@@ -1,5 +1,5 @@
 <div class="hero">
-  <img class="hero__logo" src="/images/post_logo.png" alt="Post"/>
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
   <h1 class="hero__text">Meet POST Bot &ndash;</br>
   the easiest way to get valuable feedback on your Articles</h1>
   <%= link to: auth_path(@conn, :request, :slack) do %>
@@ -18,7 +18,7 @@
     <ul class="steps">
       <li class="steps__item">
         <div class="steps__left">
-          <img class="steps__image" src="/images/step-1.png" alt="Step 1"/>
+          <img class="steps__image" src="/images/step-1.svg" alt="Step 1 - Send POST Bot your Article"/>
         </div>
         <div class="steps__right">
           <h3 class="steps__title">1. Send POST Bot your Article</h3>
@@ -29,7 +29,7 @@
       </li>
       <li class="steps__item">
         <div class="steps__left">
-          <img class="steps__image" src="/images/step-2.png" alt="Step 2"/>
+          <img class="steps__image" src="/images/step-2.svg" alt="Step 2 - POST tracks your article"/>
         </div>
         <div class="steps__right">
           <h3 class="steps__title">2. POST tracks your article</h3>
@@ -40,7 +40,7 @@
       </li>
       <li class="steps__item">
         <div class="steps__left">
-          <img class="steps__image" src="/images/step-3.png" alt="Step 3"/>
+          <img class="steps__image" src="/images/step-3.svg" alt="Step 3 - Get notifications"/>
         </div>
         <div class="steps__right">
           <h3 class="steps__title">3. Get notifications</h3>
