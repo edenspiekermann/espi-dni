@@ -124,7 +124,7 @@ ul {
   background-image: url("/images/hero.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 550px;
+  min-height: 536px;
 }
 
 .hero__logo {
@@ -260,10 +260,10 @@ footer {
   }
   .bottom__title {
     margin: 0;
-    padding: 60px 130px 20px 130px;
+    padding: 70px 150px 20px 150px;
   }
   .steps {
-    padding: 0 130px 0 130px;
+    padding: 0 150px 0 150px;
   }
   .try {
     margin: inherit;
