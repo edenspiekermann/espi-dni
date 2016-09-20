@@ -3,6 +3,6 @@ defmodule EspiDni.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Welcome"
+    assert html_response(conn, 200) =~ "Meet POST Bot"
   end
 end

@@ -1,46 +1,68 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "PostBot" %></h2>
-  <p class="lead">A slackbot to help you keep track of article performance</p>
-  <p>
-    <%= link to: auth_path(@conn, :request, :slack) do %>
-      <img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
-    <% end %>
-  </p>
-  <%= if @current_team do %>
-    <h2>Welcome, <%= @current_team.name %>!</h2>
-  <% else %>
-    <h2>Unauthenticated</h2>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Meet POST Bot &ndash;</br>
+  the easiest way to get valuable feedback on your Articles</h1>
+  <%= link to: auth_path(@conn, :request, :slack) do %>
+    <img
+      alt="Sign in with Slack"
+      height="40"
+      width="172"
+      src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+      srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
   <% end %>
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <h2 class="bottom__title">How POST works:</h2>
+    <ul class="steps">
+      <li class="steps__item">
+        <div class="steps__left">
+          <img class="steps__image" src="/images/step-1.svg" alt="Step 1 - Send POST Bot your Article"/>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title">1. Send POST Bot your Article</h3>
+          <p class="steps__description">
+            Simply paste your Articles URL into a Slack Message to POST Bot and the Bot gets to work.
+          </p>
+        </div>
       </li>
-      <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
+      <li class="steps__item">
+        <div class="steps__left">
+          <img class="steps__image" src="/images/step-2.svg" alt="Step 2 - POST tracks your article"/>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title">2. POST tracks your article</h3>
+          <p class="steps__description">
+            POST starts tracking your article over the course of several hours and analyzes how it preforms for you
+          </p>
+        </div>
       </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+      <li class="steps__item">
+        <div class="steps__left">
+          <img class="steps__image" src="/images/step-3.svg" alt="Step 3 - Get notifications"/>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title">3. Get notifications</h3>
+          <p class="steps__description">
+            When POST noticed something going on with your article it will notify your via Slack and even recommend actions for you.
+          </p>
+        </div>
       </li>
     </ul>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+    <div class="try">
+      <h3 class="try__title">Try POST now:</h3>
+      <%= link to: auth_path(@conn, :request, :slack) do %>
+        <img
+          alt="Sign in with Slack"
+          height="40"
+          width="172"
+          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+          srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+      <% end %>
+    </div>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
   </div>
 </div>

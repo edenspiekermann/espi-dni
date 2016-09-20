@@ -3,11 +3,6 @@
 <ul>
 
   <li>
-    <strong>Token:</strong>
-    <%= @team.slack_token %>
-  </li>
-
-  <li>
     <strong>Name:</strong>
     <%= @team.name %>
   </li>
