@@ -12,7 +12,7 @@ defmodule EspiDni.SlackMessageController do
     case action do
       %{"name" => "yes", "value" => url} ->
         changeset = Article.changeset(
-          %Article{}, %{url: url, user: conn.assigns.current_user.id}
+          %Article{}, %{url: url, user_id: conn.assigns.current_user.id}
         )
         Repo.insert(changeset)
         text conn, "ok, great, I've registered #{url}"

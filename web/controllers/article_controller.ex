@@ -16,7 +16,8 @@ defmodule EspiDni.ArticleController do
   end
 
   def create(conn, %{"article" => article_params}) do
-    changeset = Article.changeset(%Article{}, article_params)
+    params = Map.merge(article_params, %{"user_id" => conn.assigns.current_user.id})
+    changeset = Article.changeset(%Article{}, params)
 
     case Repo.insert(changeset) do
       {:ok, _article} ->

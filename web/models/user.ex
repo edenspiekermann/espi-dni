@@ -8,6 +8,7 @@ defmodule EspiDni.User do
     field :timezone, :string
     field :name, :string
     belongs_to :team, EspiDni.Team
+    has_many :articles, EspiDni.Article
 
     timestamps
   end

@@ -27,4 +27,13 @@ defmodule EspiDni.Team do
     |> cast(params, @required_fields, @optional_fields)
   end
 
+  def article_paths(team) do
+    EspiDni.Repo.all(
+      from article in EspiDni.Article,
+      join: user in EspiDni.User, on: user.id == article.user_id,
+      where: user.team_id == ^team.id,
+      select: article.path
+    )
+  end
+
 end

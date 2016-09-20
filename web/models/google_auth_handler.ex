@@ -6,16 +6,15 @@ defmodule EspiDni.GoogleAuthHandler do
   alias EspiDni.Team
   alias EspiDni.Repo
 
-  def update_from_auth(team, auth) do
+
+  def update_from_auth(team, %{credentials: %{token: token, refresh_token: refresh_token}}) do
     team
-    |> Team.changeset(google_params(auth))
+    |> Team.changeset(%{google_token: token, google_refresh_token: refresh_token})
     |> Repo.update
   end
 
-  defp google_params(auth) do
-    %{
-      google_token: auth.credentials.token,
-      google_refresh_token: auth.credentials.refresh_token
-    }
+  def update_from_auth(team, _) do
+    {:error}
   end
+
 end
