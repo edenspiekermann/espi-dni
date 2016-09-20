@@ -5,6 +5,7 @@ defmodule EspiDni.Article do
     field :url, :string
     field :path, :string
     belongs_to :user, EspiDni.User
+    has_many :view_counts, EspiDni.ViewCount
 
     timestamps
   end

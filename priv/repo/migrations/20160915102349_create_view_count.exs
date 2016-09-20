@@ -9,6 +9,5 @@ defmodule EspiDni.Repo.Migrations.CreateViewCount do
       timestamps
     end
     create index(:view_counts, [:article_id])
-
   end
 end

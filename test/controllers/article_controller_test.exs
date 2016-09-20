@@ -24,7 +24,6 @@ defmodule EspiDni.ArticleControllerTest do
   test "creates resource and redirects when data is valid", %{user: user} do
     conn = assign(conn(), :current_user, user)
     conn = post conn, article_path(conn, :create), article: @valid_attrs
-
     assert redirected_to(conn) == article_path(conn, :index)
     assert Repo.get_by(Article, @valid_attrs)
   end
@@ -32,7 +31,6 @@ defmodule EspiDni.ArticleControllerTest do
   test "does not create resource and renders errors when data is invalid", %{user: user} do
     conn = assign(conn(), :current_user, user)
     conn = post conn, article_path(conn, :create), article: @invalid_attrs
-
     assert html_response(conn, 200) =~ "New article"
   end
 
@@ -54,7 +52,6 @@ defmodule EspiDni.ArticleControllerTest do
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn, article: article} do
     conn = put conn, article_path(conn, :update, article), article: @valid_attrs
-
     assert redirected_to(conn) == article_path(conn, :show, article)
     assert Repo.get_by(Article, @valid_attrs)
   end

@@ -1,6 +1,5 @@
 defmodule EspiDni.ViewCountTest do
   use EspiDni.ModelCase
-
   alias EspiDni.ViewCount
 
   @valid_attrs %{count: 42, article_id: 1}
