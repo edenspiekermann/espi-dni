@@ -30,9 +30,10 @@ The user flow is as follows:
 
 The app is built using:
 
-* Elixir 1.3
-* Phoenix 1.2
-* PostgreSQL 9.4
+* Elixir `1.3`
+* Phoenix `1.2`
+* Node.js `5.3.0`
+* PostgreSQL `9.4`
 
 #### Homebrew
 
@@ -75,3 +76,14 @@ brew install nodejs
 To start the app locally:
 
 Start Phoenix endpoint with `mix phoenix.server.` Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Deployment / CI
+
+The project is hosted on [Heroku](https://www.heroku.com/) and available at [https://espi-dni.herokuapp.com](https://espi-dni.herokuapp.com).
+Deployment can be done by pushing to the Heroku git repository.
+
+We are using [Codeship](https://www.codeship.io/projects/169763) for continuous integration. Codeship will run tests for any pushes to any branch for the project on github.
+
+### Deployment
+
+Deployment to production is automatically carried out as part of the codeship build process. When changes are pushed to `master`, all tests are run, and if the build passes, the current state of `master` is deployed to heroku ([https://espi-dni.herokuapp.com](https://espi-dni.herokuapp.com). As part of the deployment process, any pending migrations will be run, and the server will be restarted.
