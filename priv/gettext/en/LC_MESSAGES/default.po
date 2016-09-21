@@ -10,6 +10,13 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
+#: web/templates/layout/app.html.eex
+msgid "Default Title"
+msgstr "POST Bot for Slack"
+
+msgid "Default Description"
+msgstr "A Slack bot to get valuable feedback on your articles."
+
 #: web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}"
 msgstr ""
