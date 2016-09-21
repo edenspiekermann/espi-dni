@@ -55,17 +55,19 @@
       </li>
       <li class="steps__item">
         <div class="steps__left">
-          <span class="steps__number">3</span>
+          <%= if @current_team && @current_team.google_property_id do %>
+            <img class="steps__image steps__image--checked" src="/images/checked.svg" alt="Step complete"/>
+          <% else %>
+            <span class="steps__number">3</span>
+          <% end %>
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 3 &ndash;</strong> Select your Google Analytics web property</h3>
-          <%= if @current_team && @current_team.google_token do %>
-            <%= form_for team_changeset(@current_team), team_path(@conn, :update, @current_team), fn form -> %>
+          <%= if @current_team && !@current_team.google_property_id do %>
+            <%= form_for team_changeset(@current_team), setup_path(@conn, :update), fn form -> %>
               <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property" %>
               <%= submit "Submit" %>
             <% end %>
-          <% else %>
-            <span>Link your Google account first.</span>
           <% end %>
         </div>
       </li>
