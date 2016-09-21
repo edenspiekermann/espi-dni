@@ -9,7 +9,8 @@ defmodule EspiDni.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :espi_dni, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico apple-touch-icon.png favicon-32x32.png
+             favicon-16x16.png manifest.json safari-pinned-tab.svg robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

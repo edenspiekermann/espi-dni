@@ -1,6 +1,3 @@
-<%
-  full_logo_url = page_url(@conn, :index) <> "images/post_logo.png"
-%>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -12,22 +9,22 @@
   <title><%= gettext "Default Title" %></title>
   <meta name="description" content="<%= gettext "Default Description" %>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= static_path(@conn, "/apple-touch-icon.png") %>">
+  <link rel="icon" type="image/png" href="<%= static_path(@conn, "/favicon-32x32.png") %>" sizes="32x32">
+  <link rel="icon" type="image/png" href="<%= static_path(@conn, "/favicon-16x16.png") %>" sizes="16x16">
+  <link rel="manifest" href="<%= static_path(@conn, "/manifest.json") %>">
+  <link rel="mask-icon" href="<%= static_path(@conn, "/safari-pinned-tab.svg") %>" color="#5bbad5">
   <meta name="theme-color" content="#ffffff">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="<%= gettext "Default Title" %>">
   <meta name="twitter:description" content="<%= gettext "Default Description" %>">
-  <meta name="twitter:image" content="<%= full_logo_url %>">
+  <meta name="twitter:image" content="<%= static_path(@conn, "/images/post_logo.png") %>">
 
   <meta property="og:title" content="<%= gettext "Default Title" %>" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="<%= page_url(@conn, :index) %>" />
-  <meta property="og:image" content="<%= full_logo_url %>" />
+  <meta property="og:image" content="<%= static_path(@conn, "/images/post_logo.png") %>" />
   <meta property="og:description" content="<%= gettext "Default Description" %>" />
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
