@@ -203,6 +203,21 @@ a {
   font-weight: 700;
 }
 
+.steps__right a {
+  color: black;
+  text-decoration: none;
+}
+
+.google {
+  padding: 0.3em 1em;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: white;
+  border: 1px solid #d5d7d9;
+  margin-top: 0.5em;
+  display: inline-block;
+}
+
 footer {
   border-top: 1px solid white;
   text-align: center;

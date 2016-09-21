@@ -42,7 +42,7 @@
           <h3 class="steps__title"><strong>Step 2 &ndash;</strong> Authenticate Google Analytics</h3>
           <%= if @current_team && !@current_team.google_token do %>
             <%= link to: auth_path(@conn, :request, :google) do %>
-              Link your Google account
+              <div class="google">Link your Google account</div>
             <% end %>
           <% end %>
         </div>
