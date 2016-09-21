@@ -26,6 +26,8 @@ defmodule EspiDni.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/setup", SetupController, :index
+
     resources "/teams", TeamController
     resources "/users", UserController
     resources "/articles", ArticleController
