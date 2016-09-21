@@ -64,7 +64,7 @@ textarea {
 }
 
 body {
-  font: 16px/26px RealText, Helvetica Neue, Arial;
+  font: 16px/26px 'RealText', 'Helvetica', 'Arial', sans-serif;
   background-color: white;
 }
 
@@ -100,11 +100,11 @@ ul {
 }
 
 .header-logo-espi {
-  width: 192px;
+  width: 144px;
 }
 
 .header-logo-dni {
-  width: 140px;
+  width: 105px;
 }
 
 .hero {
@@ -210,6 +210,12 @@ footer {
    Media Queries
    ========================================================================== */
 @media only screen and (min-width: 500px) {
+  .header-logo-espi {
+    width: 192px;
+  }
+  .header-logo-dni {
+    width: 140px;
+  }
   .bottom {
     text-align: left;
   }
@@ -254,9 +260,14 @@ footer {
     max-width: 940px;
     margin: 0 auto;
   }
+  .bottom {
+    padding-bottom: 70px;
+  }
   .bottom__offset {
     padding: 0;
     margin-top: -70px;
+    border: 1px solid white;
+    border-radius: 5px;
   }
   .bottom__title {
     margin: 0;

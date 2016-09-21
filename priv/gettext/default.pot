@@ -11,6 +11,13 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
+#: web/templates/layout/app.html.eex
+msgid "Default Title"
+msgstr ""
+
+msgid "Default Description"
+msgstr ""
+
 #: web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}"
 msgstr ""

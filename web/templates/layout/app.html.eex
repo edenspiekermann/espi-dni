@@ -6,9 +6,26 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>POST Bot for Slack</title>
-  <meta name="description" content="A Slack bot to get valuable feedback on your articles.">
+  <title><%= gettext "Default Title" %></title>
+  <meta name="description" content="<%= gettext "Default Description" %>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= static_path(@conn, "/apple-touch-icon.png") %>">
+  <link rel="icon" type="image/png" href="<%= static_path(@conn, "/favicon-32x32.png") %>" sizes="32x32">
+  <link rel="icon" type="image/png" href="<%= static_path(@conn, "/favicon-16x16.png") %>" sizes="16x16">
+  <link rel="manifest" href="<%= static_path(@conn, "/manifest.json") %>">
+  <link rel="mask-icon" href="<%= static_path(@conn, "/safari-pinned-tab.svg") %>" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="<%= gettext "Default Title" %>">
+  <meta name="twitter:description" content="<%= gettext "Default Description" %>">
+  <meta name="twitter:image" content="<%= static_path(@conn, "/images/post_logo.png") %>">
+
+  <meta property="og:title" content="<%= gettext "Default Title" %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= page_url(@conn, :index) %>" />
+  <meta property="og:image" content="<%= static_path(@conn, "/images/post_logo.png") %>" />
+  <meta property="og:description" content="<%= gettext "Default Description" %>" />
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
