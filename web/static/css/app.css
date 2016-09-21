@@ -73,6 +73,10 @@ ul {
   padding: 0;
 }
 
+a {
+  color: white;
+}
+
 /* ===============
     ALL: IE Fixes
    =============== */
@@ -145,6 +149,11 @@ ul {
 
 .steps__image {
   width: 115px;
+}
+
+.steps__image--checked {
+  width: 50px;
+  height: 50px;
 }
 
 .steps__item {
@@ -255,6 +264,9 @@ footer {
     justify-content: flex-end;
   }
   .steps__number {
+    margin-right: 50px;
+  }
+  .steps__image--checked {
     margin-right: 50px;
   }
 }

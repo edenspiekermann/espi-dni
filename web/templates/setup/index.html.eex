@@ -18,20 +18,43 @@
     <ul class="steps steps--setup">
       <li class="steps__item">
         <div class="steps__left">
-          <span class="steps__number">1</span>
+          <%= if @current_team && @current_team.google_token do %>
+            <img class="steps__image steps__image--checked" src="/images/checked.svg" alt="Step complete"/>
+          <% else %>
+            <span class="steps__number">1</span>
+          <% end %>
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Sign in with Slack</h3>
-
+          <%= if @current_team && @current_team.google_token do %>
+            <span>DONE</span>
+          <% else %>
+            <%= link to: auth_path(@conn, :request, :slack) do %>
+              <img
+                alt="Sign in with Slack"
+                height="40"
+                width="172"
+                src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+                srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+            <% end %>
+          <% end %>
         </div>
       </li>
       <li class="steps__item">
         <div class="steps__left">
-          <span class="steps__number">2</span>
+          <%= if @current_team && @current_team.google_token do %>
+            <img class="steps__image steps__image--checked" src="/images/checked.svg" alt="Step complete"/>
+          <% else %>
+            <span class="steps__number">2</span>
+          <% end %>
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 2 &ndash;</strong> Authenticate Google Analytics</h3>
-
+          <%= if @current_team && @current_team.google_token do %>
+            <span>Already Linked</span>
+          <% else %>
+            <a href="#">Link your Google account.</a>
+          <% end %>
         </div>
       </li>
       <li class="steps__item">
@@ -40,7 +63,14 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 3 &ndash;</strong> Select your Google Analytics web property</h3>
-
+          <%= if @current_team && @current_team.google_token do %>
+            <%= form_for team_changeset(@current_team), team_path(@conn, :update, @current_team), fn form -> %>
+              <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property" %>
+              <%= submit "Submit" %>
+            <% end %>
+          <% else %>
+            <span>Link your Google account first.</span>
+          <% end %>
         </div>
       </li>
     </ul>
