@@ -53,7 +53,9 @@
           <%= if @current_team && @current_team.google_token do %>
             <span>Already Linked</span>
           <% else %>
-            <a href="#">Link your Google account.</a>
+            <%= link to: auth_path(@conn, :request, :google) do %>
+              Link your Google account
+            <% end %>
           <% end %>
         </div>
       </li>
