@@ -1,1 +1,62 @@
-<div>This is the setup view</div>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Meet POST Bot &ndash;</br>
+  the easiest way to get valuable feedback on your Articles</h1>
+  <%= link to: auth_path(@conn, :request, :slack) do %>
+    <img
+      alt="Sign in with Slack"
+      height="40"
+      width="172"
+      src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+      srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+  <% end %>
+</div>
+
+<div class="bottom">
+  <div class="bottom__offset container">
+    <h2 class="bottom__title">Welcome to POST Bot:</h2>
+    <ul class="steps steps--setup">
+      <li class="steps__item">
+        <div class="steps__left">
+          <span class="steps__number">1</span>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Sign in with Slack</h3>
+
+        </div>
+      </li>
+      <li class="steps__item">
+        <div class="steps__left">
+          <span class="steps__number">2</span>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title"><strong>Step 2 &ndash;</strong> Authenticate Google Analytics</h3>
+
+        </div>
+      </li>
+      <li class="steps__item">
+        <div class="steps__left">
+          <span class="steps__number">3</span>
+        </div>
+        <div class="steps__right">
+          <h3 class="steps__title"><strong>Step 3 &ndash;</strong> Select your Google Analytics web property</h3>
+
+        </div>
+      </li>
+    </ul>
+    <div class="try">
+      <h3 class="try__title">Try POST now:</h3>
+      <%= link to: auth_path(@conn, :request, :slack) do %>
+        <img
+          alt="Sign in with Slack"
+          height="40"
+          width="172"
+          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+          srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+      <% end %>
+    </div>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
+  </div>
+</div>
