@@ -2,13 +2,24 @@
   <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
   <h1 class="hero__text">Meet POST Bot &ndash;</br>
   the easiest way to get valuable feedback on your Articles</h1>
-  <%= link to: auth_path(@conn, :request, :slack) do %>
-    <img
-      alt="Sign in with Slack"
-      height="40"
-      width="172"
-      src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-      srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+  <%= if @current_team do %>
+    <h2>Welcome, <%= @current_team.name %>!</h2>
+    <%= if @current_team.google_token do %>
+      <p>You're ready to go!</p>
+    <% else %>
+      <%= link to: auth_path(@conn, :request, :google) do %>
+        Authenticate with Google
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link to: auth_path(@conn, :request, :slack) do %>
+      <img
+        alt="Sign in with Slack"
+        height="40"
+        width="172"
+        src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+        srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+    <% end %>
   <% end %>
 </div>
 
