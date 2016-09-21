@@ -208,8 +208,13 @@ a {
   text-decoration: none;
 }
 
+.google-icon {
+  width: 30px;
+  margin-right: 0.4em;
+}
+
 .google {
-  padding: 0.3em 1em;
+  padding: 0.3em 0.8em;
   border-radius: 5px;
   font-size: 25px;
   background-color: white;
