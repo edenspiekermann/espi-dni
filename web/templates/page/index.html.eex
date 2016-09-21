@@ -10,14 +10,6 @@
       src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
       srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
   <% end %>
-
-  <%= if @current_team && @current_team.google_token do %>
-    <%= form_for team_changeset(@current_team), team_path(@conn, :update, @current_team), fn form -> %>
-      <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property" %>
-      <%= submit "Submit" %>
-    <% end %>
-  <% end %>
-
 </div>
 
 <div class="bottom">

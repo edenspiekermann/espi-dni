@@ -73,6 +73,10 @@ ul {
   padding: 0;
 }
 
+a {
+  color: white;
+}
+
 /* ===============
     ALL: IE Fixes
    =============== */
@@ -84,15 +88,9 @@ ul {
    Custom styles
    ========================================================================== */
 .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   height: 60px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin: 0 auto;
   padding-left: 1em;
@@ -108,18 +106,9 @@ ul {
 }
 
 .hero {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   background-image: url("/images/hero.jpg");
   background-size: cover;
@@ -148,6 +137,10 @@ ul {
   padding: 20px;
 }
 
+.bottom__title {
+  font-size: 35px;
+}
+
 .steps__description {
   color: black;
   margin-top: 0;
@@ -156,6 +149,11 @@ ul {
 
 .steps__image {
   width: 115px;
+}
+
+.steps__image--checked {
+  width: 50px;
+  height: 50px;
 }
 
 .steps__item {
@@ -169,20 +167,29 @@ ul {
   font-size: 30px;
 }
 
+.steps--setup .steps__left {
+  display: flex;
+  justify-content: center;
+}
+
+.steps__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+}
+
 .try {
   min-height: 200px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   background-color: #31B0E2;
   padding: 1em;
@@ -194,6 +201,26 @@ ul {
 .try__title {
   font-size: 36px;
   font-weight: 700;
+}
+
+.steps__right a {
+  color: black;
+  text-decoration: none;
+}
+
+.google-icon {
+  width: 30px;
+  margin-right: 0.4em;
+}
+
+.google {
+  padding: 0.3em 0.8em;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: white;
+  border: 1px solid #d5d7d9;
+  margin-top: 0.5em;
+  display: inline-block;
 }
 
 footer {
@@ -250,6 +277,18 @@ footer {
   .steps__right {
     width: 412px;
   }
+  .steps--setup .steps__item::after {
+    visibility: hidden;
+  }
+  .steps--setup .steps__left {
+    justify-content: flex-end;
+  }
+  .steps__number {
+    margin-right: 50px;
+  }
+  .steps__image--checked {
+    margin-right: 50px;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -299,4 +338,8 @@ footer {
 
 .clearfix {
   *zoom: 1;
+}
+
+.disabled {
+  opacity: 0.4;
 }

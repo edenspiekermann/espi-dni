@@ -29,7 +29,7 @@ defmodule EspiDni.AuthController do
         |> put_session(:current_team, team)
         |> put_session(:current_user, user)
         |> start_bot
-        |> redirect(to: "/")
+        |> redirect(to: setup_path(conn, :index))
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
@@ -44,7 +44,8 @@ defmodule EspiDni.AuthController do
       {:ok, team} ->
         conn
         |> put_flash(:info, "Team updated successfully.")
-        |> redirect(to: "/")
+        |> put_session(:current_team, team)
+        |> redirect(to: setup_path(conn, :index))
       {:error, changeset} ->
         conn
         |> put_flash(:info, "A problem occurred")
