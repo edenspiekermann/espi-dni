@@ -23,7 +23,7 @@
         <div class="steps__right">
           <h3 class="steps__title">1. Send POST Bot your Article</h3>
           <p class="steps__description">
-            Simply paste your Articles URL into a Slack Message to POST Bot and the Bot gets to work.
+            Simply paste your article’s URL in a Slack message to POST Bot and the Bot gets to work.
           </p>
         </div>
       </li>
@@ -45,7 +45,7 @@
         <div class="steps__right">
           <h3 class="steps__title">3. Get notifications</h3>
           <p class="steps__description">
-            When POST noticed something going on with your article it will notify your via Slack and even recommend actions for you.
+            When POST notices something going on with your article it will notify you via Slack, and even recommend actions for you.
           </p>
         </div>
       </li>
