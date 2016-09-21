@@ -18,15 +18,7 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Sign in with Slack</h3>
-          <%= if @current_team do %>
-            <img
-              class="disabled"
-              alt="Sign in with Slack "
-              height="40"
-              width="172"
-              src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-              srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-          <% else %>
+          <%= if !@current_team do %>
             <%= link to: auth_path(@conn, :request, :slack) do %>
               <img
                 alt="Sign in with Slack"
@@ -48,9 +40,7 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 2 &ndash;</strong> Authenticate Google Analytics</h3>
-          <%= if @current_team && @current_team.google_token do %>
-            <span>Already Linked</span>
-          <% else %>
+          <%= if @current_team && !@current_team.google_token do %>
             <%= link to: auth_path(@conn, :request, :google) do %>
               Link your Google account
             <% end %>
