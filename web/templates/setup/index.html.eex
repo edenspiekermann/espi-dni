@@ -2,14 +2,6 @@
   <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
   <h1 class="hero__text">Meet POST Bot &ndash;</br>
   the easiest way to get valuable feedback on your Articles</h1>
-  <%= link to: auth_path(@conn, :request, :slack) do %>
-    <img
-      alt="Sign in with Slack"
-      height="40"
-      width="172"
-      src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-      srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-  <% end %>
 </div>
 
 <div class="bottom">
@@ -18,7 +10,7 @@
     <ul class="steps steps--setup">
       <li class="steps__item">
         <div class="steps__left">
-          <%= if @current_team && @current_team.google_token do %>
+          <%= if @current_team do %>
             <img class="steps__image steps__image--checked" src="/images/checked.svg" alt="Step complete"/>
           <% else %>
             <span class="steps__number">1</span>
@@ -26,8 +18,14 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Sign in with Slack</h3>
-          <%= if @current_team && @current_team.google_token do %>
-            <span>DONE</span>
+          <%= if @current_team do %>
+            <img
+              class="disabled"
+              alt="Sign in with Slack "
+              height="40"
+              width="172"
+              src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+              srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
           <% else %>
             <%= link to: auth_path(@conn, :request, :slack) do %>
               <img
@@ -78,13 +76,23 @@
     </ul>
     <div class="try">
       <h3 class="try__title">Try POST now:</h3>
-      <%= link to: auth_path(@conn, :request, :slack) do %>
+      <%= if @current_team do %>
         <img
-          alt="Sign in with Slack"
+          class="disabled"
+          alt="Sign in with Slack "
           height="40"
           width="172"
           src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
           srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+      <% else %>
+        <%= link to: auth_path(@conn, :request, :slack) do %>
+          <img
+            alt="Sign in with Slack"
+            height="40"
+            width="172"
+            src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+            srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+        <% end %>
       <% end %>
     </div>
     <footer>
