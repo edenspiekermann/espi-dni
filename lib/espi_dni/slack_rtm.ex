@@ -17,7 +17,7 @@ defmodule EspiDni.SlackRtm do
   end
 
   def handle_message(message, _slack) do
-    Logger.info "Received slack activity: #{message}"
+    Logger.info "Received slack activity: #{inspect message}"
   end
 
   def handle_info({:message, text, channel}, slack) do
