@@ -64,7 +64,7 @@ textarea {
 }
 
 body {
-  font: 16px/26px RealText, Helvetica Neue, Arial;
+  font: 16px/26px 'RealText', 'Helvetica', 'Arial', sans-serif;
   background-color: white;
 }
 
