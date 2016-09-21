@@ -16,7 +16,13 @@ defmodule EspiDni.BotSupervisor do
   end
 
   def init(:ok) do
-    children = for team <- Repo.all(Team), do: worker(SlackRtm, [team.slack_token], restart: :temporary)
+    children = for team <- Repo.all(Team) do
+      worker(SlackRtm, [team.slack_token], restart: :temporary, id: worker_id(team))
+    end
     supervise(children, strategy: :one_for_one)
+  end
+
+  defp worker_id(team) do
+    "#{__MODULE__}-#{team.id}"
   end
 end
