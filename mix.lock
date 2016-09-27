@@ -34,6 +34,6 @@
   "timex": {:hex, :timex, "3.0.8", "71d5ebafcdc557c6c866cdc196c5054f587e7cd1118ad8937e2293d51fc85608", [:mix], [{:combine, "~> 0.7", [hex: :combine, optional: false]}, {:gettext, "~> 0.10", [hex: :gettext, optional: false]}, {:tzdata, "~> 0.1.8 or ~> 0.5", [hex: :tzdata, optional: false]}]},
   "tzdata": {:hex, :tzdata, "0.5.9", "575be217b039057a47e133b72838cbe104fb5329b19906ea4e66857001c37edb", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, optional: false]}]},
   "ueberauth": {:hex, :ueberauth, "0.4.0", "bc72d5e5a7bdcbfcf28a756e34630816edabc926303bdce7e171f7ac7ffa4f91", [:mix], [{:plug, "~> 1.2", [hex: :plug, optional: false]}]},
-  "ueberauth_google": {:git, "https://github.com/edenspiekermann/ueberauth_google", "9082aa3c4456d45bb3134e21646570a2419216ad", [branch: "accept-more-options"]},
+  "ueberauth_google": {:git, "https://github.com/ueberauth/ueberauth_google", "360d6049c9d0bd75b7eef916eb425191883c6f8d", []},
   "ueberauth_slack": {:hex, :ueberauth_slack, "0.4.0", "162dfa97871fd2273449c05fac1d68aa92c0cad66ba01ed6d1d09d00ea89076e", [:mix], [{:oauth2, "0.6.0", [hex: :oauth2, optional: false]}, {:ueberauth, "~> 0.4", [hex: :ueberauth, optional: false]}]},
   "websocket_client": {:git, "https://github.com/jeremyong/websocket_client", "f6892c8b55004008ce2d52be7d98b156f3e34569", []}}
