@@ -12,8 +12,9 @@ defmodule EspiDni do
       # Start the Ecto repository
       supervisor(EspiDni.Repo, []),
       # Start supervisor for all bots
-      supervisor(EspiDni.BotSupervisor, [])
+      supervisor(EspiDni.BotSupervisor, []),
       # Here you could define other workers and supervisors as children
+      worker(EspiDni.TokenSupervisor, [])
       # worker(EspiDni.Worker, [arg1, arg2, arg3]),
       # worker(EspiDni.SlackRtm, [])
     ]
