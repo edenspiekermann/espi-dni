@@ -1,9 +1,8 @@
 defmodule EspiDni.GoogleAuthHandlerTest do
   use EspiDni.ModelCase
-
   alias EspiDni.GoogleAuthHandler
 
-  @valid_params %{credentials: %{token: "atoken", refresh_token: "refresh_token"}}
+  @valid_params %{credentials: %{token: "atoken", refresh_token: "refresh_token", expires_at: 1474980702}}
   @invalid_params %{credentials: %{}}
 
   setup do
@@ -16,6 +15,7 @@ defmodule EspiDni.GoogleAuthHandlerTest do
       {:ok, team} ->
         assert team.google_token == "atoken"
         assert team.google_refresh_token == "refresh_token"
+        assert Ecto.DateTime.to_erl(team.google_token_expires_at) == Timex.to_erl(Timex.from_unix(1474980702))
     end
   end
 
