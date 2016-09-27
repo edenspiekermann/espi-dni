@@ -37,8 +37,8 @@ defmodule EspiDni.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:slack, "~> 0.7.0"},
-     {:ueberauth_slack, "~> 0.3"},
-     {:ueberauth_google, "~> 0.3"},
+     {:ueberauth_slack, "~> 0.4"},
+     {:ueberauth_google, "~> 0.4"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
