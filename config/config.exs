@@ -35,7 +35,9 @@ config :ueberauth, Ueberauth,
       ]
     },
     google: { Ueberauth.Strategy.Google, [
-        default_scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/analytics"
+        default_scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/analytics",
+        approval_prompt: "force",
+        access_type: "offline"
       ]
     }
   ]

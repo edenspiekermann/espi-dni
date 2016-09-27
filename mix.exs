@@ -19,7 +19,8 @@ defmodule EspiDni.Mixfile do
   def application do
     [mod: {EspiDni, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack, :ueberauth_google]]
+                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack,
+                    :ueberauth_google, :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,6 +42,7 @@ defmodule EspiDni.Mixfile do
      {:ueberauth_google, git: "https://github.com/edenspiekermann/ueberauth_google", branch: "accept-more-options"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
+     {:timex, "~> 3.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end
