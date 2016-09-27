@@ -4,7 +4,7 @@ defmodule EspiDni.Mixfile do
   def project do
     [app: :espi_dni,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,8 @@ defmodule EspiDni.Mixfile do
   def application do
     [mod: {EspiDni, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack, :ueberauth_google]]
+                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack,
+                    :ueberauth_google, :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,10 +38,11 @@ defmodule EspiDni.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:slack, "~> 0.7.0"},
-     {:ueberauth_slack, "~> 0.3"},
-     {:ueberauth_google, "~> 0.3"},
+     {:ueberauth_slack, "~> 0.4"},
+     {:ueberauth_google, git: "https://github.com/ueberauth/ueberauth_google"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
+     {:timex, "~> 3.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end
