@@ -38,7 +38,7 @@ defmodule EspiDni.Mixfile do
      {:gettext, "~> 0.9"},
      {:slack, "~> 0.7.0"},
      {:ueberauth_slack, "~> 0.4"},
-     {:ueberauth_google, "~> 0.4"},
+     {:ueberauth_google, git: "https://github.com/edenspiekermann/ueberauth_google", branch: "accept-more-options"},
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
