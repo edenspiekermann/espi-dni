@@ -5,14 +5,12 @@ defmodule EspiDni.GoogleAnalyticsClient do
 
   @base_url "https://www.googleapis.com"
   @token_refresh_path "/oauth2/v4/token"
-  @url "https://www.googleapis.com/analytics/v3/management/accounts"
-  @account_id "~all"
-  @properties_path "/webproperties"
+  @properties_path "/analytics/v3/management/accounts/~all/webproperties"
   @client_id Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_id]
   @client_secret Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_secret]
 
   def get_properties(team) do
-    case HTTPoison.get(@url, [], params: request_params(team)) do
+    case HTTPoison.get(web_properties_url, [], params: request_params(team)) do
       {:ok, %HTTPoison.Response{status_code: 200, body: response}} ->
         parse_properties(response)
       {:ok, %HTTPoison.Response{status_code: 401, body: response}} ->
@@ -39,7 +37,7 @@ defmodule EspiDni.GoogleAnalyticsClient do
 
   defp parse_properties(response) do
     case Poison.decode!(response, as: %{"items" => [%GoogleWebProperty{}]}) do
-      {:ok, %{"items" => items}} -> items
+      %{"items" => items} -> items
       _ -> []
     end
   end
@@ -65,7 +63,7 @@ defmodule EspiDni.GoogleAnalyticsClient do
   end
 
   defp web_properties_url do
-    @url <> @account_id <> @properties_path
+    @base_url <> @properties_path
   end
 
   defp refresh_token_url do
