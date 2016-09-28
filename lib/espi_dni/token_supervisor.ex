@@ -26,19 +26,24 @@ defmodule EspiDni.TokenSupervisor do
     diff = expires_in_unix(team) - :os.system_time(:seconds)
 
     if diff < @expiring_soon_in_seconds do
-      # just do it immediately if it will expire soon
-      Task.async fn ->
-        __MODULE__.refresh_token!(team)
-      end
+      refresh_now(team)
     else
-      # otherwise queue it for later
-      queue_delay = queue_delay_ms(diff)
-      Logger.info "Queueing token refresh for team: #{team.id} in #{queue_delay}ms"
-      :timer.apply_after(queue_delay, __MODULE__, :refresh_token!, [team])
+      refresh_later(team, queue_delay_ms(diff))
     end
   end
 
-  def refresh_token!(team) do
+  defp refresh_now(team) do
+    Task.async fn ->
+      __MODULE__.refresh_token!(team)
+    end
+  end
+
+  defp refresh_later(team, delay) do
+    Logger.info "Queueing token refresh for team: #{team.id} in #{delay}ms"
+    :timer.apply_after(delay, __MODULE__, :refresh_token!, [team])
+  end
+
+  defp refresh_token!(team) do
     Logger.info "Refreshing token for team: #{team.id}"
     new_token =  EspiDni.GoogleAnalyticsClient.get_new_token(team)
 
