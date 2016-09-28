@@ -48,20 +48,17 @@ defmodule EspiDni.GoogleRealtimeClient do
     case Poison.decode!(response) do
       %{"columnHeaders" => headers, "rows" => rows} ->
         Enum.map(rows, fn(row) ->
-          create_viewcount(headers, row, team)
+          parse_viewcount(headers, row, team)
         end)
       _ -> []
     end
   end
 
-  defp create_viewcount(headers, row, team) do
-    path = get_data(headers, row, @dimensions)
-    article_id = get_article_id(path, team)
-
-    if article_id do
-      ViewCount.changeset(%ViewCount{}, %{article_id: article_id, count: get_data(headers, row, @metrics)})
-      |> Repo.insert!()
-    end
+  defp parse_viewcount(headers, row, team) do
+    %{
+      path: get_data(headers, row, @dimensions),
+      count: get_data(headers, row, @metrics)
+    }
   end
 
   defp get_data(headers, rows, key) do
@@ -70,16 +67,6 @@ defmodule EspiDni.GoogleRealtimeClient do
 
   defp key_column_index(columns, key) do
     Enum.find_index(columns, fn(column) -> Map.get(column, "name") == key end)
-  end
-
-  defp get_article_id(path, team) do
-    EspiDni.Repo.one(
-      from article in EspiDni.Article,
-      join: user in EspiDni.User, on: user.id == article.user_id,
-      where: user.team_id == ^team.id,
-      where: article.path == ^path,
-      select: article.id
-    )
   end
 
 end
