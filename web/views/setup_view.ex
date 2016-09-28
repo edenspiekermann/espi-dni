@@ -6,7 +6,7 @@ defmodule EspiDni.SetupView do
 
   def web_properties(%Team{} = team) do
     GoogleAnalyticsClient.get_properties(team)
-    |> Enum.map(&{&1.name, &1.id})
+    |> Enum.map(&{&1.name, &1.defaultProfileId})
   end
 
   def team_changeset(%Team{} = team) do
