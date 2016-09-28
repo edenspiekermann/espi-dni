@@ -43,7 +43,7 @@ defmodule EspiDni.TokenSupervisor do
     :timer.apply_after(delay, __MODULE__, :refresh_token!, [team])
   end
 
-  defp refresh_token!(team) do
+  def refresh_token!(team) do
     Logger.info "Refreshing token for team: #{team.id}"
     new_token =  EspiDni.GoogleAnalyticsClient.get_new_token(team)
 
