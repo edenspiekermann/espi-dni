@@ -5,6 +5,7 @@ defmodule EspiDni.TokenSupervisor do
   require Logger
   alias EspiDni.Team
   alias EspiDni.Repo
+  import Ecto.Query, only: [from: 1, from: 2]
 
   @expiring_soon_in_seconds 60
   @refresh_wait_in_seconds 2_700
@@ -14,7 +15,12 @@ defmodule EspiDni.TokenSupervisor do
     GenServer.start_link(__MODULE__, :ok, [name: __MODULE__])
   end
 
-  def init(:ok), do: {:ok, %{}}
+  def init(:ok) do
+    for team <- teams_with_refresh_tokens do
+      queue_for_refresh(team)
+    end
+    {:ok, %{}}
+  end
 
   def queue_for_refresh(team) do
     diff = expires_in_unix(team) - :os.system_time(:seconds)
@@ -57,6 +63,10 @@ defmodule EspiDni.TokenSupervisor do
 
   defp queue_delay_ms(time) do
     (time - @expiring_soon_in_seconds) * @milliseconds_in_seconds
+  end
+
+  defp teams_with_refresh_tokens do
+    Repo.all(from team in Team, where: not is_nil(team.google_refresh_token))
   end
 
 end
