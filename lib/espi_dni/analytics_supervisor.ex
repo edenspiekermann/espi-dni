@@ -45,6 +45,15 @@ defmodule EspiDni.AnalyticsSupervisor do
     )
   end
 
+  defp create_view_count(view_count_data, team) do
+    article_id = get_article_id(view_count_data.path, team)
+
+    if article_id do
+      ViewCount.changeset(%ViewCount{}, %{article_id: article_id, count: view_count_data.count})
+      |> Repo.insert!()
+    end
+  end
+
   defp get_article_id(path, team) do
     Repo.one(
       from article in EspiDni.Article,
@@ -53,14 +62,5 @@ defmodule EspiDni.AnalyticsSupervisor do
       where: article.path == ^path,
       select: article.id
     )
-  end
-
-  defp create_view_count(view_count_data, team) do
-    article_id = get_article_id(view_count_data.path, team)
-
-    if article_id do
-      ViewCount.changeset(%ViewCount{}, view_count_data)
-      |> Repo.insert!()
-    end
   end
 end
