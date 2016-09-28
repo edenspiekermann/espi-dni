@@ -16,6 +16,7 @@ defmodule EspiDni.GoogleAuthHandler do
         team
         |> Team.changeset(params_from_auth(credentials))
         |> Repo.update
+        |> queue_for_refresh
       _ -> {:error}
     end
   end
@@ -23,6 +24,12 @@ defmodule EspiDni.GoogleAuthHandler do
   def update_from_auth(_, _) do
     {:error}
   end
+
+  defp queue_for_refresh({:ok, team}) do
+    EspiDni.TokenSupervisor.queue_for_refresh(Repo.one(Team))
+    {:ok, team}
+  end
+  defp queue_for_refresh(_), do: {:error}
 
   defp params_from_auth(%{token: token, refresh_token: refresh_token, expires_at: expires_at}) do
     %{
