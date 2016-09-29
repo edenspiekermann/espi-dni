@@ -71,7 +71,11 @@ defmodule EspiDni.TokenSupervisor do
   end
 
   defp teams_with_refresh_tokens do
-    Repo.all(from team in Team, where: not is_nil(team.google_refresh_token))
+    Repo.all(
+      from team in Team,
+      where: not is_nil(team.google_refresh_token),
+      where: not is_nil(team.google_token_expires_at)
+    )
   end
 
 end
