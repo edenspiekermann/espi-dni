@@ -24,3 +24,6 @@ msgstr ""
 
 msgid "Initial Greeting"
 msgstr ""
+
+msgid "Message Spike"
+msgstr ""
