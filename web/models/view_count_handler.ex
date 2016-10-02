@@ -15,7 +15,6 @@ defmodule EspiDni.ViewCountHandler do
     if new_view_count do
       notify_if_count_spike(article)
     end
-
   end
 
   defp notify_if_count_spike(article) do
@@ -73,5 +72,4 @@ defmodule EspiDni.ViewCountHandler do
       limit: 2
     )
   end
-
 end
