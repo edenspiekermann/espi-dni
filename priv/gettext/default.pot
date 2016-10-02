@@ -27,3 +27,9 @@ msgstr ""
 
 msgid "Message Spike"
 msgstr ""
+
+msgid "Article Confirm Prompt"
+msgstr ""
+
+msgid "Article Refute"
+msgstr ""

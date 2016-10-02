@@ -27,3 +27,12 @@ msgstr "Hi! I'm POST. I help journalists by suggesting the right action at the r
 
 msgid "Message Spike"
 msgstr "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour."
+
+msgid "Article Confirm Prompt"
+msgstr "Okay, you'd like to register the article at %{url}"
+
+msgid "Article Confirm"
+msgstr "Yes, that's it."
+
+msgid "Article Refute"
+msgstr "Nope"
