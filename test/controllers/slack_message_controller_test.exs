@@ -1,5 +1,6 @@
 defmodule EspiDni.SlackMessageControllerTest do
   use EspiDni.ConnCase
+  import EspiDni.Gettext
 
   setup do
     user = insert_team |> insert_user
@@ -47,7 +48,7 @@ defmodule EspiDni.SlackMessageControllerTest do
     )
     conn = post conn, slack_message_path(conn, :new), %{payload: payload}
 
-    assert text_response(conn, 200) =~ "ok, can you try adding it with `/add` again please?"
+    assert text_response(conn, 200) =~ gettext("Article Retry")
   end
 
   test "saves article and returns a message for a 'yes' confirm_article action", %{conn: conn, user: user} do
@@ -62,6 +63,6 @@ defmodule EspiDni.SlackMessageControllerTest do
     conn = post conn, slack_message_path(conn, :new), %{payload: payload}
     assert Repo.get_by(EspiDni.Article, url: "http://www.example.com")
 
-    assert text_response(conn, 200) =~ "ok, great, I've registered http://www.example.com"
+    assert text_response(conn, 200) =~ gettext("Article Registered", %{url: "http://www.example.com"})
   end
 end

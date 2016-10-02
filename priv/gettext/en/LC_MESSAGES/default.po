@@ -36,3 +36,9 @@ msgstr "Yes, that's it."
 
 msgid "Article Refute"
 msgstr "Nope"
+
+msgid "Article Registered"
+msgstr "Okay, great, I've registered %{url}"
+
+msgid "Article Retry"
+msgstr "ok, can you try adding it with `/add` again please?"

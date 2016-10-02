@@ -33,3 +33,9 @@ msgstr ""
 
 msgid "Article Refute"
 msgstr ""
+
+msgid "Article Registered"
+msgstr "Okay, great, I've registered %{url}"
+
+msgid "Article Retry"
+msgstr ""
