@@ -1,5 +1,6 @@
 defmodule EspiDni.ViewCountHandler do
 
+  require Logger
   alias EspiDni.Repo
   alias EspiDni.ViewCount
   import EspiDni.Gettext
@@ -10,20 +11,22 @@ defmodule EspiDni.ViewCountHandler do
 
   def process_view_count(view_count_data, team) do
     article = get_article(view_count_data.path, team)
-    new_view_count = create_view_count(article, view_count_data)
 
-    if new_view_count do
-      notify_if_count_spike(article)
+    case create_view_count(article, view_count_data) do
+      {:ok, _} ->
+        notify_if_count_spike(article)
+      {:error, changeset} ->
+        Logger.error "Cannot create view_count: #{inspect changeset}"
+      _ ->
+        nil
     end
   end
 
   defp notify_if_count_spike(article) do
     latest_counts = last_two_counts(article)
+
     if view_count_spike?(latest_counts) do
-      send_spike_message(
-        article,
-        latest_counts
-      )
+      send_spike_message(article,latest_counts)
     end
   end
 
@@ -50,7 +53,7 @@ defmodule EspiDni.ViewCountHandler do
 
   defp create_view_count(article, view_count_data) do
     ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: view_count_data.count})
-    |> Repo.insert!()
+    |> Repo.insert()
   end
 
   defp get_article(path, team) do
