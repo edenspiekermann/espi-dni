@@ -24,6 +24,7 @@ defmodule EspiDni.Article do
     |> cast(params, @required_fields, @optional_fields)
     |> set_path()
     |> validate_url(:url)
+    |> unique_constraint(:url, name: :unique_user_article)
   end
 
   defp validate_url(changeset, field, options \\ []) do

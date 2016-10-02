@@ -32,9 +32,9 @@ defmodule EspiDni.TeamTest do
   end
 
   test "article_paths with articles", %{team: team, user: user} do
-    insert_article(user, %{path: "/foobar"})
-    insert_article(user, %{path: "/"})
-    insert_article(user, %{path: "/foo/baz/bar/"})
+    insert_article(user, %{url: "http://f.com/foobar", path: "/foobar"})
+    insert_article(user, %{url: "http://f.com/", path: "/"})
+    insert_article(user, %{url: "http://f.com/baz/bar", path: "/foo/baz/bar/"})
     assert Enum.sort(Team.article_paths(team)) == Enum.sort(["/foobar", "/", "/foo/baz/bar/"])
   end
 end

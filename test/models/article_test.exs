@@ -30,4 +30,38 @@ defmodule EspiDni.ArticleTest do
     changeset = Article.changeset(%Article{}, %{})
     refute changeset.valid?
   end
+
+  describe "with a pre-existing article" do
+    setup do
+      team = insert_team
+      article = team |> insert_user |> insert_article(%{path: "/foobar"})
+
+      {:ok, team: team, article: article}
+    end
+
+    test "changeset with a duplicate url", %{team: team, article: article} do
+      changeset = Article.changeset(%Article{}, %{team_id: team.id, user_id: article.user_id, url: article.url})
+      result = Repo.insert(changeset)
+      {response_code, response_changeset} = result
+      assert response_code == :error
+      hd(response_changeset.constraints).constraint == "unique_user_article"
+    end
+
+    test "changeset with a different url", %{team: team, article: article} do
+      changeset = Article.changeset(%Article{}, %{team_id: team.id, user_id: article.user_id, url: "http://www.example.com/different"})
+      result = Repo.insert(changeset)
+      {response_code, response_changeset} = result
+
+      assert response_code == :ok
+    end
+
+    test "changeset with a duplicate url but a differet user", %{team: team, article: article} do
+      user = insert_user(team)
+      changeset = Article.changeset(%Article{}, %{team_id: team.id, user_id: user.id, url: article.url})
+      result = Repo.insert(changeset)
+      {response_code, response_changeset} = result
+
+      assert response_code == :ok
+    end
+  end
 end
