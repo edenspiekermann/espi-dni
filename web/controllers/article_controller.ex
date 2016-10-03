@@ -3,11 +3,11 @@ defmodule EspiDni.ArticleController do
 
   alias EspiDni.Article
 
+  plug :authenticate
   plug :scrub_params, "article" when action in [:create, :update]
 
   def index(conn, _params) do
-    articles = Repo.all(Article)
-    render(conn, "index.html", articles: articles)
+    render(conn, "index.html", articles: user_articles(conn))
   end
 
   def new(conn, _params) do
@@ -35,13 +35,13 @@ defmodule EspiDni.ArticleController do
   end
 
   def edit(conn, %{"id" => id}) do
-    article = Repo.get!(Article, id)
+    article = get_user_article(conn, id)
     changeset = Article.changeset(article)
     render(conn, "edit.html", article: article, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "article" => article_params}) do
-    article = Repo.get!(Article, id)
+    article = get_user_article(conn, id)
     changeset = Article.changeset(article, article_params)
 
     case Repo.update(changeset) do
@@ -55,7 +55,7 @@ defmodule EspiDni.ArticleController do
   end
 
   def delete(conn, %{"id" => id}) do
-    article = Repo.get!(Article, id)
+    article = get_user_article(conn, id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -64,5 +64,33 @@ defmodule EspiDni.ArticleController do
     conn
     |> put_flash(:info, "Article deleted successfully.")
     |> redirect(to: article_path(conn, :index))
+  end
+
+  defp user_articles(conn) do
+    user_id = conn.assigns.current_user.id
+    Repo.all(
+      from article in Article,
+      where: article.user_id == ^user_id
+    )
+  end
+
+  defp get_user_article(conn, id) do
+    user_id = conn.assigns.current_user.id
+    Repo.one!(
+      from article in Article,
+      where: article.id == ^id,
+      where: article.user_id == ^user_id
+    )
+  end
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_team && conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
   end
 end

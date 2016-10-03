@@ -1,10 +1,11 @@
 defmodule EspiDni.SlackArticleView do
   use EspiDni.Web, :view
+  import EspiDni.Gettext
 
   def render("confirm.json", %{url: url}) do
     %{
       response_type: "ephemeral",
-      text: "Okay, you'd like to register the article at #{url}?",
+      text: gettext("Article Confirm Prompt", %{url: url}),
       attachments: [
         %{
           fallback: "Please enable interactive messages to confirm the article",
@@ -14,13 +15,13 @@ defmodule EspiDni.SlackArticleView do
           actions: [
             %{
               name: "yes",
-              text: "Yes, that's it.",
+              text: gettext("Article Confirm"),
               type: "button",
               value: "#{url}"
             },
             %{
               name: "no",
-              text: "Nope",
+              text: gettext("Article Refute"),
               type: "button",
               value: "#{url}"
             }

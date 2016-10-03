@@ -1,18 +1,22 @@
-<h2>Show article</h2>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Article details</h1>
+</div>
 
-<ul>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <ul>
+      <li>
+        <strong>Url:</strong>
+        <%= @article.url %>
+      </li>
+    </ul>
+    <%= link "Edit", to: article_path(@conn, :edit, @article) %>
+    <%= link "Back", to: article_path(@conn, :index) %>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
+  </div>
+</div>
 
-  <li>
-    <strong>Url:</strong>
-    <%= @article.url %>
-  </li>
 
-  <li>
-    <strong>User:</strong>
-    <%= @article.user_id %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: article_path(@conn, :edit, @article) %>
-<%= link "Back", to: article_path(@conn, :index) %>

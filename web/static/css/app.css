@@ -87,6 +87,38 @@ a {
 /* ==========================================================================
    Custom styles
    ========================================================================== */
+.alert {
+  width: 100%;
+}
+
+.alert__info {
+  border-top: 2px solid #bce8f1;
+  border-bottom: 2px solid #bce8f1;
+  text-align: center;
+  padding: 20px 20px 15px;
+  margin: 0px;
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.alert__info:empty{
+  display: none;
+}
+
+.alert__danger {
+  border-top: 2px solid #bce8f1;
+  border-bottom: 2px solid #bce8f1;
+  text-align: center;
+  padding: 20px 20px 15px;
+  margin: 0px;
+  color: #31708f;
+  background-color: #ebccd1;
+}
+
+.alert__danger:empty{
+  display: none;
+}
+
 .header {
   display: flex;
   height: 60px;
@@ -231,6 +263,54 @@ footer {
   font-size: 18px;
   font-weight: 600;
   margin: 1.2em -1.2em -1.2em -1.2em;
+}
+
+.table {
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+
+.table__row {
+  position: relative;
+}
+
+.table__row--header {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.table__cell {
+  border-top: 2px solid;
+  padding: 10px;
+}
+
+.table__row--header .table__cell {
+  border-top: 0;
+}
+
+.form {
+  padding: 20px;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__input {
+  border-radius: 3px;
+  border: 2px solid #bce8f1;
+  display: flex;
+  line-height: $line-height--small;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form__button {
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 3px;
 }
 
 /* ==========================================================================

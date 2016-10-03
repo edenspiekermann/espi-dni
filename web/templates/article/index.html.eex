@@ -1,28 +1,32 @@
-<h2>Listing articles</h2>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Your Articles</h1>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>User</th>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <table class="table">
+      <thead>
+        <tr class="table__row">
+          <th class="table__row--header">Url</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for article <- @articles do %>
+          <tr class="table__row">
+            <td class="table__cell"><%= article.url %></td>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for article <- @articles do %>
-    <tr>
-      <td><%= article.url %></td>
-      <td><%= article.user_id %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: article_path(@conn, :show, article), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New article", to: article_path(@conn, :new) %>
+            <td class="table__cell">
+              <%= link "Edit", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
+              <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"] %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
+  </div>
+</div>

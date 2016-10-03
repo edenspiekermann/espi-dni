@@ -27,14 +27,14 @@ defmodule EspiDni.TeamTest do
     refute changeset.valid?
   end
 
-  test "article_paths with no articles", %{team: team, user: user} do
+  test "article_paths with no articles", %{team: team} do
     assert Team.article_paths(team) == []
   end
 
   test "article_paths with articles", %{team: team, user: user} do
-    insert_article(user, %{path: "/foobar"})
-    insert_article(user, %{path: "/"})
-    insert_article(user, %{path: "/foo/baz/bar/"})
+    insert_article(user, %{url: "http://f.com/foobar", path: "/foobar"})
+    insert_article(user, %{url: "http://f.com/", path: "/"})
+    insert_article(user, %{url: "http://f.com/baz/bar", path: "/foo/baz/bar/"})
     assert Enum.sort(Team.article_paths(team)) == Enum.sort(["/foobar", "/", "/foo/baz/bar/"])
   end
 end
