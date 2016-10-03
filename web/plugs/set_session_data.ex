@@ -14,13 +14,25 @@ defmodule EspiDni.Plugs.SetSessionData do
 
   defp set_user(conn, repo) do
     user_id = get_session(conn, :user_id)
-    user = user_id && repo.get(EspiDni.User, user_id)
-    assign(conn, :current_user, user)
+    cond do
+      user = conn.assigns[:current_user] ->
+        conn
+      user = user_id && repo.get(EspiDni.User, user_id) ->
+        assign(conn, :current_user, user)
+      true ->
+        assign(conn, :current_user, nil)
+    end
   end
 
   defp set_team(conn, repo) do
     team_id = get_session(conn, :team_id)
-    team = team_id && repo.get(EspiDni.Team, team_id)
-    assign(conn, :current_team, team)
+    cond do
+      team = conn.assigns[:current_team] ->
+        conn
+      team = team_id && repo.get(EspiDni.Team, team_id) ->
+        assign(conn, :current_team, team)
+      true ->
+        assign(conn, :current_team, nil)
+    end
   end
 end
