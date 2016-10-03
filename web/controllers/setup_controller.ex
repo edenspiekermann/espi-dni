@@ -3,11 +3,11 @@ defmodule EspiDni.SetupController do
   alias EspiDni.Team
 
   def index(conn, _params) do
-    render conn, "index.html", current_team: get_session(conn, :current_team)
+    render(conn, "index.html", current_team: conn.assigns.current_team)
   end
 
   def update(conn, %{"team" => team_params}) do
-    team = get_session(conn, :current_team)
+    team = conn.assigns.current_team
     changeset = Team.changeset(team, team_params)
 
     case Repo.update(changeset) do
@@ -16,7 +16,7 @@ defmodule EspiDni.SetupController do
         |> put_flash(:info, "Team updated successfully.")
         |> put_session(:current_team, team)
         |> redirect(to: setup_path(conn, :index))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> redirect(to: setup_path(conn, :index))
     end

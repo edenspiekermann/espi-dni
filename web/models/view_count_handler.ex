@@ -14,7 +14,7 @@ defmodule EspiDni.ViewCountHandler do
 
     case create_view_count(article, view_count_data) do
       {:ok, _} ->
-        notify_if_count_spike(article)
+        notify_if_count_spike(article, team)
       {:error, changeset} ->
         Logger.error "Cannot create view_count: #{inspect changeset}"
       _ ->
@@ -22,10 +22,10 @@ defmodule EspiDni.ViewCountHandler do
     end
   end
 
-  defp notify_if_count_spike(article) do
+  defp notify_if_count_spike(article, team) do
     latest_counts = last_two_counts(article)
 
-    if view_count_spike?(latest_counts) do
+    if view_count_spike?(latest_counts, team) do
       send_spike_message(article,latest_counts)
     end
   end
@@ -39,15 +39,17 @@ defmodule EspiDni.ViewCountHandler do
     end
   end
 
-  defp view_count_spike?([current_count | [previous_count]]) do
-    difference = current_count - previous_count
-    percentage_increase = (difference / previous_count * 100)
+  defp view_count_spike?([current_count | [previous_count]], team) do
+    difference              = current_count - previous_count
+    percentage_increase     = (difference / previous_count * 100)
+    min_difference          = team.min_view_count_increase || @minimum_increase
+    min_percentage_increase = team.view_count_threshold || @increase_threshold_percentage
 
-    (difference >= @minimum_increase) && (percentage_increase >= @increase_threshold_percentage)
+    (difference >= min_difference) && (percentage_increase >= min_percentage_increase)
   end
 
   # return false if there's not a list with two entries
-  defp view_count_spike?(_), do: false
+  defp view_count_spike?(_, team), do: false
 
   defp create_view_count(nil, _), do: :nil
 

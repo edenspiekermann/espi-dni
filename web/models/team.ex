@@ -10,13 +10,18 @@ defmodule EspiDni.Team do
     field :url,                     :string
     field :slack_id,                :string
     field :google_token_expires_at, Ecto.DateTime
+    field :min_view_count_increase, :integer
+    field :view_count_threshold,    :integer
     has_many :users,                EspiDni.User
 
     timestamps
   end
 
   @required_fields ~w(slack_token name slack_id)
-  @optional_fields ~w(url google_token google_refresh_token google_property_id google_token_expires_at)
+  @optional_fields ~w(
+    url google_token google_refresh_token google_property_id
+    google_token_expires_at min_view_count_increase view_count_threshold
+  )
 
   @doc """
   Creates a changeset based on the `model` and `params`.

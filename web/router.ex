@@ -29,6 +29,8 @@ defmodule EspiDni.Router do
     get "/", PageController, :index
     get "/setup", SetupController, :index
     put "/setup", SetupController, :update
+    get "/preferences", PreferenceController, :index
+    put "/preferences", PreferenceController, :update
 
     resources "/teams", TeamController
     resources "/users", UserController

@@ -2,6 +2,7 @@ defmodule EspiDni.ViewCountHandlerTest do
   use EspiDni.ModelCase
   alias EspiDni.ViewCountHandler
   alias EspiDni.ViewCount
+  alias EspiDni.Team
 
   setup do
     team = insert_team
@@ -49,5 +50,13 @@ defmodule EspiDni.ViewCountHandlerTest do
     # for now just test that this is not nil, but I need to figure out the correct way 
     # to test this
     assert is_nil(result) == false
+  end
+
+  test "process_view_count users team preferences for min views if set", %{team: team, article: article} do
+    Repo.insert!(ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: 10}))
+    Repo.update!(Team.changeset(team, %{min_view_count_increase: 2, view_count_threshold: 20}))
+    view_count_data = %{path: article.path, count: 2}
+
+    result = ViewCountHandler.process_view_count(view_count_data, team)
   end
 end
