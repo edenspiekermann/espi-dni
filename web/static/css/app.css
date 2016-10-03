@@ -289,6 +289,30 @@ footer {
   border-top: 0;
 }
 
+.form {
+  padding: 20px;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__input {
+  border-radius: 3px;
+  border: 2px solid #bce8f1;
+  display: flex;
+  line-height: $line-height--small;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form__button {
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */

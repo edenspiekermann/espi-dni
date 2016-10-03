@@ -22,6 +22,7 @@ defmodule EspiDni.ArticleControllerTest do
     Enum.each([
       get(conn, article_path(conn, :new)),
       get(conn, article_path(conn, :index)),
+      get(conn, article_path(conn, :show, "123")),
       get(conn, article_path(conn, :edit, "123")),
       put(conn, article_path(conn, :update, "123", %{})),
       post(conn, article_path(conn, :create, %{})),

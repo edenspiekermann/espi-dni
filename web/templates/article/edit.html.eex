@@ -1,6 +1,16 @@
-<h2>Edit article</h2>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Edit article</h1>
+</div>
 
-<%= render "form.html", changeset: @changeset,
-                        action: article_path(@conn, :update, @article) %>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <%= render "form.html", changeset: @changeset,
+                            action: article_path(@conn, :update, @article) %>
 
-<%= link "Back", to: article_path(@conn, :index) %>
+    <%= link "Back", to: article_path(@conn, :index) %>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
+  </div>
+</div>

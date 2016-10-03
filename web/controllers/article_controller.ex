@@ -29,6 +29,11 @@ defmodule EspiDni.ArticleController do
     end
   end
 
+  def show(conn, %{"id" => id}) do
+    article = Repo.get!(Article, id)
+    render(conn, "show.html", article: article)
+  end
+
   def edit(conn, %{"id" => id}) do
     article = get_user_article(conn, id)
     changeset = Article.changeset(article)
