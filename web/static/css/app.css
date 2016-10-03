@@ -87,6 +87,38 @@ a {
 /* ==========================================================================
    Custom styles
    ========================================================================== */
+.alert {
+  width: 100%;
+}
+
+.alert__info {
+  border-top: 2px solid #bce8f1;
+  border-bottom: 2px solid #bce8f1;
+  text-align: center;
+  padding: 20px 20px 15px;
+  margin: 0px;
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.alert__info:empty{
+  display: none;
+}
+
+.alert__danger {
+  border-top: 2px solid #bce8f1;
+  border-bottom: 2px solid #bce8f1;
+  text-align: center;
+  padding: 20px 20px 15px;
+  margin: 0px;
+  color: #31708f;
+  background-color: #ebccd1;
+}
+
+.alert__danger:empty{
+  display: none;
+}
+
 .header {
   display: flex;
   height: 60px;
