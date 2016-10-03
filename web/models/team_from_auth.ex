@@ -3,7 +3,6 @@ defmodule EspiDni.TeamFromAuth do
   @moduledoc """
   Create or retreive the team from an auth request
   """
-  import Ecto.Query
   alias Ueberauth.Auth
   alias EspiDni.Repo
   alias EspiDni.Team

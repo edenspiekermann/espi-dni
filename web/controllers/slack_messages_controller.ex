@@ -21,18 +21,14 @@ defmodule EspiDni.SlackMessageController do
     end
   end
 
-  defp slack_action(payload) do
-    List.first(payload["actions"])
-  end
-
   defp handle_payload(conn, _) do
     conn
     |> put_status(400)
     |> text("Unknown Action")
   end
 
-  defp response(payload) do
-    List.first(payload["actions"]) 
+  defp slack_action(payload) do
+    List.first(payload["actions"])
   end
 
   defp create_article(conn, url) do

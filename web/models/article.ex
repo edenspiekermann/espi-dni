@@ -31,7 +31,7 @@ defmodule EspiDni.Article do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do
         {:ok, _} -> []
-        {:error, msg} ->
+        {:error, _msg} ->
           [{field, options[:message] || "#{url} is not a valid URL!"}]
       end
     end

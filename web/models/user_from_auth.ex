@@ -3,7 +3,6 @@ defmodule EspiDni.UserFromAuth do
   @moduledoc """
   Create or retreive the user from an auth request
   """
-  import Ecto.Query
   alias Ueberauth.Auth
   alias EspiDni.Repo
   alias EspiDni.User

@@ -16,7 +16,7 @@ defmodule EspiDni.SetupController do
         |> put_flash(:info, "Team updated successfully.")
         |> put_session(:current_team, team)
         |> redirect(to: setup_path(conn, :index))
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> redirect(to: setup_path(conn, :index))
     end
