@@ -44,13 +44,13 @@ defmodule EspiDni.ArticleTest do
       result = Repo.insert(changeset)
       {response_code, response_changeset} = result
       assert response_code == :error
-      hd(response_changeset.constraints).constraint == "unique_user_article"
+      assert hd(response_changeset.constraints).constraint == "unique_user_article"
     end
 
     test "changeset with a different url", %{team: team, article: article} do
       changeset = Article.changeset(%Article{}, %{team_id: team.id, user_id: article.user_id, url: "http://www.example.com/different"})
       result = Repo.insert(changeset)
-      {response_code, response_changeset} = result
+      {response_code, _changeset} = result
 
       assert response_code == :ok
     end
@@ -59,7 +59,7 @@ defmodule EspiDni.ArticleTest do
       user = insert_user(team)
       changeset = Article.changeset(%Article{}, %{team_id: team.id, user_id: user.id, url: article.url})
       result = Repo.insert(changeset)
-      {response_code, response_changeset} = result
+      {response_code, _changeset} = result
 
       assert response_code == :ok
     end

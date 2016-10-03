@@ -32,23 +32,23 @@ defmodule EspiDni.ArticleControllerTest do
     end)
   end
 
-  test "lists all entries on index", %{conn: conn, team: team, user: user} do
+  test "lists all entries on index", %{conn: conn} do
     conn = get conn, article_path(conn, :index)
     assert html_response(conn, 200) =~ "Your Articles"
   end
 
-  test "renders form for new resources", %{conn: conn, team: team, user: user} do
+  test "renders form for new resources", %{conn: conn} do
     conn = get conn, article_path(conn, :new)
     assert html_response(conn, 200) =~ "New article"
   end
 
-  test "creates resource and redirects when data is valid", %{conn: conn, user: user} do
+  test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, article_path(conn, :create), article: @valid_attrs
     assert redirected_to(conn) == article_path(conn, :index)
     assert Repo.get_by(Article, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn, user: user} do
+  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, article_path(conn, :create), article: @invalid_attrs
     assert html_response(conn, 200) =~ "New article"
   end

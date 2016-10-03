@@ -27,7 +27,7 @@ defmodule EspiDni.TeamTest do
     refute changeset.valid?
   end
 
-  test "article_paths with no articles", %{team: team, user: user} do
+  test "article_paths with no articles", %{team: team} do
     assert Team.article_paths(team) == []
   end
 
