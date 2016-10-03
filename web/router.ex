@@ -7,6 +7,7 @@ defmodule EspiDni.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug EspiDni.Plugs.SetSessionData, repo: EspiDni.Repo
   end
 
   pipeline :api do
