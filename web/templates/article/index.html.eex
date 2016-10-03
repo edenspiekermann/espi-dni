@@ -7,17 +7,17 @@
   <div class="bottom__offset container">
     <table class="table">
       <thead>
-        <tr>
-          <th>Url</th>
+        <tr class="table__row">
+          <th class="table__row--header">Url</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <%= for article <- @articles do %>
-          <tr>
-            <td><%= article.url %></td>
+          <tr class="table__row">
+            <td class="table__cell"><%= article.url %></td>
 
-            <td>
+            <td class="table__cell">
               <%= link "Edit", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
               <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"] %>
             </td>

@@ -265,6 +265,30 @@ footer {
   margin: 1.2em -1.2em -1.2em -1.2em;
 }
 
+.table {
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+
+.table__row {
+  position: relative;
+}
+
+.table__row--header {
+  font-weight: bold;
+  padding: 10px;
+}
+
+.table__cell {
+  border-top: 2px solid;
+  padding: 10px;
+}
+
+.table__row--header .table__cell {
+  border-top: 0;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
