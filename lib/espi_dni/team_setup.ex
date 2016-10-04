@@ -7,12 +7,17 @@ defmodule EspiDni.TeamSetup do
 
   def start_link do
     start_slack_bots
+    start_token_workers
     start_analytic_workers
     :ignore
   end
 
   defp start_slack_bots do
     for team <- slack_teams, do: start_bot(team)
+  end
+
+  defp start_token_workers do
+    for team <- teams_with_refresh_tokens, do: queue_token_refresh(team)
   end
 
   defp start_analytic_workers do
@@ -23,6 +28,14 @@ defmodule EspiDni.TeamSetup do
     Repo.all(
       from team in EspiDni.Team,
       where: not is_nil(team.slack_token)
+    )
+  end
+
+  defp teams_with_refresh_tokens do
+    Repo.all(
+      from team in Team,
+      where: not is_nil(team.google_refresh_token),
+      where: not is_nil(team.google_token_expires_at)
     )
   end
 
@@ -40,6 +53,15 @@ defmodule EspiDni.TeamSetup do
         Logger.info("Successfully started bot for team #{team.id}")
       {:error, error} ->
         Logger.error("Could not start bot for team #{team.id}. Error: #{inspect error}")
+    end
+  end
+
+  defp queue_token_refresh(team) do
+    case EspiDni.TokenSupervisor.start_token_worker(team) do
+      {:ok, _pid} ->
+        Logger.info("Successfully started token worker for team #{team.id}")
+      {:error, error} ->
+        Logger.error("Could not start token worker for team #{team.id}. Error: #{inspect error}")
     end
   end
 
