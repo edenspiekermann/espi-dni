@@ -22,4 +22,14 @@ defmodule EspiDni.SetupController do
     end
   end
 
+  defp queue_analytics(team) do
+    if ready_for_analytics? do
+      EspiDni.AnalyticsSupervisor.start_anlaytics_worker(team)
+    end
+  end
+
+  defp ready_for_analytics?(team) do
+    !!(team.google_token && team.google_property_id && team.google_refresh_token)
+  end
+
 end
