@@ -20,7 +20,7 @@ defmodule EspiDni.Mixfile do
     [mod: {EspiDni, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :slack, :ueberauth_slack,
-                    :ueberauth_google, :timex]]
+                    :ueberauth_google, :timex, :gproc]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,6 +43,7 @@ defmodule EspiDni.Mixfile do
      {:websocket_client, git: "https://github.com/jeremyong/websocket_client"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.0"},
+     {:gproc, "~> 0.6.1"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end

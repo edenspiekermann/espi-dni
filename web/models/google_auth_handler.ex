@@ -14,7 +14,7 @@ defmodule EspiDni.GoogleAuthHandler do
     case map_size(params) do
       @expected_param_count ->
         team
-        |> Team.changeset(params_from_auth(credentials))
+        |> Team.changeset(params)
         |> Repo.update
         |> queue_for_refresh
       _ -> {:error}
@@ -25,11 +25,11 @@ defmodule EspiDni.GoogleAuthHandler do
     {:error}
   end
 
-  defp queue_for_refresh({:ok, team}) do
-    EspiDni.TokenSupervisor.queue_for_refresh(Repo.one(Team))
+  def queue_for_refresh({:ok, team}) do
+    EspiDni.TokenSupervisor.start_token_worker(team)
     {:ok, team}
   end
-  defp queue_for_refresh(_), do: {:error}
+  def queue_for_refresh(_), do: {:error}
 
   defp params_from_auth(%{token: token, refresh_token: refresh_token, expires_at: expires_at}) do
     %{

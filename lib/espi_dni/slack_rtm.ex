@@ -12,12 +12,12 @@ defmodule EspiDni.SlackRtm do
 
   def handle_message(message = %{type: "message"}, slack) do
     if message.user != slack.me.id do
-      Logger.info "Message received: #{slack.me.name}"
+      Logger.debug "Message received: #{slack.me.name}"
     end
   end
 
   def handle_message(message, _slack) do
-    Logger.info "Received slack activity: #{inspect message}"
+    Logger.debug "Received slack activity: #{inspect message}"
   end
 
   def handle_info({:message, text, channel}, slack) do
