@@ -1,47 +1,26 @@
 defmodule EspiDni.AnalyticsSupervisor do
-  use GenServer
-  use Supervisor
+
   require Logger
-  alias EspiDni.Team
-  alias EspiDni.ViewCount
-  alias EspiDni.Repo
-  alias EspiDni.GooglePageViewClient
+  use Supervisor
+  alias EspiDni.AnalyticsWorker
   import Ecto.Query, only: [from: 1, from: 2]
 
-  @api_call_frequency_in_ms 1_800_000
+  @name EspiDni.AnalyticsSupervisor
 
   def start_link do
-    GenServer.start_link(__MODULE__, :ok, [name: __MODULE__])
+    Logger.info("Starting AnalyticsSupervisor")
+    Supervisor.start_link(__MODULE__, :ok, name: @name)
   end
 
   def init(:ok) do
-    for team <- teams_with_analytics_configs do
-      queue_analytic_call(team)
-    end
-    {:ok, IO.puts "queued analytics" }
+    children = [
+      worker(EspiDni.AnalyticsWorker, [])
+    ]
+    supervise(children, strategy: :simple_one_for_one)
   end
 
-  def queue_analytic_call(team) do
-    Logger.info "Queueing analytic call for team: #{team.id} in #{@api_call_frequency_in_ms}ms"
-    :timer.apply_after(@api_call_frequency_in_ms, __MODULE__, :call_anlaytics, [team])
-  end
-
-  def call_anlaytics(team) do
-    Logger.info "Retrieving analytics for team: #{team.id}"
-    results = EspiDni.GoogleRealtimeClient.get_pageviews(team)
-
-    for view_count_data <- results do
-      EspiDni.ViewCountHandler.process_view_count(view_count_data, team)
-    end
-
-    queue_analytic_call(team)
-  end
-
-  defp teams_with_analytics_configs do
-    Repo.all(
-      from team in EspiDni.Team,
-      where: not is_nil(team.google_token),
-      where: not is_nil(team.google_property_id)
-    )
+  def start_anlaytics_worker(team) do
+    Logger.info("Starting analytic worker via start_anlaytics_worker for team: #{team.id}")
+    Supervisor.start_child(@name, [team])
   end
 end
