@@ -1,28 +1,28 @@
 defmodule EspiDni.BotSupervisor do
   use Supervisor
-  alias EspiDni.Repo
-  alias EspiDni.Team
+  require Logger
   alias EspiDni.SlackRtm
 
-  # A simple module attribute that stores the supervisor name
   @name EspiDni.BotSupervisor
 
   def start_link do
+    Logger.info("Starting BotSupervisor")
     Supervisor.start_link(__MODULE__, :ok, name: @name)
   end
 
-  def start_bot(token) do
-    Supervisor.start_child(@name, worker(SlackRtm, [token]))
-  end
-
   def init(:ok) do
-    children = for team <- Repo.all(Team) do
-      worker(SlackRtm, [team.slack_token], restart: :temporary, id: worker_id(team))
-    end
-    supervise(children, strategy: :one_for_one)
+    children = [
+      worker(SlackRtm, [])
+    ]
+    supervise(children, strategy: :simple_one_for_one)
   end
 
-  defp worker_id(team) do
-    "#{__MODULE__}-#{team.id}"
+  @doc """
+  Starts child `EspiDni.SlackRtm` process which opens a websocket connection to 
+  connect a slackbot to a team using the provided token
+  """
+  def start_bot(token) do
+    Logger.info("Starting bot via start_bot with token: #{token}")
+    Supervisor.start_child(@name, [token])
   end
 end

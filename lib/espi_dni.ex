@@ -15,9 +15,9 @@ defmodule EspiDni do
       supervisor(EspiDni.BotSupervisor, []),
       # Here you could define other workers and supervisors as children
       worker(EspiDni.TokenSupervisor, []),
-      worker(EspiDni.AnalyticsSupervisor, [])
-      # worker(EspiDni.Worker, [arg1, arg2, arg3]),
-      # worker(EspiDni.SlackRtm, [])
+      worker(EspiDni.AnalyticsSupervisor, []),
+      # run task to connect exiting team
+      worker(EspiDni.TeamSetup, [], restart: :temporary)
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
