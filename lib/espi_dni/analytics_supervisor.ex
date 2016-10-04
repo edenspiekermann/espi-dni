@@ -3,7 +3,6 @@ defmodule EspiDni.AnalyticsSupervisor do
   require Logger
   use Supervisor
   alias EspiDni.AnalyticsWorker
-  import Ecto.Query, only: [from: 1, from: 2]
 
   @name EspiDni.AnalyticsSupervisor
 
@@ -14,7 +13,7 @@ defmodule EspiDni.AnalyticsSupervisor do
 
   def init(:ok) do
     children = [
-      worker(EspiDni.AnalyticsWorker, [])
+      worker(AnalyticsWorker, [])
     ]
     supervise(children, strategy: :simple_one_for_one)
   end

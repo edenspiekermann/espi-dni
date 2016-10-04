@@ -3,7 +3,6 @@ defmodule EspiDni.AnalyticsWorker do
   require Logger
   alias EspiDni.GooglePageViewClient
   alias EspiDni.ViewCountHandler
-  import Ecto.Query, only: [from: 1, from: 2]
 
   @api_call_frequency_in_ms 1_800_000
 
@@ -22,7 +21,7 @@ defmodule EspiDni.AnalyticsWorker do
 
   def queue_analytic_call(team) do
     Logger.info "Queueing analytic call for team: #{team.id} in #{@api_call_frequency_in_ms}ms"
-    :timer.apply_after(5000, __MODULE__, :call_anlaytics, [team])
+    :timer.apply_after(@api_call_frequency_in_ms, __MODULE__, :call_anlaytics, [team])
   end
 
   def call_anlaytics(team) do

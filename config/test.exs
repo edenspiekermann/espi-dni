@@ -22,3 +22,7 @@ config :espi_dni, EspiDni.Plugs.RequireSlackToken,
 config :ueberauth, Ueberauth.Strategy.Slack.OAuth,
   client_id: "test",
   client_secret: "test"
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: "test",
+  client_secret: "test"

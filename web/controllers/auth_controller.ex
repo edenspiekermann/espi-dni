@@ -53,7 +53,6 @@ defmodule EspiDni.AuthController do
   end
 
   defp start_bot(conn) do
-
     team = conn.assigns.current_team
     EspiDni.BotSupervisor.start_bot(team.slack_token)
     conn
