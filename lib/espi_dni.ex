@@ -13,10 +13,10 @@ defmodule EspiDni do
       supervisor(EspiDni.Repo, []),
       # Start supervisor for all bots
       supervisor(EspiDni.BotSupervisor, []),
+      # Start supervisor to refresh team google analytics tokens
+      supervisor(EspiDni.TokenSupervisor, []),
       # Start supervisor for all team realtime google analytic calls
       supervisor(EspiDni.AnalyticsSupervisor, []),
-      # Here you could define other workers and supervisors as children
-      worker(EspiDni.TokenSupervisor, []),
       # run task to connect exiting team
       worker(EspiDni.TeamSetup, [], restart: :temporary)
     ]
