@@ -25,13 +25,13 @@ defmodule EspiDni.GoogleAnalyticsClient do
   def get_new_token(team) do
     case HTTPoison.post(refresh_token_url, { :form, refresh_form(team)}) do
       {:ok, %HTTPoison.Response{status_code: 200, body: response}} ->
-        parse_token(response)
+        parse_token_response(response)
       {:ok, %HTTPoison.Response{status_code: 401, body: response}} ->
         Logger.error "Authentication error #{inspect response}"
-        []
+        %{}
       {:error, %HTTPoison.Error{reason: reason}} ->
         Logger.error "Google Analytics error #{inspect reason}"
-        []
+        %{}
     end
   end
 
@@ -42,10 +42,12 @@ defmodule EspiDni.GoogleAnalyticsClient do
     end
   end
 
-  defp parse_token(response) do
+  defp parse_token_response(response) do
     case Poison.decode!(response) do
-      %{"access_token" => access_token} -> access_token
-      _ -> []
+      %{"access_token" => access_token, "expires_in" => expires_in} ->
+        %{access_token: access_token, expires_in: expires_in}
+      data ->
+        Logger.error "Google token call returned unexpected format #{inspect data}"
     end
   end
 
