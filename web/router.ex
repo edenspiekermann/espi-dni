@@ -1,5 +1,6 @@
 defmodule EspiDni.Router do
   use EspiDni.Web, :router
+  use Plug.ErrorHandler
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -55,4 +56,8 @@ defmodule EspiDni.Router do
   # scope "/api", EspiDni do
   #   pipe_through :api
   # end
+
+  defp handle_errors(conn, %{kind: kind, reason: reason, stack: stacktrace}) do
+    Rollbax.report(kind, reason, stacktrace)
+  end
 end

@@ -18,9 +18,22 @@ defmodule EspiDni.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {EspiDni, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :slack, :ueberauth_slack,
-                    :ueberauth_google, :timex, :gproc]]
+     applications: [
+       :phoenix,
+       :phoenix_html,
+       :cowboy,
+       :logger,
+       :gettext,
+       :phoenix_ecto,
+       :postgrex,
+       :slack,
+       :ueberauth_slack,
+       :ueberauth_google,
+       :timex,
+       :gproc,
+       :rollbax
+     ]
+   ]
   end
 
   # Specifies which paths to compile per environment.
@@ -44,6 +57,7 @@ defmodule EspiDni.Mixfile do
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.0"},
      {:gproc, "~> 0.6.1"},
+     {:rollbax, "~> 0.7.0"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end

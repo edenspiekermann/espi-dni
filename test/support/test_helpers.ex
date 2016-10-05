@@ -6,7 +6,7 @@ defmodule EspiDni.TestHelpers do
       slack_token: "supersecret",
       name: "Some User",
       url: "http://espi-dni.slack.com/foobar",
-      slack_id: "token#{Base.encode16(:crypto.rand_bytes(8))}",
+      slack_id: "token#{Base.encode16(:crypto.strong_rand_bytes(8))}",
     }, attrs)
 
     %EspiDni.Team{}

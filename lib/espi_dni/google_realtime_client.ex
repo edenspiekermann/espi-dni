@@ -1,9 +1,6 @@
 defmodule EspiDni.GoogleRealtimeClient do
 
   require Logger
-  import Ecto.Query, only: [from: 1, from: 2]
-  alias EspiDni.ViewCount
-  alias EspiDni.Repo
 
   @metrics "rt:pageviews"
   @dimensions "rt:pagePath"
@@ -12,7 +9,7 @@ defmodule EspiDni.GoogleRealtimeClient do
   def get_pageviews(team) do
     case HTTPoison.get(@url, [], params: request_params(team)) do
       {:ok, %HTTPoison.Response{status_code: 200, body: response}} ->
-        parse_pageviews(response, team)
+        parse_pageviews(response)
       {:ok, %HTTPoison.Response{status_code: 401, body: response}} ->
         Logger.error "Authentication error #{inspect response}"
         []
@@ -44,17 +41,19 @@ defmodule EspiDni.GoogleRealtimeClient do
     |> Enum.join(",")
   end
 
-  defp parse_pageviews(response, team) do
+  defp parse_pageviews(response) do
     case Poison.decode!(response) do
       %{"columnHeaders" => headers, "rows" => rows} ->
         Enum.map(rows, fn(row) ->
-          parse_viewcount(headers, row, team)
+          parse_viewcount(headers, row)
         end)
-      _ -> []
+      _ ->
+        Logger.error "Pageview response in unexpected format: #{inspect response}"
+        []
     end
   end
 
-  defp parse_viewcount(headers, row, team) do
+  defp parse_viewcount(headers, row) do
     %{
       path: get_data(headers, row, @dimensions),
       count: get_data(headers, row, @metrics)

@@ -16,6 +16,13 @@ config :espi_dni, EspiDni.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :rollbax,
+  access_token: "placeholder",
+  environment: "test"
+
+# Set rollbar erorrs to just log locally
+config :rollbax, enabled: :log
+
 config :espi_dni, EspiDni.Plugs.RequireSlackToken,
   slack_token: "test-slack-token"
 

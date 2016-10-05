@@ -39,5 +39,13 @@ config :espi_dni, EspiDni.Repo,
   hostname: "localhost",
   pool_size: 10
 
+config :rollbax,
+  access_token: "placeholder",
+  environment: "development"
+
+# Set rollbar erorrs to just log locally
+config :rollbax, enabled: :log
+
 # Use add local dev secrets
 import_config "dev.secret.exs"
+
