@@ -46,6 +46,14 @@ config :rollbax,
 # Set rollbar erorrs to just log locally
 config :rollbax, enabled: :log
 
+# configure exq for background jobs with redis
+config :exq,
+  host: "127.0.0.1",
+  port: 6379,
+  namespace: "exq",
+  concurrency: 1000,
+  queues: ["default"]
+
 # Use add local dev secrets
 import_config "dev.secret.exs"
 

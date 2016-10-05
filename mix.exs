@@ -31,6 +31,7 @@ defmodule EspiDni.Mixfile do
        :ueberauth_google,
        :timex,
        :gproc,
+       :exq,
        :rollbax
      ]
    ]
@@ -58,6 +59,7 @@ defmodule EspiDni.Mixfile do
      {:timex, "~> 3.0"},
      {:gproc, "~> 0.6.1"},
      {:rollbax, "~> 0.7.0"},
+     {:exq, git: "https://github.com/akira/exq.git"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end

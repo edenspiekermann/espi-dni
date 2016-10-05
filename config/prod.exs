@@ -17,6 +17,13 @@ config :espi_dni, EspiDni.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+# configure exq for background jobs with redis
+config :exq,
+  url: System.get_env("REDISCLOUD_URL"),
+  namespace: "exq"
+  concurrency: 1000,
+  queues: ["default"]
+
 config :rollbax,
   access_token: System.get_env("ROLLBAR_TOKEN"),
   environment: "production"
