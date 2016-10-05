@@ -26,7 +26,7 @@ defmodule EspiDni.GoogleAuthHandler do
   end
 
   def queue_for_refresh({:ok, team}) do
-    EspiDni.TokenSupervisor.start_token_worker(team)
+    EspiDni.TokenRefreshWorker.queue_job(team)
     {:ok, team}
   end
   def queue_for_refresh(_), do: {:error}
