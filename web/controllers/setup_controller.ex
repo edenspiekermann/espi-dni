@@ -26,7 +26,7 @@ defmodule EspiDni.SetupController do
 
   defp queue_analytics(team) do
     if ready_for_analytics?(team) do
-      EspiDni.AnalyticsSupervisor.start_anlaytics_worker(team)
+      EspiDni.AnalyticsWorker.queue_job(team)
     end
   end
 
