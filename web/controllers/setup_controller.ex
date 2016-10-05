@@ -12,6 +12,8 @@ defmodule EspiDni.SetupController do
 
     case Repo.update(changeset) do
       {:ok, team} ->
+        queue_analytics(team)
+
         conn
         |> put_flash(:info, "Team updated successfully.")
         |> put_session(:current_team, team)
@@ -23,7 +25,7 @@ defmodule EspiDni.SetupController do
   end
 
   defp queue_analytics(team) do
-    if ready_for_analytics? do
+    if ready_for_analytics?(team) do
       EspiDni.AnalyticsSupervisor.start_anlaytics_worker(team)
     end
   end
