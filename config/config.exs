@@ -21,12 +21,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :logger,
-  backends: [Rollbax.Logger]
-
-config :logger, Rollbax.Logger,
-  level: :error
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
