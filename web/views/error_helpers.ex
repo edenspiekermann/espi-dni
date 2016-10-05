@@ -37,4 +37,18 @@ defmodule EspiDni.ErrorHelpers do
       Gettext.dgettext(EspiDni.Gettext, "errors", msg, opts)
     end
   end
+
+  @doc """
+  Displays a full error message string, in the format
+  "[input-value] [message]"
+  e.g. "foo is not a valid URL"
+
+  Uses `translate_error` to translate the message
+  Assumes the value supplied exists in the changeset changes
+  """
+  def full_error_message(changeset, {key, error}) do
+    message = __MODULE__.translate_error(error)
+    value = changeset.changes[key]
+    "#{value} #{message}"
+  end
 end

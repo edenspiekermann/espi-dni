@@ -8,8 +8,12 @@ defmodule EspiDni.SlackArticleController do
     if changeset.valid? do
       render(conn, "confirm.json", url: url)
     else
-      text conn, Keyword.get(changeset.errors, :url)
+      text conn, error_string(changeset)
     end
   end
 
+  defp error_string(changeset) do
+    Enum.map(changeset.errors, &EspiDni.ErrorHelpers.full_error_message(changeset, &1))
+    |> Enum.join(",")
+  end
 end
