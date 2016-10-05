@@ -6,7 +6,7 @@ defmodule EspiDni.Plugs.SetSessionDataTest do
 
   test "request passes through when data is not present in session" do
     conn =
-      conn
+      build_conn
       |> bypass_through(EspiDni.Router, :browser)
       |> get("/")
       |> EspiDni.Plugs.SetSessionData.call(@opts)
@@ -22,7 +22,7 @@ defmodule EspiDni.Plugs.SetSessionDataTest do
       user = team |> insert_user()
 
       conn =
-        conn
+        build_conn
         |> bypass_through(EspiDni.Router, :browser)
         |> get("/")
         |> put_session(:team_id, team.id)

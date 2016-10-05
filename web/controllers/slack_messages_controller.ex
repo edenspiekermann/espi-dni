@@ -41,10 +41,8 @@ defmodule EspiDni.SlackMessageController do
   end
 
   defp error_string(changeset) do
-    Enum.map(changeset.errors,
-      fn({key, message}) -> "#{changeset.changes[key]} #{message}" end
-    )
-    |> Enum.join(", ")
+    Enum.map(changeset.errors, &EspiDni.ErrorHelpers.full_error_message(changeset, &1))
+    |> Enum.join(",")
   end
 
 end

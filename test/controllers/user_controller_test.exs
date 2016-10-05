@@ -8,7 +8,7 @@ defmodule EspiDni.UserControllerTest do
   setup do
     team = insert_team
     user = insert_user(team)
-    {:ok, conn: conn, team: team, user: user}
+    {:ok, conn: build_conn, team: team, user: user}
   end
 
   test "lists all entries on index", %{conn: conn} do

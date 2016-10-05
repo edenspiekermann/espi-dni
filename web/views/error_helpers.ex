@@ -21,15 +21,34 @@ defmodule EspiDni.ErrorHelpers do
     # Because error messages were defined within Ecto, we must
     # call the Gettext module passing our Gettext backend. We
     # also use the "errors" domain as translations are placed
-    # in the errors.po file. On your own code and templates,
-    # this could be written simply as:
+    # in the errors.po file.
+    # Ecto will pass the :count keyword if the error message is
+    # meant to be pluralized.
+    # On your own code and templates, depending on whether you
+    # need the message to be pluralized or not, this could be
+    # written simply as:
     #
     #     dngettext "errors", "1 file", "%{count} files", count
+    #     dgettext "errors", "is invalid"
     #
-    Gettext.dngettext(EspiDni.Gettext, "errors", msg, msg, opts[:count], opts)
+    if count = opts[:count] do
+      Gettext.dngettext(EspiDni.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(EspiDni.Gettext, "errors", msg, opts)
+    end
   end
 
-  def translate_error(msg) do
-    Gettext.dgettext(EspiDni.Gettext, "errors", msg)
+  @doc """
+  Displays a full error message string, in the format
+  "[input-value] [message]"
+  e.g. "foo is not a valid URL"
+
+  Uses `translate_error` to translate the message
+  Assumes the value supplied exists in the changeset changes
+  """
+  def full_error_message(changeset, {key, error}) do
+    message = __MODULE__.translate_error(error)
+    value = changeset.changes[key]
+    "#{value} #{message}"
   end
 end

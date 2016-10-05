@@ -4,7 +4,7 @@ defmodule EspiDni.SlackMessageControllerTest do
 
   setup do
     user = insert_team |> insert_user
-    {:ok, conn: conn, user: user}
+    {:ok, conn: build_conn, user: user}
   end
 
   test "returns a 401 for an invalid token", %{conn: conn} do

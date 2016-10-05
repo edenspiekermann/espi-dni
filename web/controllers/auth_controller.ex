@@ -2,6 +2,7 @@ defmodule EspiDni.AuthController do
   use EspiDni.Web, :controller
   alias EspiDni.SlackAuthHandler
   alias EspiDni.GoogleAuthHandler
+  alias Ueberauth.Strategy.Helpers
   plug Ueberauth
 
   def request(conn, _params) do

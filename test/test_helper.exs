@@ -1,3 +1,2 @@
 ExUnit.start
-Ecto.Adapters.SQL.begin_test_transaction(EspiDni.Repo)
-
+Ecto.Adapters.SQL.Sandbox.mode(EspiDni.Repo, :manual)

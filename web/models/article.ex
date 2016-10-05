@@ -19,7 +19,7 @@ defmodule EspiDni.Article do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> set_path()
@@ -32,7 +32,7 @@ defmodule EspiDni.Article do
       case url |> String.to_char_list |> :http_uri.parse do
         {:ok, _} -> []
         {:error, _msg} ->
-          [{field, options[:message] || "#{url} is not a valid URL!"}]
+          [{field, options[:message] || "is not a valid URL!"}]
       end
     end
   end
