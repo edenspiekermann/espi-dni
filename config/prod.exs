@@ -20,7 +20,7 @@ config :espi_dni, EspiDni.Repo,
 # configure exq for background jobs with redis
 config :exq,
   url: System.get_env("REDISCLOUD_URL"),
-  namespace: "exq"
+  namespace: "exq",
   concurrency: 1000,
   queues: ["default"]
 
