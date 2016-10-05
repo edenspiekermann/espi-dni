@@ -17,6 +17,10 @@ config :espi_dni, EspiDni.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :rollbax,
+  access_token: System.get_env("ROLLBAR_TOKEN"),
+  environment: "production"
+
 config :espi_dni, EspiDni.Plugs.RequireSlackToken,
   slack_token: System.get_env("SLACK_TOKEN")
 
