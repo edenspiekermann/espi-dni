@@ -60,7 +60,7 @@ defmodule EspiDni.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&MyApp.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&EspiDni.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

@@ -4,7 +4,7 @@ defmodule EspiDni.Plugs.RequireSlackTokenTest do
 
   test "returns unauthorised wheh the token is missing" do
     conn =
-      conn(:get, "/", %{})
+      build_conn(:get, "/", %{})
       |> EspiDni.Plugs.RequireSlackToken.call(%{})
 
     assert conn.halted
@@ -13,7 +13,7 @@ defmodule EspiDni.Plugs.RequireSlackTokenTest do
 
   test "returns unauthorised wheh the param token is invalid" do
     conn =
-      conn(:get, "/", %{token: "invalid"})
+      build_conn(:get, "/", %{token: "invalid"})
       |> EspiDni.Plugs.RequireSlackToken.call(%{})
 
     assert conn.halted
@@ -22,7 +22,7 @@ defmodule EspiDni.Plugs.RequireSlackTokenTest do
 
   test "returns unauthorised wheh the payload token is invalid" do
     conn =
-      conn(:get, "/", %{})
+      build_conn(:get, "/", %{})
       |> assign(:payload, %{"token" => "invalid"})
       |> EspiDni.Plugs.RequireSlackToken.call(%{})
 
@@ -32,7 +32,7 @@ defmodule EspiDni.Plugs.RequireSlackTokenTest do
 
   test "request passes through when the correct token is present" do
     conn =
-      conn(:get, "/", %{token: slack_token})
+      build_conn(:get, "/", %{token: slack_token})
       |> EspiDni.Plugs.RequireSlackToken.call(%{})
 
     refute conn.halted
@@ -40,7 +40,7 @@ defmodule EspiDni.Plugs.RequireSlackTokenTest do
 
   test "request passes through when the correct token is present in payload params" do
     conn =
-      conn(:get, "/", %{})
+      build_conn(:get, "/", %{})
       |> assign(:payload, %{"token" => slack_token})
       |> EspiDni.Plugs.RequireSlackToken.call(%{})
 

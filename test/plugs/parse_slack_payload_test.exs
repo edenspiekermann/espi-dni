@@ -4,7 +4,7 @@ defmodule EspiDni.Plugs.ParseSlackPayloadTest do
 
   test "does nothing if the payload is missing" do
     conn =
-      conn(:get, "/", %{})
+      build_conn(:get, "/", %{})
       |> EspiDni.Plugs.ParseSlackPayload.call(%{})
 
     assert get_in(conn.assigns, [:payload, "token"]) == nil
@@ -13,7 +13,7 @@ defmodule EspiDni.Plugs.ParseSlackPayloadTest do
 
   test "parses and sets the payload" do
     conn =
-      conn(:get, "/", %{payload: Poison.encode!(%{"foo" => "bar"})})
+      build_conn(:get, "/", %{payload: Poison.encode!(%{"foo" => "bar"})})
       |> EspiDni.Plugs.ParseSlackPayload.call(%{})
 
     assert conn.assigns.payload == %{"foo" => "bar"}

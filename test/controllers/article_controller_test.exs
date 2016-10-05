@@ -11,7 +11,7 @@ defmodule EspiDni.ArticleControllerTest do
     article = user |> insert_article
 
     conn =
-      conn
+      build_conn
       |> assign(:current_user, user)
       |> assign(:current_team, team)
 
@@ -19,6 +19,7 @@ defmodule EspiDni.ArticleControllerTest do
   end
 
   test "requires user authentication on all actions" do
+    conn = build_conn
     Enum.each([
       get(conn, article_path(conn, :new)),
       get(conn, article_path(conn, :index)),
