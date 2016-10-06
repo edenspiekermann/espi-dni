@@ -34,6 +34,7 @@ The app is built using:
 * Phoenix `1.2`
 * Node.js `5.3.0`
 * PostgreSQL `9.4`
+* Redis `3.2`
 
 #### Homebrew
 
@@ -63,6 +64,14 @@ Install noedejs via Homebrew
 brew install nodejs
 ```
 
+#### Redis
+
+Install redis via Homebrew
+
+```
+brew install redis
+```
+
 ### Setup
 
 * Clone the repo
@@ -76,7 +85,17 @@ brew install nodejs
 
 To start the app locally:
 
-Start Phoenix endpoint with `mix phoenix.server.` Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+We're using Redis to queue and schedule background jobs such as refreshing OAuth tokens and regularly pulling data from Google Analytics.
+
+Start redis by running:
+  `redis-server`
+
+We're using Phoenix as the webserver for the application - this serves the websites, manages websocket connections for the slackbots and schedules and runs the background jobs.
+
+Start Phoenix endpoint by running:
+  `mix phoenix.server`
+
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Deployment / CI
 
