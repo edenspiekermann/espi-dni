@@ -36,7 +36,7 @@ defmodule EspiDni.ArticleControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, article_path(conn, :index)
-    assert html_response(conn, 200) =~ "Your Articles"
+    assert html_response(conn, 200) =~ "Manage your preferences"
   end
 
   test "renders form for new resources", %{conn: conn} do

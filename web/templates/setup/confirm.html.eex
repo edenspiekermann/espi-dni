@@ -21,7 +21,7 @@
           👉 You can also edit your team preferences and articles:
         </li>
         <li>
-          <%= link "Manage team preferences", to: preference_path(@conn, :index) %>
+          <%= link "Manage team preferences", to: article_path(@conn, :index) %>
         </li>
       </ul>
     </div>

@@ -12,7 +12,7 @@ defmodule EspiDni.SlackMessageController do
       %{"name" => "yes", "value" => url} ->
         case create_article(conn, url) do
           {:ok, _article} ->
-            text conn, gettext("Article Registered", %{article_url: url, preferences_url: preference_url(conn, :index)})
+            text conn, gettext("Article Registered", %{url: url, manage_url: article_url(conn, :index)})
           {:error, changeset} ->
             text conn, error_string(changeset)
         end

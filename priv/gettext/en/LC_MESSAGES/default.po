@@ -42,8 +42,8 @@ msgid "Article Refute"
 msgstr "Nope"
 
 msgid "Article Registered"
-msgstr "Okay, great, I've registered %{article_url}\n\n"
-  "You can see a list of yoru article and manage team preferences here: %{preferences_url}"
+msgstr "Okay, great, I've registered %{url}\n\n"
+  "You can see a list of all your articles and manage team preferences here: %{manage_url}"
 
 msgid "Article Retry"
 msgstr "ok, can you try adding it with `/add` again please?"

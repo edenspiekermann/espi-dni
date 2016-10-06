@@ -1,6 +1,6 @@
 <%= case team_state(@current_team) do %>
   <% :complete -> %>
-    <%= link to: preference_url(@conn, :index) do %>
+    <%= link to: article_url(@conn, :index) do %>
       <div>
         View your team settings
       </div>

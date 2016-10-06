@@ -1,10 +1,33 @@
 <div class="hero">
   <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
-  <h1 class="hero__text">Your Articles</h1>
+  <h1 class="hero__text">Manage your preferences</h1>
 </div>
 
 <div class="bottom">
   <div class="bottom__offset container">
+    <div>
+      <%= link "< back to \"How Post Works\"", to: page_path(@conn, :index) %>
+    </div>
+
+    <div class="form">
+      <%= form_for team_changeset(@current_team), preference_path(@conn, :update), fn form -> %>
+      <h3>Notify me when:</h3>
+      <ul>
+        <li>
+          There is an increase of at least
+          <%= text_input form, :min_view_count_increase, class: "form__input--inline" %>
+          views,
+        </li>
+        <li>
+          and there is pageview increase of
+          <%= text_input form, :view_count_threshold, class: "form__input--inline" %>%
+          or more.
+        </li>
+      </ul>
+        <%= submit "Submit" %>
+      <% end %>
+    </div>
+
     <table class="table">
       <thead>
         <tr class="table__row">

@@ -31,7 +31,6 @@ defmodule EspiDni.Router do
     get "/setup", SetupController, :index
     get "/confirm", SetupController, :confirm
     put "/setup", SetupController, :update
-    get "/preferences", PreferenceController, :index
     put "/preferences", PreferenceController, :update
 
     resources "/teams", TeamController

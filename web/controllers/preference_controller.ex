@@ -4,10 +4,6 @@ defmodule EspiDni.PreferenceController do
 
   plug :authenticate
 
-  def index(conn, _params) do
-    render conn, "index.html", current_team: conn.assigns.current_team
-  end
-
   def update(conn, %{"team" => team_params}) do
     team = conn.assigns.current_team
     changeset = Team.changeset(team, team_params)
@@ -17,10 +13,10 @@ defmodule EspiDni.PreferenceController do
         conn
         |> put_flash(:info, "Preferences updated successfully.")
         |> assign(:current_team, team)
-        |> redirect(to: preference_path(conn, :index))
+        |> redirect(to: article_path(conn, :index))
       {:error, _changeset} ->
         conn
-        |> redirect(to: preference_path(conn, :index))
+        |> redirect(to: article_path(conn, :index))
     end
   end
 
