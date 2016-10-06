@@ -1,0 +1,23 @@
+<%= case team_state(@current_team) do %>
+  <% :complete -> %>
+    <%= link to: article_url(@conn, :index) do %>
+      <div>
+        View your team settings
+      </div>
+    <% end %>
+  <% :new -> %>
+    <%= link to: auth_path(@conn, :request, :slack) do %>
+      <img
+        alt="Sign in with Slack"
+        height="40"
+        width="172"
+        src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+        srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+    <% end %>
+  <% _ -> %>
+    <%= link to: setup_path(@conn, :update) do %>
+      <div>
+        View your team settings
+      </div>
+    <% end %>
+<% end %>

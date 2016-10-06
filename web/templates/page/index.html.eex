@@ -2,14 +2,7 @@
   <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
   <h1 class="hero__text">Meet POST Bot &ndash;</br>
   the easiest way to get valuable feedback on your Articles</h1>
-  <%= link to: auth_path(@conn, :request, :slack) do %>
-    <img
-      alt="Sign in with Slack"
-      height="40"
-      width="172"
-      src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-      srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-  <% end %>
+  <%= render "action.html", current_team: @current_team, conn: @conn %>
 </div>
 
 <div class="bottom">
@@ -51,15 +44,10 @@
       </li>
     </ul>
     <div class="try">
-      <h3 class="try__title">Try POST now:</h3>
-      <%= link to: auth_path(@conn, :request, :slack) do %>
-        <img
-          alt="Sign in with Slack"
-          height="40"
-          width="172"
-          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-          srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+      <%= if is_nil(@current_team) do %>
+        <h3 class="try__title">Try POST now:</h3>
       <% end %>
+      <%= render "action.html", current_team: @current_team, conn: @conn %>
     </div>
     <footer>
       <p>Have feedback or questions? Contact us</p>

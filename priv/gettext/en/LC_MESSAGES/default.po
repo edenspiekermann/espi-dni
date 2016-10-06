@@ -23,10 +23,14 @@ msgstr ""
 
 msgid "Initial Greeting"
 msgstr "Hi! I'm POST. I help journalists by suggesting the right action at the right moment.\n\n"
-  "Use the `/add` command to add a new article url."
+  "We're almost ready to go, please complete the setup here: https://espi-dni.herokuapp.com/setup."
 
 msgid "Message Spike"
 msgstr "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour."
+
+msgid "Setup Complete"
+msgstr "Great, thanks for completing the setup!\n\n"
+  "Use the `/add` command to add a new article url."
 
 msgid "Article Confirm Prompt"
 msgstr "Okay, you'd like to register the article at %{url}"
@@ -38,7 +42,8 @@ msgid "Article Refute"
 msgstr "Nope"
 
 msgid "Article Registered"
-msgstr "Okay, great, I've registered %{url}"
+msgstr "Okay, great, I've registered %{url}\n\n"
+  "You can see a list of all your articles and manage team preferences here: %{manage_url}"
 
 msgid "Article Retry"
 msgstr "ok, can you try adding it with `/add` again please?"

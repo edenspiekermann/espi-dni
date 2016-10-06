@@ -7,7 +7,8 @@ defmodule EspiDni.ArticleController do
   plug :scrub_params, "article" when action in [:create, :update]
 
   def index(conn, _params) do
-    render(conn, "index.html", articles: user_articles(conn))
+    team = conn.assigns.current_team
+    render(conn, "index.html", articles: user_articles(conn), current_team: team)
   end
 
   def new(conn, _params) do
