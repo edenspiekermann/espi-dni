@@ -27,6 +27,7 @@
                 src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
                 srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
             <% end %>
+            <p>You'll need permission to add a bot integration to your slack channel.</p>
           <% end %>
         </div>
       </li>
@@ -50,6 +51,7 @@
                 Link your Google account
               </div>
             <% end %>
+            <p>You'll need a Google account with access to view your Google Analytics data.</p>
           <% end %>
         </div>
       </li>
@@ -69,6 +71,7 @@
               <%= submit "Submit" %>
             <% end %>
           <% end %>
+          <p>Select which web property your articles belong to.</p>
         </div>
       </li>
     </ul>
