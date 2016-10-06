@@ -12,7 +12,7 @@ defmodule EspiDni.TokenRefreshWorker do
   end
 
   def queue_job(team) do
-    EspiDni.UniqueQueue.enqueue_in(EspiDni.TokenManager, team, @fourty_five_minutes)
+    EspiDni.UniqueQueue.enqueue_in(EspiDni.TokenRefreshWorker, team, @fourty_five_minutes)
   end
 
 end
