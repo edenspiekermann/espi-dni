@@ -1,0 +1,29 @@
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">
+    🙌 </br>
+    POST Bot is now set up!
+  </h1>
+</div>
+
+<div class="bottom">
+  <div class="bottom__offset container">
+    <div class="setup">
+      <ul>
+        <li>
+          You can now add your Articles URL
+          directly in Slack by writing <code>“/add [URL]”</code> in a direct message to the Bot
+        </li>
+        <li>
+          👉 You can also edit your team preferences and articles:
+        </li>
+        <li>
+          <%= link "Manage team preferences", to: preference_path(@conn, :index) %>
+        </li>
+      </ul>
+    </div>
+    <footer>
+      <p>Have feedback or questions? Contact us</p>
+    </footer>
+  </div>
+</div>

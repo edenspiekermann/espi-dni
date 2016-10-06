@@ -19,11 +19,15 @@ defmodule EspiDni.SetupController do
         conn
         |> put_flash(:info, "Team updated successfully.")
         |> put_session(:current_team, team)
-        |> redirect(to: setup_path(conn, :index))
+        |> redirect(to: setup_path(conn, :confirm))
       {:error, _changeset} ->
         conn
         |> redirect(to: setup_path(conn, :index))
     end
+  end
+
+  def confirm(conn, _params) do
+    render(conn, "confirm.html", current_team: conn.assigns.current_team)
   end
 
   defp finish_integration(team, user) do
