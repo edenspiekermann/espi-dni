@@ -43,4 +43,18 @@ defmodule EspiDni.Team do
     )
   end
 
+  def current_state(team) do
+    case team  do
+      %{slack_token: nil, google_token: nil, google_refresh_token: nil, google_property_id: nil} ->
+        :new
+      %{slack_token: _, google_token: nil, google_refresh_token: nil, google_property_id: nil} ->
+        :awaiting_google_token
+      %{slack_token: _, google_token: _, google_refresh_token: nil, google_property_id: nil} ->
+        :awaiting_refresh_token
+      %{slack_token: _, google_token: _, google_refresh_token: _, google_property_id: nil} ->
+        :awaiting_google_property
+      %{slack_token: _, google_token: _, google_refresh_token: _, google_property_id: _} ->
+        :complete
+    end
+  end
 end
