@@ -25,6 +25,9 @@ msgstr ""
 msgid "Initial Greeting"
 msgstr ""
 
+msgid "Setup Complete"
+msgstr ""
+
 msgid "Message Spike"
 msgstr ""
 

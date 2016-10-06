@@ -28,6 +28,10 @@ msgstr "Hi! I'm POST. I help journalists by suggesting the right action at the r
 msgid "Message Spike"
 msgstr "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour."
 
+msgid "Setup Complete"
+msgstr "Great, thanks for completing the setup!\n\n"
+  "Use the `/add` command to add a new article url."
+
 msgid "Article Confirm Prompt"
 msgstr "Okay, you'd like to register the article at %{url}"
 

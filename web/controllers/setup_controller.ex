@@ -1,5 +1,6 @@
 defmodule EspiDni.SetupController do
   use EspiDni.Web, :controller
+  require Logger
   alias EspiDni.Team
 
   def index(conn, _params) do
@@ -8,11 +9,12 @@ defmodule EspiDni.SetupController do
 
   def update(conn, %{"team" => team_params}) do
     team = conn.assigns.current_team
+    user = conn.assigns.current_user
     changeset = Team.changeset(team, team_params)
 
     case Repo.update(changeset) do
       {:ok, team} ->
-        queue_analytics(team)
+        finish_integration(team, user)
 
         conn
         |> put_flash(:info, "Team updated successfully.")
@@ -24,14 +26,31 @@ defmodule EspiDni.SetupController do
     end
   end
 
+  defp finish_integration(team, user) do
+    if setup_complete?(team) do
+      queue_analytics(team)
+      send_completion_message(user)
+    end
+  end
+
+  defp setup_complete?(team) do
+    !!(team.google_token && team.google_property_id && team.google_refresh_token)
+  end
+
   defp queue_analytics(team) do
-    if ready_for_analytics?(team) do
+    if setup_complete?(team) do
       EspiDni.AnalyticsWorker.queue_job(team)
     end
   end
 
-  defp ready_for_analytics?(team) do
-    !!(team.google_token && team.google_property_id && team.google_refresh_token)
-  end
+  defp send_completion_message(user) do
+    message = gettext "Setup Complete"
 
+    case EspiDni.SlackWeb.send_message(user, message) do
+      %{"ok" => true } ->
+        {:ok, user}
+      %{"ok" => false, "error" => error} ->
+        Logger.error("Could not send completion message to user: #{user.id}. Error: #{inspect error}")
+    end
+  end
 end
