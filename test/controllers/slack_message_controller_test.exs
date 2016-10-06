@@ -63,6 +63,7 @@ defmodule EspiDni.SlackMessageControllerTest do
     conn = post conn, slack_message_path(conn, :new), %{payload: payload}
     assert Repo.get_by(EspiDni.Article, url: "http://www.example.com")
 
-    assert text_response(conn, 200) =~ gettext("Article Registered", %{url: "http://www.example.com"})
+    expected_text = gettext("Article Registered", %{article_url: "http://www.example.com", preferences_url: preference_url(conn, :index)})
+    assert text_response(conn, 200) =~ expected_text
   end
 end

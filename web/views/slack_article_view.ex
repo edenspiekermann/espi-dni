@@ -10,7 +10,7 @@ defmodule EspiDni.SlackArticleView do
         %{
           fallback: "Please enable interactive messages to confirm the article",
           callback_id: "confirm_article",
-          color: "#8654e5",
+          color: "#31b0e2",
           attachment_type: "default",
           actions: [
             %{
