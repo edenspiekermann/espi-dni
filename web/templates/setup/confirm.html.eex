@@ -8,6 +8,9 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
+    <div>
+      <%= link "< back to \"How Post Works\"", to: page_path(@conn, :index) %>
+    </div>
     <div class="setup">
       <ul>
         <li>
