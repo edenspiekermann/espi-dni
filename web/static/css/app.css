@@ -65,7 +65,7 @@ textarea {
 
 body {
   font: 16px/26px 'RealText', 'Helvetica', 'Arial', sans-serif;
-  background-color: white;
+  background-color: #F6F6F6;
 }
 
 ul {
@@ -119,6 +119,10 @@ a {
   display: none;
 }
 
+header {
+  background-color: white;
+}
+
 .header {
   display: flex;
   height: 60px;
@@ -150,6 +154,8 @@ a {
 
 .hero__logo {
   width: 200px;
+  -webkit-filter: drop-shadow(-2px -2px 5px #656c70);
+  filter: drop-shadow(-2px -2px 5px #656c70);
 }
 
 .hero__text {
@@ -165,7 +171,7 @@ a {
 }
 
 .bottom__offset {
-  background-color: #47B9B4;
+  background-color: white;
   padding: 20px;
 }
 
@@ -193,10 +199,11 @@ a {
 }
 
 .steps__title {
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.1em;
   margin-bottom: 0.4em;
   font-size: 30px;
+  color: #31b0e2;
 }
 
 .steps--setup .steps__left {
@@ -389,8 +396,11 @@ footer {
     border-radius: 5px;
   }
   .bottom__title {
+    font-weight: 700;
+    font-size: 36px;
     margin: 0;
     padding: 70px 150px 20px 150px;
+    color: #31b0e2;
   }
   .steps {
     padding: 0 150px 0 150px;
