@@ -34,7 +34,6 @@ defmodule EspiDni.Router do
     put "/preferences", PreferenceController, :update
 
     resources "/teams", TeamController
-    resources "/users", UserController
     resources "/articles", ArticleController
   end
 
