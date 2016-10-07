@@ -3,7 +3,6 @@ defmodule EspiDni.ViewCountHandler do
   require Logger
   alias EspiDni.Repo
   alias EspiDni.ViewCount
-  import EspiDni.Gettext
   import Ecto.Query
 
   @minimum_increase 10
@@ -49,7 +48,7 @@ defmodule EspiDni.ViewCountHandler do
   end
 
   # return false if there's not a list with two entries
-  defp view_count_spike?(_, team), do: false
+  defp view_count_spike?(_, _team), do: false
 
   defp create_view_count(nil, _), do: :nil
 
