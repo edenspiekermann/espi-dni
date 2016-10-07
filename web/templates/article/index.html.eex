@@ -15,10 +15,10 @@
         <%= form_for team_changeset(@current_team), preference_path(@conn, :update), fn form -> %>
         <h3>Notify me when:</h3>
         <p>
-          There is an increase of at least <%= text_input form, :min_view_count_increase, class: "preferences__input--inline" %> views,
+          There is an increase of at least <%= text_input form, :min_view_count_increase, class: "preferences__input" %> views,
         </p>
         <p>
-          and there is pageview increase of <%= text_input form, :view_count_threshold, class: "preferences__input--inline" %>% or more.
+          and there is pageview increase of <%= text_input form, :view_count_threshold, class: "preferences__input" %>% or more.
         </p>
           <%= submit "Submit" %>
         <% end %>

@@ -119,7 +119,7 @@ a {
   display: none;
 }
 
-header {
+.site-header {
   background-color: white;
 }
 
@@ -301,10 +301,7 @@ footer {
   padding: 40px 0 20px 0;
 }
 
-.preferences {
-}
-
-.preferences__input--inline {
+.preferences__input {
   width: 40px;
   text-align: center;
 }
@@ -379,10 +376,6 @@ footer {
   color: white;
 }
 
-.setup__header h2 {
-  color: white;
-}
-
 .setup__body {
   color: black;
   padding: 0px 150px;
@@ -428,6 +421,7 @@ footer {
     display: table;
     padding-bottom: 100px;
     position: relative;
+    color: black;
   }
   .steps__item::after {
     content: '';
