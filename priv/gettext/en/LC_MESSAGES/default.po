@@ -28,6 +28,24 @@ msgstr "Hi! I'm POST. I help journalists by suggesting the right action at the r
 msgid "Message Spike"
 msgstr "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour."
 
+msgid "Message Spike 1"
+msgstr "There’s been a spike in traffic for `%{article_url}`, an increase of %{count} page views — ask the desk team to publish it on the homepage (again) to make the most of it."
+
+msgid "Message Spike 2"
+msgstr "Woah, unexpected traffic spike for `%{article_url}`, an increase of %{count} page views, cd — check the comments and think about adding a new spin to your story with a new angle!"
+
+msgid "Message Spike 3"
+msgstr "It’s going great! :tada: Traffic is high for `%{article_url}`, it’s received %{count} more page views — have you posted it on social media yet? Pushing to Facebook with a new teaser can gain even more traction."
+
+msgid "Message Spike 4"
+msgstr "Great job! Traffic to `%{article_url}` is peaking :mount_fuji:, there's been an increase of %{count} more page views — find out where people are coming from to engage further or use similar platforms to broaden your reach."
+
+msgid "Message Spike 5"
+msgstr "Traffic to `%{article_url}` was great, but now it’s really heating up, with an increase of %{count} page views! :fire: Try adding new images, videos or GIFs so people stick around for longer."
+
+msgid "Message Spike 6"
+msgstr "There’s a traffic spike on `%{article_url}`, with an increase of %{count} more page views — put yourself in your readers’ shoes and deliver the story to the platform where they really want to read it. :love_letter: (i.e FB Groups, Bulletin Boards or Reddit)"
+
 msgid "Setup Complete"
 msgstr "Great, thanks for completing the setup!\n\n"
   "Use the `/add` command to add a new article url."

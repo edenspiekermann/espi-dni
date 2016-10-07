@@ -3,7 +3,6 @@ defmodule EspiDni.ViewCountHandler do
   require Logger
   alias EspiDni.Repo
   alias EspiDni.ViewCount
-  import EspiDni.Gettext
   import Ecto.Query
 
   @minimum_increase 10
@@ -31,7 +30,7 @@ defmodule EspiDni.ViewCountHandler do
   end
 
   def send_spike_message(article, latest_counts) do
-    message =  gettext("Message Spike", %{article_url: article.url, count: hd(latest_counts)})
+    message = spike_message(article, latest_counts)
 
     case EspiDni.SlackWeb.send_message(article.user, message) do
       %{"ok" => true } -> {:ok, article.user}
@@ -49,7 +48,7 @@ defmodule EspiDni.ViewCountHandler do
   end
 
   # return false if there's not a list with two entries
-  defp view_count_spike?(_, team), do: false
+  defp view_count_spike?(_, _team), do: false
 
   defp create_view_count(nil, _), do: :nil
 
@@ -75,6 +74,18 @@ defmodule EspiDni.ViewCountHandler do
       where: view_count.article_id == ^article.id,
       order_by: [desc: view_count.id],
       limit: 2
+    )
+  end
+
+  defp spike_message(%{url: url}, [current_count | [previous_count]]) do
+    string_number = :rand.uniform(6)
+    count = current_count - previous_count
+
+    Gettext.gettext(
+      EspiDni.Gettext,
+      "Message Spike #{string_number}",
+      article_url: url,
+      count: count
     )
   end
 end

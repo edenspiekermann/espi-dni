@@ -31,6 +31,24 @@ msgstr ""
 msgid "Message Spike"
 msgstr ""
 
+msgid "Message Spike 1"
+msgstr ""
+
+msgid "Message Spike 2"
+msgstr ""
+
+msgid "Message Spike 3"
+msgstr ""
+
+msgid "Message Spike 4"
+msgstr ""
+
+msgid "Message Spike 5"
+msgstr ""
+
+msgid "Message Spike 6"
+msgstr ""
+
 msgid "Article Confirm Prompt"
 msgstr ""
 
