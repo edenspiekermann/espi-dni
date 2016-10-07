@@ -5,49 +5,43 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
-    <div>
-      <%= link "< back to \"How Post Works\"", to: page_path(@conn, :index) %>
+    <div class="bottom__back-link">
+      <%= link "back to \"How Post Works\"", to: page_path(@conn, :index) %>
     </div>
 
-    <div class="form">
-      <%= form_for team_changeset(@current_team), preference_path(@conn, :update), fn form -> %>
-      <h3>Notify me when:</h3>
-      <ul>
-        <li>
-          There is an increase of at least
-          <%= text_input form, :min_view_count_increase, class: "form__input--inline" %>
-          views,
-        </li>
-        <li>
-          and there is pageview increase of
-          <%= text_input form, :view_count_threshold, class: "form__input--inline" %>%
-          or more.
-        </li>
-      </ul>
-        <%= submit "Submit" %>
-      <% end %>
-    </div>
-
-    <table class="table">
-      <thead>
-        <tr class="table__row">
-          <th class="table__row--header">Url</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= for article <- @articles do %>
-          <tr class="table__row">
-            <td class="table__cell"><%= article.url %></td>
-
-            <td class="table__cell">
-              <%= link "Edit", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
-              <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"] %>
-            </td>
-          </tr>
+    <div class="team-management">
+      <h2 class="bottom__title">Manage your preferences</h2>
+      <div class="preferences">
+        <%= form_for team_changeset(@current_team), preference_path(@conn, :update), fn form -> %>
+        <h3>Notify me when:</h3>
+        <p>
+          There is an increase of at least <%= text_input form, :min_view_count_increase, class: "preferences__input" %> views,
+        </p>
+        <p>
+          and there is pageview increase of <%= text_input form, :view_count_threshold, class: "preferences__input" %>% or more.
+        </p>
+          <%= submit "Submit" %>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+
+      <h2 class="bottom__title">Your registered articles</h2>
+      <div class="articles">
+        <table class="table">
+          <tbody>
+            <%= for article <- @articles do %>
+              <tr class="table__row">
+                <td class="table__cell"><%= article.url %></td>
+
+                <td class="table__cell articles__action">
+                  <%= link "Edit URL", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
+                  <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"] %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <footer>
       <p>Have feedback or questions? Contact us</p>
     </footer>

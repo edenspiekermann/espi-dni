@@ -73,8 +73,8 @@
               <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property" %>
               <%= submit "Submit" %>
             <% end %>
+            <p>Select which web property your articles belong to.</p>
           <% end %>
-          <p>Select which web property your articles belong to.</p>
         </div>
       </li>
     </ul>

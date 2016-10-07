@@ -38,7 +38,7 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <header class="clearfix">
+  <header class="clearfix site-header">
     <div class="header container">
       <img class="header-logo-espi" src="/images/edenspiekermann.png" alt="Edenspiekermann logo" />
       <img class="header-logo-dni" src="/images/dni_logogoogle_-01_720.png" alt="Google Digital News Initiative logo" />
