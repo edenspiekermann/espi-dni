@@ -43,13 +43,13 @@
         </div>
       </li>
     </ul>
-    <div class="try">
-      <%= if is_nil(@current_team) do %>
-        <h3 class="try__title">Try POST now:</h3>
-      <% end %>
-      <%= render "action.html", current_team: @current_team, conn: @conn %>
-    </div>
     <footer>
+      <div class="try">
+        <%= if is_nil(@current_team) do %>
+          <h3 class="try__title">Try POST now:</h3>
+        <% end %>
+        <%= render "action.html", current_team: @current_team, conn: @conn %>
+      </div>
       <p>Have feedback or questions? Contact us</p>
     </footer>
   </div>
