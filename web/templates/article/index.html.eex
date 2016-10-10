@@ -5,10 +5,9 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
-    <div class="bottom__back-link">
+    <div class="back">
       <%= link "back to \"How Post Works\"", to: page_path(@conn, :index) %>
     </div>
-
     <h2 class="bottom__title">Manage your preferences</h2>
     <div class="team-management">
       <div class="preferences">

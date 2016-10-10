@@ -186,26 +186,6 @@ a {
   color: white;
 }
 
-.bottom__back-link {
-  font-size: 16px;
-  font-weight: 700;
-  color: #9b9b9b;
-  padding: 10px;
-}
-
-.bottom__back-link a {
-  color: #9b9b9b;
-  text-decoration: none;
-}
-
-.bottom__back-link a:hover, a:focus {
-  text-decoration: underline;
-}
-
-.bottom__back-link:before {
-   content: "< ";
-}
-
 .steps p {
   font-size: 20px;
   color: #31b0e2;
@@ -398,6 +378,10 @@ a {
   text-decoration: none;
 }
 
+.setup {
+  margin-top: 1em;
+}
+
 .setup__header {
   text-align: center;
   line-height: 40px;
@@ -460,6 +444,11 @@ a {
   font-weight: 700;
   position: relative;
   text-decoration: none;
+}
+
+.back a:hover,
+.back a:focus {
+  text-decoration: underline;
 }
 
 .back a::before {
