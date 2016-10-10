@@ -564,6 +564,9 @@ footer.no-border {
     vertical-align: top;
   }
   .steps__left {
+    min-width: 160px;
+  }
+  .steps--setup .steps__left {
     min-width: 100px;
   }
   .steps--setup .steps__item::after {
