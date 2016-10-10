@@ -144,12 +144,12 @@ a {
 .hero {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   background-image: url("/images/hero.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 536px;
+  padding-top: 42px;
+  min-height: 494px;
 }
 
 .hero__logo {
@@ -358,9 +358,7 @@ footer {
 }
 
 .action__button {
-  background-color: white;
   margin-top: 10px;
-  border-radius: 3px;
   padding: 4px 10px;
 }
 
@@ -484,11 +482,11 @@ footer {
     font-weight: 700;
     font-size: 36px;
     margin: 0;
-    padding: 70px 150px 20px 150px;
+    padding: 85px 160px 20px 160px;
     color: #31b0e2;
   }
   .steps {
-    padding: 0 150px 0 150px;
+    padding: 0 160px 0 160px;
   }
   .try {
     margin: inherit;
