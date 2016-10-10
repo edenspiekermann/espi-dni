@@ -21,7 +21,7 @@
       <div class="setup__body">
         <p class="setup__note">
           You can now add your Articles URL
-          directly in Slack by writing <code>“/add [URL]”</code> in a direct message to the Bot
+          directly in Slack by writing <code>/add [URL]</code> in a direct message to the Bot
         </p>
         <div class="setup__edit">
           <span class="emoji">👉</span><span>You can also edit your team preferences and articles:</span>
