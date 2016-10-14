@@ -10,7 +10,7 @@
 
     <%= link "Back", to: article_path(@conn, :index) %>
     <footer>
-      <p>Have feedback or questions? Contact us</p>
+      <p>Have feedback or questions? <a href="mailto:c​.hanke@de​.edenspiekermann​.com?subject=POSTBot%20Feedback%20or%20Question">Contact us<a/></p>
     </footer>
   </div>
 </div>
