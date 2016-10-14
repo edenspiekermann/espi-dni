@@ -7,26 +7,26 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
-    <div class="bottom__back-link">
+    <div class="back">
       <%= link "back to \"How Post Works\"", to: page_path(@conn, :index) %>
     </div>
     <div class="setup">
       <div class="setup__header">
-        <h2 class="bottom__title">
-          🙌</br>
+        <h2 class="setup__title">
+          <span class="emoji">🙌</span></br>
           High Five!</br>
           POST Bot is now set up!
         </h2>
       </div>
       <div class="setup__body">
-        <p class="setup__body--centered">
+        <p class="setup__note">
           You can now add your Articles URL
-          directly in Slack by writing <code>“/add [URL]”</code> in a direct message to the Bot
+          directly in Slack by writing <code>/add [URL]</code> in a direct message to the Bot
         </p>
-        <p class="setup__body-centered">
-          👉 You can also edit your team preferences and articles:
-        </p>
-        <div class="setup__link setup__body-centered">
+        <div class="setup__edit">
+          <span class="emoji">👉</span><span>You can also edit your team preferences and articles:</span>
+        </div>
+        <div class="setup__link">
           <%= link "Manage team preferences", to: article_path(@conn, :index) %>
         </div>
       </div>

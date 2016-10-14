@@ -6,8 +6,8 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
-    <div>
-      <%= link "< back to \"How Post Works\"", to: page_path(@conn, :index) %>
+    <div class="back">
+      <%= link "back to \"How Post Works\"", to: page_path(@conn, :index) %>
     </div>
     <h2 class="bottom__title">Welcome to POST Bot:</h2>
     <ul class="steps steps--setup">
@@ -44,6 +44,7 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 2 &ndash;</strong> Authenticate Google Analytics</h3>
+          <p>You'll need a Google account with access to view your Google Analytics data.</p>
           <%= if @current_team && !@current_team.google_token do %>
             <%= link to: auth_path(@conn, :request, :google) do %>
               <div class="google">
@@ -54,7 +55,6 @@
                 Link your Google account
               </div>
             <% end %>
-            <p>You'll need a Google account with access to view your Google Analytics data.</p>
           <% end %>
         </div>
       </li>
@@ -68,37 +68,21 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 3 &ndash;</strong> Select your Google Analytics web property</h3>
+          <p>Select which web property your articles belong to.</p>
           <%= if @current_team && !@current_team.google_property_id do %>
             <%= form_for team_changeset(@current_team), setup_path(@conn, :update), fn form -> %>
-              <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property" %>
-              <%= submit "Submit" %>
+              <div class="select-item">
+                <%= select form, :google_property_id, web_properties(@current_team), class: "form-control", prompt: "Select Google Analytics Property", onchange: "this.form.submit()" %>
+              </div>
+              <div class="visually-hidden">
+                <%= submit "Submit" %>
+              <div>
             <% end %>
-            <p>Select which web property your articles belong to.</p>
           <% end %>
         </div>
       </li>
     </ul>
-    <div class="try">
-      <h3 class="try__title">Try POST now:</h3>
-      <%= if @current_team do %>
-        <img
-          class="disabled"
-          alt="Sign in with Slack "
-          height="40"
-          width="172"
-          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-          srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-      <% else %>
-        <%= link to: auth_path(@conn, :request, :slack) do %>
-          <img
-            alt="Sign in with Slack"
-            height="40"
-            width="172"
-            src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-            srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-        <% end %>
-      <% end %>
-    </div>
+
     <footer>
       <p>Have feedback or questions? Contact us</p>
     </footer>

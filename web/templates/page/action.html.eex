@@ -1,8 +1,8 @@
-<div class="action__button">
+<div class="action">
   <%= case team_state(@current_team) do %>
     <% :complete -> %>
       <%= link to: article_url(@conn, :index) do %>
-        <div>
+        <div class="action__button--white">
           View your <strong>Team Settings</strong>
         </div>
       <% end %>
@@ -17,7 +17,7 @@
       <% end %>
     <% _ -> %>
       <%= link to: setup_path(@conn, :update) do %>
-        <div>
+        <div class="action__button--white">
           View your <strong>Team Settings</strong>
         </div>
     <% end %>
