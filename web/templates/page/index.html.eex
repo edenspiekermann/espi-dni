@@ -50,7 +50,7 @@
         <% end %>
         <%= render "action.html", current_team: @current_team, conn: @conn %>
       </div>
-      <p>Have feedback or questions? <a href="mailto:c​.hanke@de​.edenspiekermann​.com?subject=POSTBot%20Feedback%20or%20Question">Contact us<a/></p>
+      <%= render EspiDni.SharedView, "feedback_link.html" %>
     </footer>
   </div>
 </div>
