@@ -60,3 +60,9 @@ msgstr "Okay, great, I've registered %{url}"
 
 msgid "Article Retry"
 msgstr ""
+
+msgid "Feedback prompt"
+msgstr ""
+
+msgid "Contact us"
+msgstr ""
