@@ -1,0 +1,6 @@
+<p>
+  Have feedback or questions?
+  <%= link to: "mailto:c.hanke@de.edenspiekermann.com?subject=POSTBot%20Feedback%20or%20Question" do %>
+    Contact us
+  <% end %>
+</p>
