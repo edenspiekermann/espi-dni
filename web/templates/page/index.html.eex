@@ -50,7 +50,7 @@
         <% end %>
         <%= render "action.html", current_team: @current_team, conn: @conn %>
       </div>
-      <p>Have feedback or questions? Contact us</p>
+      <%= render EspiDni.SharedView, "feedback_link.html" %>
     </footer>
   </div>
 </div>

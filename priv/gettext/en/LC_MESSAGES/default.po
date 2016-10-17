@@ -65,3 +65,9 @@ msgstr "Okay, great, I've registered %{url}\n\n"
 
 msgid "Article Retry"
 msgstr "ok, can you try adding it with `/add` again please?"
+
+msgid "Feedback prompt"
+msgstr "Have feedback or questions?"
+
+msgid "Contact us"
+msgstr "Contact us"
