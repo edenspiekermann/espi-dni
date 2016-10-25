@@ -1,4 +1,5 @@
 defmodule EspiDni.TestHelpers do
+  import EspiDni.Factory
   alias EspiDni.Repo
 
   def insert_team(attrs \\ %{}) do
@@ -37,6 +38,14 @@ defmodule EspiDni.TestHelpers do
     user
     |> Ecto.build_assoc(:articles, article_attrs)
     |> Repo.insert!()
+  end
+
+  def insert_previous_view_count(attrs \\ %{}) do
+    half_hour_ago = Ecto.DateTime.cast!(Timex.shift(Timex.now, minutes: -30))
+
+    build(:view_count, attrs)
+    |> Map.merge(%{inserted_at: half_hour_ago, updated_at: half_hour_ago})
+    |> insert
   end
 
   def slack_token do

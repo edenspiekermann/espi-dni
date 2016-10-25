@@ -28,21 +28,21 @@ defmodule EspiDni.ViewCountHandlerTest do
   end
 
   test "process_view_count does not send message of min view count increase is not reached", %{team: team, article: article} do
-    Repo.insert!(ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: 5}))
+    insert_previous_view_count(%{article_id: article.id, count: 5})
     view_count_data = %{path: article.path, count: 14}
     result = ViewCountHandler.process_view_count(view_count_data, team)
     assert result == nil
   end
 
   test "process_view_count does not send message of percentage increase is not reached", %{team: team, article: article} do
-    Repo.insert!(ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: 500}))
+    insert_previous_view_count(%{article_id: article.id, count: 500})
     view_count_data = %{path: article.path, count: 20}
     result = ViewCountHandler.process_view_count(view_count_data, team)
     assert result == nil
   end
 
   test "process_view_count sends a message if the view count is a spike", %{team: team, article: article} do
-    Repo.insert!(ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: 5}))
+    insert_previous_view_count(%{article_id: article.id, count: 5})
     view_count_data = %{path: article.path, count: 24}
     result = ViewCountHandler.process_view_count(view_count_data, team)
 
@@ -53,7 +53,7 @@ defmodule EspiDni.ViewCountHandlerTest do
   end
 
   test "process_view_count users team preferences for min views if set", %{team: team, article: article} do
-    Repo.insert!(ViewCount.changeset(%ViewCount{}, %{article_id: article.id, count: 10}))
+    insert_previous_view_count(%{article_id: article.id, count: 10})
     team = Repo.update!(Team.changeset(team, %{min_view_count_increase: 2, view_count_threshold: 20}))
     view_count_data = %{path: article.path, count: 12}
     result = ViewCountHandler.process_view_count(view_count_data, team)

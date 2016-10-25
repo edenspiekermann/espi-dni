@@ -70,9 +70,10 @@ defmodule EspiDni.ViewCountHandler do
   defp last_two_counts(article) do
     Repo.all(
       from view_count in ViewCount,
-      select: view_count.count,
+      select: sum(view_count.count),
       where: view_count.article_id == ^article.id,
-      order_by: [desc: view_count.id],
+      group_by: fragment("round(extract('epoch' from inserted_at) / 1800)"),
+      order_by: fragment("round(extract('epoch' from inserted_at) / 1800) desc"),
       limit: 2
     )
   end
