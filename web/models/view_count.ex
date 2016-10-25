@@ -3,13 +3,14 @@ defmodule EspiDni.ViewCount do
 
   schema "view_counts" do
     field :count, :integer
+    field :source, :string
     belongs_to :article, EspiDni.Article
 
     timestamps
   end
 
   @required_fields ~w(count article_id)
-  @optional_fields ~w()
+  @optional_fields ~w(source)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
