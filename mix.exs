@@ -60,7 +60,8 @@ defmodule EspiDni.Mixfile do
      {:gproc, "~> 0.6.1"},
      {:rollbax, "~> 0.7.0"},
      {:exq, git: "https://github.com/akira/exq.git"},
-     {:credo, "~> 0.4", only: [:dev, :test]}
+     {:credo, "~> 0.4", only: [:dev, :test]},
+     {:ex_machina, "~> 1.0", only: :test}
    ]
   end
 
