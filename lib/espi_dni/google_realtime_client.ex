@@ -3,7 +3,9 @@ defmodule EspiDni.GoogleRealtimeClient do
   require Logger
 
   @metrics "rt:pageviews"
-  @dimensions "rt:pagePath"
+  @page_path "rt:pagePath"
+  @page_source "rt:source"
+  @dimensions "rt:pagePath, rt:source"
   @url "https://www.googleapis.com/analytics/v3/data/realtime"
 
   def get_pageviews(team) do
@@ -55,7 +57,8 @@ defmodule EspiDni.GoogleRealtimeClient do
 
   defp parse_viewcount(headers, row) do
     %{
-      path: get_data(headers, row, @dimensions),
+      path: get_data(headers, row, @page_path),
+      source: get_data(headers, row, @page_source),
       count: get_data(headers, row, @metrics)
     }
   end
