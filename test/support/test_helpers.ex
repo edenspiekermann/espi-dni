@@ -40,14 +40,6 @@ defmodule EspiDni.TestHelpers do
     |> Repo.insert!()
   end
 
-  def insert_previous_view_count(attrs \\ %{}) do
-    half_hour_ago = Ecto.DateTime.cast!(Timex.shift(Timex.now, minutes: -30))
-
-    build(:view_count, attrs)
-    |> Map.merge(%{inserted_at: half_hour_ago, updated_at: half_hour_ago})
-    |> insert
-  end
-
   def slack_token do
     Application.get_env(:espi_dni, EspiDni.Plugs.RequireSlackToken)[:slack_token]
   end

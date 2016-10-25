@@ -18,6 +18,13 @@ defmodule EspiDni.Factory do
     }
   end
 
+  def article_factory do
+    %EspiDni.Article{
+      url: sequence(:url, &"http://www.example.com/foobar-#{&1}"),
+      path: sequence(:path, &"foobar-#{&1}")
+    }
+  end
+
   def view_count_factory do
     %EspiDni.ViewCount{}
   end
