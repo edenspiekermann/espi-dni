@@ -3,22 +3,25 @@ defmodule EspiDni.SpikeNotifier do
   alias EspiDni.Repo
   alias EspiDni.ViewCount
   alias EspiDni.Article
+  alias EspiDni.User
   import Ecto.Query
 
   @minimum_increase 10
   @increase_threshold_percentage 25
 
   def notify_recent_spikes(team) do
-    for article <- recently_active_articles do
+    for article <- recently_active_articles(team) do
       notify_if_count_spike(article, team)
     end
   end
 
-  defp recently_active_articles do
+  defp recently_active_articles(team) do
     Repo.all(
       from article in Article,
       join: view_count in ViewCount, on: view_count.article_id == article.id,
+      join: user in User, on: user.id == article.user_id,
       where: view_count.inserted_at < ago(5, "minute"),
+      where: user.team_id == ^team.id,
       group_by: article.id,
       preload: :user
     )
@@ -26,7 +29,6 @@ defmodule EspiDni.SpikeNotifier do
 
   def notify_if_count_spike(article, team) do
     latest_counts = last_two_counts(article)
-    foo= view_count_spike?(latest_counts, team)
 
     if view_count_spike?(latest_counts, team) do
       send_spike_message(article, latest_counts)
