@@ -27,6 +27,7 @@ defmodule EspiDni.SpikeNotifier do
       from view_count in ViewCount,
       select: sum(view_count.count),
       where: view_count.article_id == ^article.id,
+      where: view_count.inserted_at > ago(2, "hour"),
       group_by: fragment("round(extract('epoch' from inserted_at) / 1800)"),
       order_by: fragment("round(extract('epoch' from inserted_at) / 1800) desc"),
       limit: 2
