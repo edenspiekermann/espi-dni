@@ -1,4 +1,5 @@
 defmodule EspiDni.TestHelpers do
+  import EspiDni.Factory
   alias EspiDni.Repo
 
   def insert_team(attrs \\ %{}) do
