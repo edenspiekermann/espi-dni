@@ -11,7 +11,9 @@ defmodule EspiDni.AnalyticsManager do
       EspiDni.ViewCountHandler.process_view_count(view_count_data, team)
     end
 
+    active_articles = Article.recently_active(team)
+
     Logger.info "Notifying of any view_count spikes for team: #{team.id}"
-    EspiDni.SpikeNotifier.notify_recent_spikes(team)
+    EspiDni.SpikeNotifier.notify_recent_spikes(team, active_articles)
   end
 end
