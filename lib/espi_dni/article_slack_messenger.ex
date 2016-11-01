@@ -9,20 +9,14 @@ defmodule EspiDni.ArticleSlackMessenger do
     message = view_spike_message(article, count_increase)
     user    = article_user(article)
 
-    case SlackWeb.send_message(user, message) do
-      %{"ok" => true } -> {:ok, user}
-      %{"ok" => false } -> {:error, user}
-    end
+    send_message(user, message)
   end
 
   def send_source_spike_message(article, source) do
     message = "Your article is seeing an increase in traffic from #{source.source}"
     user    = article_user(article)
 
-    case SlackWeb.send_message(user, message) do
-      %{"ok" => true } -> {:ok, user}
-      %{"ok" => false } -> {:error, user}
-    end
+    send_message(user, message)
   end
 
   defp view_spike_message(%{url: url}, count_increase) do
@@ -36,8 +30,19 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
+  defp source_spike_message(%{url: url}, %{source: source}) do
+    "Your article is seeing an increase in traffic from #{source.source}"
+  end
+
   defp article_user(article) do
     Repo.preload(article, :user).user
+  end
+
+  defp send_message(user, message) do
+    case SlackWeb.send_message(user, message) do
+      %{"ok" => true } -> {:ok, user}
+      %{"ok" => false } -> {:error, user}
+    end
   end
 
 end
