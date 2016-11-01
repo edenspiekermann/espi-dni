@@ -8,12 +8,6 @@ defmodule EspiDni.ArticleViewCountNotifier do
   @minimum_increase 10
   @increase_threshold_percentage 25
 
-  def notify_recent_spikes(team, active_articles) do
-    for article <- active_articles do
-      notify_if_count_spike(article, team)
-    end
-  end
-
   def notify_if_spike(article, team) do
     latest_counts = last_two_counts(article)
 
