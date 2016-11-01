@@ -1,6 +1,5 @@
 defmodule EspiDni.ArticleViewCountNotifier do
 
-  require Logger
   import Ecto.Query
   alias EspiDni.{
     Repo,
@@ -8,6 +7,7 @@ defmodule EspiDni.ArticleViewCountNotifier do
     Article,
     ArticleSlackMessenger
   }
+  require Logger
 
   @minimum_increase 10
   @increase_threshold_percentage 25
