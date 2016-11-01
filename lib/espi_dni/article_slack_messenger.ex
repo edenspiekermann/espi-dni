@@ -15,6 +15,16 @@ defmodule EspiDni.ArticleSlackMessenger do
     end
   end
 
+  def send_source_spike_message(article, source) do
+    message = "Your article is seeing an increase in traffic from #{source.source}"
+    user    = article_user(article)
+
+    case SlackWeb.send_message(user, message) do
+      %{"ok" => true } -> {:ok, user}
+      %{"ok" => false } -> {:error, user}
+    end
+  end
+
   defp view_spike_message(%{url: url}, count_increase) do
     string_number = :rand.uniform(6)
 

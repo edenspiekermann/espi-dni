@@ -1,24 +1,28 @@
-defmodule EspiDni.SpikeNotifier do
-  require Logger
-  alias EspiDni.Repo
-  alias EspiDni.ViewCount
-  alias EspiDni.Article
+defmodule EspiDni.ArticleViewSourceNotifier do
+
   import Ecto.Query
+  alias EspiDni.{
+    Repo,
+    ViewCount,
+    SlackWeb,
+    ArticleSlackMessenger
+  }
+  require Logger
 
-  @minimum_increase 2
-  @increase_threshold_percentage 25
+  @minimum_increase 10
+  @increase_threshold_percentage 20
 
-  def notify_if_source_spike(article, team) do
+  def notify_if_spike(article, team) do
     highest_sources = highest_sources(article)
 
     if source_spike?(highest_sources, team) do
-      send_source_message(article, hd(highest_sources))
+      ArticleSlackMessenger.send_source_spike_message(article, hd(highest_sources))
     end
   end
 
   def source_spike?([highest_source, runner_up_source | _rest ], team) do
     difference              = highest_source.count - runner_up_source.count
-    percentage_increase     = (highest_source.count / runner_up_source.count * 100)
+    percentage_increase     = (difference / runner_up_source.count * 100)
     min_difference          = @minimum_increase
     min_percentage_increase = @increase_threshold_percentage
 
@@ -47,12 +51,4 @@ defmodule EspiDni.SpikeNotifier do
     )
   end
 
-  defp send_source_message(article, source) do
-    message = "Your article is seeing an increase in traffic to #{source.source}"
-
-    case EspiDni.SlackWeb.send_message(article.user, message) do
-      %{"ok" => true } -> {:ok, article.user}
-      %{"ok" => false } -> {:error, article.user}
-    end
-  end
 end
