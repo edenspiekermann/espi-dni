@@ -1,4 +1,4 @@
-defmodule EspiDni.SpikeNotifier do
+defmodule EspiDni.ArticleViewCountNotifier do
   require Logger
   alias EspiDni.Repo
   alias EspiDni.ViewCount
@@ -14,7 +14,7 @@ defmodule EspiDni.SpikeNotifier do
     end
   end
 
-  def notify_if_count_spike(article, team) do
+  def notify_if_spike(article, team) do
     latest_counts = last_two_counts(article)
 
     if view_count_spike?(latest_counts, team) do
