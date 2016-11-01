@@ -5,8 +5,8 @@ defmodule EspiDni.ArticleSlackMessenger do
     Repo
   }
 
-  def send_view_spike_message(article, latest_counts) do
-    message = view_spike_message(article, latest_counts)
+  def send_view_spike_message(article, count_increase) do
+    message = view_spike_message(article, count_increase)
     user    = article_user(article)
 
     case SlackWeb.send_message(user, message) do
@@ -15,15 +15,14 @@ defmodule EspiDni.ArticleSlackMessenger do
     end
   end
 
-  defp view_spike_message(%{url: url}, [current_count | [previous_count]]) do
+  defp view_spike_message(%{url: url}, count_increase) do
     string_number = :rand.uniform(6)
-    count = current_count - previous_count
 
     Gettext.gettext(
       EspiDni.Gettext,
       "Message Spike #{string_number}",
       article_url: url,
-      count: count
+      count: count_increase
     )
   end
 

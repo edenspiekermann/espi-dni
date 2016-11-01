@@ -16,7 +16,7 @@ defmodule EspiDni.ArticleViewCountNotifier do
     latest_counts = last_two_counts(article)
 
     if view_count_spike?(latest_counts, team) do
-      ArticleSlackMessenger.send_view_spike_message(article, latest_counts)
+      ArticleSlackMessenger.send_view_spike_message(article, count_increase(latest_counts))
     end
   end
 
@@ -32,8 +32,8 @@ defmodule EspiDni.ArticleViewCountNotifier do
     )
   end
 
-  defp view_count_spike?([current_count | [previous_count]], team) do
-    difference              = current_count - previous_count
+  defp view_count_spike?([current_count, previous_count], team) do
+    difference              = count_increase([current_count, previous_count])
     percentage_increase     = (difference / previous_count * 100)
     min_difference          = team.min_view_count_increase || @minimum_increase
     min_percentage_increase = team.view_count_threshold || @increase_threshold_percentage
@@ -43,5 +43,9 @@ defmodule EspiDni.ArticleViewCountNotifier do
 
   # return false if there's not a list with two entries
   defp view_count_spike?(_, _team), do: false
+
+  defp count_increase([current_count, previous_count]) do
+    current_count - previous_count
+  end
 
 end
