@@ -1,5 +1,9 @@
 defmodule EspiDni.Article do
   use EspiDni.Web, :model
+  alias EspiDni.ViewCount
+  alias EspiDni.Article
+  alias EspiDni.User
+  alias EspiDni.Repo
 
   schema "articles" do
     field :url, :string
@@ -25,6 +29,18 @@ defmodule EspiDni.Article do
     |> set_path()
     |> validate_url(:url)
     |> unique_constraint(:url, name: :unique_user_article)
+  end
+
+  def recently_active(team) do
+    Repo.all(
+      from article in Article,
+      join: view_count in ViewCount, on: view_count.article_id == article.id,
+      join: user in User, on: user.id == article.user_id,
+      where: view_count.inserted_at < ago(5, "minute"),
+      where: user.team_id == ^team.id,
+      group_by: article.id,
+      preload: :user
+    )
   end
 
   defp validate_url(changeset, field, options \\ []) do

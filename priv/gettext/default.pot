@@ -49,6 +49,18 @@ msgstr ""
 msgid "Message Spike 6"
 msgstr ""
 
+msgid "Generic Source Spike 1"
+msgstr ""
+
+msgid "Generic Source Spike 2"
+msgstr ""
+
+msgid "Twitter Source"
+msgstr ""
+
+msgid "Facebook Source"
+msgstr ""
+
 msgid "Article Confirm Prompt"
 msgstr ""
 
