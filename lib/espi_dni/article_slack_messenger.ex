@@ -4,6 +4,7 @@ defmodule EspiDni.ArticleSlackMessenger do
     SlackWeb,
     Repo
   }
+  import EspiDni.Gettext
 
   def send_view_spike_message(article, count_increase) do
     message = view_spike_message(article, count_increase)
@@ -13,7 +14,7 @@ defmodule EspiDni.ArticleSlackMessenger do
   end
 
   def send_source_spike_message(article, source) do
-    message = "Your article is seeing an increase in traffic from #{source.source}"
+    message = source_spike_message(article, source)
     user    = article_user(article)
 
     send_message(user, message)
@@ -30,8 +31,31 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
+  defp source_spike_message(%{url: url}, %{source: "Twitter"}) do
+    gettext(
+      "Twitter Source",
+      article_url: url,
+      article_search_url: url_without_protocol(url)
+    )
+  end
+
+  defp source_spike_message(%{url: url}, %{source: "Facebook"}) do
+    gettext(
+      "Twitter Source",
+      article_url: url,
+      article_search_url: url_without_protocol(url)
+    )
+  end
+
   defp source_spike_message(%{url: url}, %{source: source}) do
-    "Your article is seeing an increase in traffic from #{source.source}"
+    string_number = :rand.uniform(2)
+
+    Gettext.gettext(
+      EspiDni.Gettext,
+      "Generic Source Spike #{string_number}",
+      article_url: url,
+      source_name: source
+    )
   end
 
   defp article_user(article) do
@@ -43,6 +67,11 @@ defmodule EspiDni.ArticleSlackMessenger do
       %{"ok" => true } -> {:ok, user}
       %{"ok" => false } -> {:error, user}
     end
+  end
+
+  defp url_without_protocol(url) do
+    parsed_url = URI.parse(url)
+    parsed_url.host <> parsed_url.path
   end
 
 end

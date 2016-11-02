@@ -46,6 +46,18 @@ msgstr "Traffic to `%{article_url}` was great, but now it’s really heating up,
 msgid "Message Spike 6"
 msgstr "There’s a traffic spike on `%{article_url}`, with an increase of %{count} more page views — put yourself in your readers’ shoes and deliver the story to the platform where they really want to read it. :love_letter: (i.e FB Groups, Bulletin Boards or Reddit)"
 
+msgid "Generic Source Spike 1"
+msgstr "Hey, it seems like your article `%{article_url}` suddenly got a lot of traffic coming from `%{source_name}`! Talk to your audience development colleague to find ideas how you could build on that."
+
+msgid "Generic Source Spike 2"
+msgstr "Great! Your article `%{article_url}` is receiving a lot of visitors from`%{source_name}. Maybe you can replicate that success tomorrow at the same time?"
+
+msgid "Twitter Source"
+msgstr "Psssst! Seems like the elite crowd on Twitter just fell in love with `%{article_url}`! Get on twitter and join the conversation `https://twitter.com/search?f=tweets&q=%{article_search_url}` — authors engaging in social conversations on their article increases the readership."
+
+msgid "Facebook Source"
+msgstr "Psssst! Seems like the Facebook audience started talking about your `%{article_url}` right now! Get on Facebook and be part of the conversation `https://www.facebook.com/search/top/?q=%{article_search_url}`. Maybe there is a new perspective or story angle to your piece which would spin your story further or help you with a follow-up story."
+
 msgid "Setup Complete"
 msgstr "Great, thanks for completing the setup!\n\n"
   "Use the `/add` command to add a new article url."
