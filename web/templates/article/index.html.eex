@@ -12,13 +12,16 @@
     <div class="team-management">
       <div class="preferences">
         <%= form_for team_changeset(@current_team), preference_path(@conn, :update), fn form -> %>
-        <h3>Notify me when:</h3>
-        <p>
-          There is an increase of at least <%= text_input form, :min_view_count_increase, class: "preferences__input", autofocus: "true" %> views,
-        </p>
-        <p>
-          and there is pageview increase of <%= text_input form, :view_count_threshold, class: "preferences__input" %>% or more.
-        </p>
+          <h3>View Count Spike</h3>
+          <p>
+            Notify me when there is an increase of at least <%= text_input form, :min_view_count_increase, class: "preferences__input", autofocus: "true" %> views,
+            and there is pageview increase of <%= text_input form, :view_count_threshold, class: "preferences__input" %>% or more.
+          </p>
+          <h3>Source Spike</h3>
+          <p>
+            Notify me when there is difference of at least <%= text_input form, :min_source_count_increase, class: "preferences__input", autofocus: "true" %> views,
+            and more than <%= text_input form, :source_count_threshold, class: "preferences__input" %>% of views coming from one particular site.
+          </p>
           <div class="preferences__submit">
             <%= submit "Submit" %>
           </div>
@@ -35,7 +38,7 @@
               <tr class="table__row">
                 <td class="table__cell"><%= article.url %></td>
                 <td class="table__cell articles__action">
-                  <%= link "Edit URL", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
+                  <%= link "Edit", to: article_path(@conn, :edit, article), class: "btn btn-default btn-xs" %>
                   <%= link "Delete", to: article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"] %>
                 </td>
               </tr>

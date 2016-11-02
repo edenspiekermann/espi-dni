@@ -2,25 +2,34 @@ defmodule EspiDni.Team do
   use EspiDni.Web, :model
 
   schema "teams" do
-    field :slack_token,             :string
-    field :google_token,            :string
-    field :google_refresh_token,    :string
-    field :google_property_id,      :integer
-    field :name,                    :string
-    field :url,                     :string
-    field :slack_id,                :string
-    field :google_token_expires_at, Ecto.DateTime
-    field :min_view_count_increase, :integer
-    field :view_count_threshold,    :integer
-    has_many :users,                EspiDni.User
+    field :slack_token,               :string
+    field :google_token,              :string
+    field :google_refresh_token,      :string
+    field :google_property_id,        :integer
+    field :name,                      :string
+    field :url,                       :string
+    field :slack_id,                  :string
+    field :google_token_expires_at,   Ecto.DateTime
+    field :min_view_count_increase,   :integer
+    field :view_count_threshold,      :integer
+    field :min_source_count_increase, :integer
+    field :source_count_threshold,    :integer
+    has_many :users,                  EspiDni.User
 
     timestamps
   end
 
   @required_fields ~w(slack_token name slack_id)
   @optional_fields ~w(
-    url google_token google_refresh_token google_property_id
-    google_token_expires_at min_view_count_increase view_count_threshold
+    url
+    google_token
+    google_refresh_token
+    google_property_id
+    google_token_expires_at
+    min_view_count_increase
+    view_count_threshold
+    min_source_count_increase
+    source_count_threshold
   )
 
   @doc """
