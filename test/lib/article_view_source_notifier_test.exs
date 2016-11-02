@@ -39,4 +39,11 @@ defmodule EspiDni.ArticleViewSourceNotifierTest do
     assert is_nil(result) == false
   end
 
+  test "notify_if_spike uses team preferences for source if set", %{team: team, article: article} do
+    insert(:view_count, %{article_id: article.id, count: 10, source: "foo"})
+    insert(:view_count, %{article_id: article.id, count: 12, source: "baz"})
+    team = Repo.update!(Team.changeset(team, %{min_source_count_increase: 2, source_count_threshold: 20}))
+    result = Subject.notify_if_spike(article, team)
+    assert is_nil(result) == false
+  end
 end

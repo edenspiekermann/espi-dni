@@ -23,8 +23,8 @@ defmodule EspiDni.ArticleViewSourceNotifier do
   def source_spike?([highest_source, runner_up_source | _rest ], team) do
     difference              = highest_source.count - runner_up_source.count
     percentage_increase     = (difference / runner_up_source.count * 100)
-    min_difference          = @minimum_increase
-    min_percentage_increase = @increase_threshold_percentage
+    min_difference          = team.min_source_count_increase || @minimum_increase
+    min_percentage_increase = team.source_count_threshold || @increase_threshold_percentage
 
     (difference >= min_difference) && (percentage_increase >= min_percentage_increase)
   end
