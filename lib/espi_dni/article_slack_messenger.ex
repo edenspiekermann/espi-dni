@@ -41,7 +41,7 @@ defmodule EspiDni.ArticleSlackMessenger do
 
   defp source_spike_message(%{url: url}, %{source: "Facebook"}) do
     gettext(
-      "Twitter Source",
+      "Facebook Source",
       article_url: url,
       article_search_url: url_without_protocol(url)
     )
