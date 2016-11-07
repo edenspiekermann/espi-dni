@@ -1,5 +1,6 @@
 <p>
-  <%= gettext "Feedback prompt" %>
+  Read our <%= link "Q & A", to: "https://docs.google.com/document/d/1cnY3BjaBxWEOcWkR9Cp2edhRxgYCwjQa9Bow_EmzP5I/", target: "_blank", rel: "noopener noreferrer" %>
+  | <%= gettext "Feedback prompt" %>
   <%= link to: "mailto:c.hanke@de.edenspiekermann.com?subject=POSTBot%20Feedback%20or%20Question" do %>
     <%= gettext "Contact us" %>
   <% end %>
