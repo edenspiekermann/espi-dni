@@ -1,9 +1,11 @@
 defmodule EspiDni.SlackArticleControllerTest do
+  import EspiDni.Factory
   use EspiDni.ConnCase
 
   setup do
-    user = insert_team |> insert_user
-    {:ok, conn: build_conn, user: user}
+    team = insert(:team)
+    user = insert(:user, %{team: team})
+    {:ok, conn: build_conn, user: user, team: team}
   end
 
   test "returns a 401 for an invalid token", %{conn: conn} do
@@ -22,15 +24,15 @@ defmodule EspiDni.SlackArticleControllerTest do
     assert conn.resp_body =~ "Unknown User"
   end
 
-  test "returns a validation message for an invalid url", %{conn: conn, user: user} do
-    params = %{command: "/add", token: slack_token, user_id: user.slack_id, text: "invalid_url"}
+  test "returns a validation message for an invalid url", %{conn: conn, user: user, team: team} do
+    params = %{command: "/add", token: slack_token, user_id: user.slack_id, team_id: team.slack_id, text: "invalid_url"}
     conn = post conn, slack_article_path(conn, :new), params
 
     assert text_response(conn, 200) =~ "invalid_url is not a valid URL"
   end
 
-  test "returns an article confirmation response", %{conn: conn, user: user} do
-    params = %{command: "/add", token: slack_token, user_id: user.slack_id, text: "http://example.com" }
+  test "returns an article confirmation response", %{conn: conn, user: user, team: team} do
+    params = %{command: "/add", token: slack_token, user_id: user.slack_id, team_id: team.slack_id, text: "http://example.com" }
     conn = post conn, slack_article_path(conn, :new), params
 
     body = json_response(conn, 200)
