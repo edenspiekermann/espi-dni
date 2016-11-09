@@ -1,10 +1,12 @@
 defmodule EspiDni.SlackMessageControllerTest do
   use EspiDni.ConnCase
   import EspiDni.Gettext
+  import EspiDni.Factory
 
   setup do
-    user = insert_team |> insert_user
-    {:ok, conn: build_conn, user: user}
+    team = insert(:team)
+    user = insert(:user, %{team: team})
+    {:ok, conn: build_conn, user: user, team: team}
   end
 
   test "returns a 401 for an invalid token", %{conn: conn} do
@@ -23,11 +25,12 @@ defmodule EspiDni.SlackMessageControllerTest do
     assert conn.resp_body =~ "Unknown User"
   end
 
-  test "returns an error for an unknown callback", %{conn: conn, user: user} do
+  test "returns an error for an unknown callback", %{conn: conn, user: user, team: team} do
     payload = Poison.encode!(
       %{
           token: slack_token,
           user: %{id: user.slack_id},
+          team: %{id: team.slack_id},
           callback_id: "invalid"
       }
     )
@@ -37,11 +40,12 @@ defmodule EspiDni.SlackMessageControllerTest do
     assert conn.resp_body =~ "Unknown Action"
   end
 
-  test "returns a message for a 'no' confirm_article action", %{conn: conn, user: user} do
+  test "returns a message for a 'no' confirm_article action", %{conn: conn, user: user, team: team} do
     payload = Poison.encode!(
       %{
         token: slack_token,
         user: %{id: user.slack_id},
+        team: %{id: team.slack_id},
         callback_id: "confirm_article",
         actions: [ %{name: "no", value: "url"} ]
       }
@@ -51,11 +55,12 @@ defmodule EspiDni.SlackMessageControllerTest do
     assert text_response(conn, 200) =~ gettext("Article Retry")
   end
 
-  test "saves article and returns a message for a 'yes' confirm_article action", %{conn: conn, user: user} do
+  test "saves article and returns a message for a 'yes' confirm_article action", %{conn: conn, user: user, team: team} do
     payload = Poison.encode!(
       %{
         token: slack_token,
         user: %{id: user.slack_id},
+        team: %{id: team.slack_id},
         callback_id: "confirm_article",
         actions: [ %{name: "yes", value: "http://www.example.com"} ]
       }
