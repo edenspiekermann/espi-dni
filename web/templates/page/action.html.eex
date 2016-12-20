@@ -7,14 +7,22 @@
         </div>
       <% end %>
     <% :new -> %>
-      <%= link to: auth_path(@conn, :request, :slack) do %>
-        <img
-          alt="Sign in with Slack"
-          height="40"
-          width="172"
-          src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-          srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-      <% end %>
+      <div class="action__buttons">
+        <h3>Get started with POST</h3>
+        <%= link to: auth_path(@conn, :request, :slack) do %>
+          <img
+            alt="Add to Slack"
+            src="https://platform.slack-edge.com/img/add_to_slack.png"
+            srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"/>
+        <% end %>
+        <h3>or sign into an existing account</h3>
+        <%= link to: auth_path(@conn, :request, :slack, scope: "identity.basic")  do %>
+          <img
+            alt="Sign in with Slack"
+            src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
+            srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
+        <% end %>
+      </div>
     <% _ -> %>
       <%= link to: setup_path(@conn, :update) do %>
         <div class="action__button--white">
