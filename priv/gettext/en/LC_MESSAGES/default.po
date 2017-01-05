@@ -25,6 +25,18 @@ msgid "Initial Greeting"
 msgstr "Hi! I'm POST. I help journalists by suggesting the right action at the right moment.\n\n"
   "We're almost ready to go, please complete the setup here: https://espi-dni.herokuapp.com/setup."
 
+msgid "Awaiting Google Setup"
+msgstr "Hi! Welcome back.\n\n "
+  "We're almost ready to go, please setup your Google analytics account here: https://espi-dni.herokuapp.com/setup."
+
+msgid "Awaiting Google Property"
+msgstr "Hi! Welcome back.\n\n "
+  "We're almost ready to go, please set your Google Anlaytics web property here: https://espi-dni.herokuapp.com/setup."
+
+msgid "Welcome Back"
+msgstr "Hi! Welcome back.\n\n "
+    "You can track your existing articles and settings here: https://espi-dni.herokuapp.com/articles."
+
 msgid "Message Spike"
 msgstr "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour."
 

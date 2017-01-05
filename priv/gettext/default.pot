@@ -25,6 +25,15 @@ msgstr ""
 msgid "Initial Greeting"
 msgstr ""
 
+msgid "Awaiting Google Setup"
+msgstr ""
+
+msgid "Awaiting Google Property"
+msgstr ""
+
+msgid "Welcome Back"
+msgstr ""
+
 msgid "Setup Complete"
 msgstr ""
 
