@@ -375,6 +375,10 @@ a {
   color: #343333;
 }
 
+.action__buttons {
+  text-align: center;
+}
+
 .action__button--white {
   border-radius: 3px;
   background-color: white;
@@ -604,7 +608,7 @@ footer.no-border {
     padding: 0;
   }
   .hero {
-    min-height: 494px;
+    min-height: 650px;
     padding-bottom: 0;
   }
   .container {

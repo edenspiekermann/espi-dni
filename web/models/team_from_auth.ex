@@ -23,14 +23,16 @@ defmodule EspiDni.TeamFromAuth do
   end
 
   defp create_or_update(%{slack_id: slack_id} = params) do
+    team_params = scrubbed_params(params)
+
     case team_by_slack_id(slack_id) do
       nil ->
         %Team{}
-        |> Team.changeset(params)
+        |> Team.changeset(team_params)
         |> Repo.insert
       existing_team ->
         existing_team
-        |> Team.changeset(params)
+        |> Team.changeset(team_params)
         |> Repo.update
     end
   end
@@ -41,6 +43,12 @@ defmodule EspiDni.TeamFromAuth do
 
   defp bot_token(auth) do
     auth.extra.raw_info.token.other_params["bot"]["bot_access_token"]
+  end
+
+  def scrubbed_params(params) do
+    params
+    |> Enum.filter(fn {_, value} -> !is_nil(value) end)
+    |> Enum.into(%{})
   end
 
 end
