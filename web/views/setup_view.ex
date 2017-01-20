@@ -3,13 +3,19 @@ defmodule EspiDni.SetupView do
 
   alias EspiDni.Team
   alias EspiDni.GoogleAnalyticsClient
+  alias EspiDni.GoogleWebProperty
 
   def web_properties(%Team{} = team) do
-    GoogleAnalyticsClient.get_properties(team)
-    |> Enum.map(&{&1.name, &1.defaultProfileId})
+    team
+    |> GoogleAnalyticsClient.get_properties
+    |> Enum.map(&select_options(&1))
   end
 
   def team_changeset(%Team{} = team) do
     EspiDni.Team.changeset(team, %{})
+  end
+
+  defp select_options(%GoogleWebProperty{} = property) do
+    {"[#{property.websiteUrl}] - #{property.name}", property.id}
   end
 end
