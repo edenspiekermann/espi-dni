@@ -14,7 +14,8 @@ config :espi_dni, EspiDni.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "espi_dni_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  ownership_timeout: 50_0000
 
 config :rollbax,
   access_token: "placeholder",
