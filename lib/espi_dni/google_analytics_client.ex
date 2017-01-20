@@ -5,7 +5,7 @@ defmodule EspiDni.GoogleAnalyticsClient do
 
   @base_url "https://www.googleapis.com"
   @token_refresh_path "/oauth2/v4/token"
-  @properties_path "/analytics/v3/management/accounts/~all/webproperties"
+  @properties_path "/analytics/v3/management/accounts/~all/webproperties/~all/profiles"
   @client_id Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_id]
   @client_secret Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_secret]
 
