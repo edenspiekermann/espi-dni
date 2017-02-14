@@ -2,7 +2,6 @@
   <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
   <h1 class="hero__text">Meet POST Bot &ndash;</br>
   the easiest way to get valuable feedback on your Articles</h1>
-  <%= render "action.html", current_team: @current_team, conn: @conn %>
 </div>
 
 <div class="bottom">
