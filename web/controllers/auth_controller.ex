@@ -29,7 +29,7 @@ defmodule EspiDni.AuthController do
         |> put_flash(:info, "Successfully authenticated.")
         |> assign_team_and_user(team, user)
         |> start_bot
-        |> redirect(to: setup_path(conn, :index))
+        |> redirect(to: redirect_path(conn, team))
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
@@ -65,6 +65,15 @@ defmodule EspiDni.AuthController do
     |> put_session(:user_id, user.id)
     |> assign(:current_team, team)
     |> assign(:current_user, user)
+  end
+
+  defp redirect_path(conn, team) do
+    case EspiDni.Team.current_state(team) do
+      :complete ->
+        article_path(conn, :index)
+      _ ->
+        setup_path(conn, :index)
+    end
   end
 
 end

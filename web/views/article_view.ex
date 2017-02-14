@@ -19,4 +19,10 @@ defmodule EspiDni.ArticleView do
         source_count_threshold: source_count_threshold,
     })
   end
+
+  def total_view_counts(article) do
+    article.view_counts
+    |> Enum.map(&(&1.count))
+    |> Enum.sum
+  end
 end

@@ -9,11 +9,10 @@
     <% :new -> %>
       <div class="action__buttons">
         <h3>Get started with POST</h3>
-        <%= link to: auth_path(@conn, :request, :slack) do %>
-          <img
-            alt="Add to Slack"
-            src="https://platform.slack-edge.com/img/add_to_slack.png"
-            srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"/>
+        <%= link to: setup_path(@conn, :index) do %>
+          <div class="button">
+            Add POST Integration
+          </div>
         <% end %>
         <h3>or sign into an existing account</h3>
         <%= link to: auth_path(@conn, :request, :slack, scope: "identity.basic")  do %>

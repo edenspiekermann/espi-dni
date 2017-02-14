@@ -10,6 +10,15 @@
       <%= link "back to \"How Post Works\"", to: page_path(@conn, :index) %>
     </div>
     <h2 class="bottom__title">Welcome to POST Bot:</h2>
+    <div class="prerequisites">
+      <h4 class="prerequisites__title">Prerequisites:</h4>
+      <p>POST Bot integrates with your Slack team and your Google Analytics account to monitor you articles performance notify you accordingly.</p>
+      <em>Before you can integrate POST bot you'll need to have:</em>
+      <ul class="prerequisites__list">
+        <li>An 'Admin' or 'Owner' account for the Slack team you wish to add the bot to.</li>
+        <li>A Google Analytics account with 'View' access to the web property your articles are tracked under.</li>
+      </ul>
+    </div>
     <ul class="steps steps--setup">
       <li class="steps__item">
         <div class="steps__left">
@@ -20,17 +29,15 @@
           <% end %>
         </div>
         <div class="steps__right">
-          <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Sign in with Slack</h3>
+          <h3 class="steps__title"><strong>Step 1 &ndash;</strong> Add POST to your slack team</h3>
           <%= if !@current_team do %>
+            <p>You'll need permission to add a bot integration to your slack channel.</p>
             <%= link to: auth_path(@conn, :request, :slack) do %>
               <img
-                alt="Sign in with Slack"
-                height="40"
-                width="172"
-                src="https://platform.slack-edge.com/img/sign_in_with_slack.png"
-                srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
-            <% end %>
-            <p>You'll need permission to add a bot integration to your slack channel.</p>
+                alt="Add to Slack"
+                src="https://platform.slack-edge.com/img/add_to_slack.png"
+                srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"/>
+              <% end %>
           <% end %>
         </div>
       </li>
@@ -47,7 +54,7 @@
           <p>You'll need a Google account with access to view your Google Analytics data.</p>
           <%= if @current_team && !@current_team.google_token do %>
             <%= link to: auth_path(@conn, :request, :google) do %>
-              <div class="google">
+              <div class="button">
                 <img
                   class="google-icon"
                   alt="Google logo"
@@ -68,7 +75,7 @@
         </div>
         <div class="steps__right">
           <h3 class="steps__title"><strong>Step 3 &ndash;</strong> Select your Google Analytics web property</h3>
-          <p>Select which web property your articles belong to.</p>
+          <p>Once you've setup access to Google Analytics, you'll need to select which Google Analytics web property the bot should use.</p>
           <%= if @current_team && !@current_team.google_property_id do %>
             <%= form_for team_changeset(@current_team), setup_path(@conn, :update), fn form -> %>
               <div class="select-item">

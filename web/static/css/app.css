@@ -185,6 +185,21 @@ a {
   color: white;
 }
 
+.prerequisites {
+  color: #31b0e2;
+  margin-top: 0;
+}
+
+.prerequisites__title {
+  margin: 0;
+}
+
+.prerequisites__list {
+  list-style: disc inside;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
 .steps p {
   font-size: 20px;
   color: #31b0e2;
@@ -265,10 +280,10 @@ a {
   margin-right: 0.4em;
 }
 
-.google {
+.button {
   padding: 0.3em 0.8em;
   border-radius: 5px;
-  font-size: 25px;
+  font-size: 20px;
   background-color: white;
   border: 1px solid #d5d7d9;
   margin-top: 0.5em;
@@ -331,6 +346,11 @@ a {
   width: 100%;
 }
 
+.articles__article--url {
+  color:  #31b0e2;
+  text-decoration: none;
+}
+
 .table__row {
   position: relative;
 }
@@ -342,6 +362,21 @@ a {
 
 .table__row--header .table__cell {
   border-top: 0;
+}
+
+.article-details {
+  color:  #31b0e2;
+  margin: 1.5em;
+}
+
+.article-details a {
+  color: #31b0e2;
+}
+.article-details__data-table {
+  width: 100%;
+}
+.article-details__cell-label {
+  width: 30%;
 }
 
 .form {
@@ -608,7 +643,7 @@ footer.no-border {
     padding: 0;
   }
   .hero {
-    min-height: 650px;
+    min-height: 424px;
     padding-bottom: 0;
   }
   .container {
@@ -630,6 +665,11 @@ footer.no-border {
     margin: 0;
     padding: 85px 160px 40px 160px;
   }
+
+  .prerequisites {
+    padding: 0 160px 0 160px;
+  }
+
   .steps {
     padding: 0 160px 0 160px;
   }
