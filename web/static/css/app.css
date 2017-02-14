@@ -185,6 +185,21 @@ a {
   color: white;
 }
 
+.prerequisites {
+  color: #31b0e2;
+  margin-top: 0;
+}
+
+.prerequisites__title {
+  margin: 0;
+}
+
+.prerequisites__list {
+  list-style: disc inside;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
 .steps p {
   font-size: 20px;
   color: #31b0e2;
@@ -630,6 +645,11 @@ footer.no-border {
     margin: 0;
     padding: 85px 160px 40px 160px;
   }
+
+  .prerequisites {
+    padding: 0 160px 0 160px;
+  }
+
   .steps {
     padding: 0 160px 0 160px;
   }
