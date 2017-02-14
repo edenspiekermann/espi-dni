@@ -31,12 +31,7 @@ defmodule EspiDni.ArticleController do
   end
 
   def show(conn, %{"id" => id}) do
-    article =
-      Article
-      |> Article.with_view_counts
-      |> Repo.get!(id)
-
-    render(conn, "show.html", article: article)
+    render(conn, "show.html", article: get_article(id))
   end
 
   def edit(conn, %{"id" => id}) do
@@ -97,5 +92,11 @@ defmodule EspiDni.ArticleController do
       |> redirect(to: page_path(conn, :index))
       |> halt()
     end
+  end
+
+  defp get_article(id) do
+    Article
+    |> Article.with_view_counts
+    |> Repo.get!(id)
   end
 end
