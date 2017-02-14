@@ -280,10 +280,10 @@ a {
   margin-right: 0.4em;
 }
 
-.google {
+.button {
   padding: 0.3em 0.8em;
   border-radius: 5px;
-  font-size: 25px;
+  font-size: 20px;
   background-color: white;
   border: 1px solid #d5d7d9;
   margin-top: 0.5em;

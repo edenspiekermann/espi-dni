@@ -54,7 +54,7 @@
           <p>You'll need a Google account with access to view your Google Analytics data.</p>
           <%= if @current_team && !@current_team.google_token do %>
             <%= link to: auth_path(@conn, :request, :google) do %>
-              <div class="google">
+              <div class="button">
                 <img
                   class="google-icon"
                   alt="Google logo"
