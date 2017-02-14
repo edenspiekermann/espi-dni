@@ -5,14 +5,42 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
-    <ul>
-      <li>
-        <strong>Url:</strong>
-        <%= @article.url %>
-      </li>
-    </ul>
-    <%= link "Edit", to: article_path(@conn, :edit, @article) %>
-    <%= link "Back", to: article_path(@conn, :index) %>
+    <div class="back">
+      <%= link "Back", to: article_path(@conn, :index) %>
+    </div>
+    <div class="article-details">
+      <h3>Article Details</h3>
+      <table class="article-details__data-table">
+        <tr>
+          <th class="article-details__cell-label">Url:</th>
+          <td><%= link @article.url, to: @article.url %></td>
+        </tr>
+        <tr>
+          <th class="article-details__cell-label">Added On:</th>
+          <td><%= @article.inserted_at %></td>
+        </tr>
+        <tr>
+          <th class="article-details__cell-label">Total Count Recored:</th>
+          <td><%= total_view_counts(@article) %></td>
+        </tr>
+      </table>
+
+      <h4>View Counts recorded</h4>
+      <table class="article-details__data-table">
+        <tr>
+          <th>Count</th>
+          <th>Source</th>
+          <th>Recored On</th>
+        </tr>
+        <%= for view_count <- @article.view_counts do %>
+          <tr>
+            <td><%= view_count.count %></td>
+            <td><%= view_count.source %></td>
+            <td><%= view_count.inserted_at %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
     <footer>
       <%= render EspiDni.SharedView, "feedback_link.html" %>
     </footer>
