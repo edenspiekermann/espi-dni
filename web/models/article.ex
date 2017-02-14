@@ -43,6 +43,10 @@ defmodule EspiDni.Article do
     )
   end
 
+  def with_view_counts(query) do
+    from q in query, preload: :view_counts
+  end
+
   defp validate_url(changeset, field, options \\ []) do
     validate_change changeset, field, fn _, url ->
       case url |> String.to_char_list |> :http_uri.parse do

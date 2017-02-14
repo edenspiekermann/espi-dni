@@ -31,7 +31,11 @@ defmodule EspiDni.ArticleController do
   end
 
   def show(conn, %{"id" => id}) do
-    article = Repo.get!(Article, id)
+    article =
+      Article
+      |> Article.with_view_counts
+      |> Repo.get!(id)
+
     render(conn, "show.html", article: article)
   end
 
