@@ -66,6 +66,7 @@ textarea {
 body {
   font: 16px/26px 'RealText', 'Helvetica', 'Arial', sans-serif;
   background-color: #F6F6F6;
+  color: #31b0e2;
 }
 
 ul {
@@ -74,7 +75,7 @@ ul {
 }
 
 a {
-  color: white;
+  color: #31b0e2;
 }
 
 /* ===============
@@ -163,6 +164,7 @@ a {
   text-align: center;
   font-size: 34px;
   line-height: 1.4em;
+  color: white;
 }
 
 .bottom {
@@ -549,6 +551,10 @@ footer {
 }
 
 footer p {
+  color: white;
+}
+
+footer a {
   color: white;
 }
 
