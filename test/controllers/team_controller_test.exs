@@ -1,13 +1,20 @@
 defmodule EspiDni.TeamControllerTest do
   use EspiDni.ConnCase
 
-  alias EspiDni.Team
+  import EspiDni.Factory
   @valid_attrs %{slack_id: "some content", slack_token: "some content", name: "teamname", url: "some content"}
   @invalid_attrs %{slack_token: "", slack_id: "", name: ""}
 
   setup do
-    team = insert_team
-    {:ok, conn: build_conn, team: team}
+     team = insert(:team)
+     user = insert(:user)
+
+    conn =
+      build_conn
+      |> assign(:current_user, user)
+      |> assign(:current_team, team)
+
+    {:ok, conn: conn, team: team}
   end
 
   test "lists all entries on index", %{conn: conn} do

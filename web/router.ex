@@ -11,6 +11,10 @@ defmodule EspiDni.Router do
     plug EspiDni.Plugs.SetSessionData, repo: EspiDni.Repo
   end
 
+  pipeline :authenticated do
+    plug EspiDni.Plugs.Auth, repo: Auth.Repo
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -31,10 +35,14 @@ defmodule EspiDni.Router do
     get "/setup", SetupController, :index
     get "/confirm", SetupController, :confirm
     put "/setup", SetupController, :update
-    put "/preferences", PreferenceController, :update
+  end
 
-    resources "/teams", TeamController
+  scope "/", EspiDni do
+    pipe_through [:browser, :authenticated]
+
     resources "/articles", ArticleController
+    resources "/teams", TeamController
+    put "/preferences", PreferenceController, :update
   end
 
   scope "/slack", EspiDni do
