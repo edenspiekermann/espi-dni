@@ -1,0 +1,8 @@
+<div class="notification-messages">
+<h2>Edit notification message</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: notification_message_path(@conn, :update, @notification_message) %>
+
+<%= link "Back", to: notification_message_path(@conn, :index) %>
+</div>

@@ -43,6 +43,7 @@ defmodule EspiDni.Router do
     resources "/articles", ArticleController
     resources "/teams", TeamController
     put "/preferences", PreferenceController, :update
+    resources "/notification_messages", NotificationMessageController
   end
 
   scope "/slack", EspiDni do

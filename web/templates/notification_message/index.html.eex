@@ -1,0 +1,32 @@
+<h2>Listing notification messages</h2>
+
+<div class="notification-messages">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Type</th>
+      <th>Team</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for notification_message <- @notification_messages do %>
+    <tr>
+      <td><%= notification_message.text %></td>
+      <td><%= notification_message.type %></td>
+      <td><%= notification_message.team_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: notification_message_path(@conn, :show, notification_message), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: notification_message_path(@conn, :edit, notification_message), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: notification_message_path(@conn, :delete, notification_message), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New notification message", to: notification_message_path(@conn, :new) %>
+</div>

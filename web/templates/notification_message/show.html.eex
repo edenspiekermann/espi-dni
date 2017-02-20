@@ -1,0 +1,23 @@
+<h2>Show notification message</h2>
+
+<ul>
+
+  <li>
+    <strong>Text:</strong>
+    <%= @notification_message.text %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @notification_message.type %>
+  </li>
+
+  <li>
+    <strong>Team:</strong>
+    <%= @notification_message.team_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: notification_message_path(@conn, :edit, @notification_message) %>
+<%= link "Back", to: notification_message_path(@conn, :index) %>
