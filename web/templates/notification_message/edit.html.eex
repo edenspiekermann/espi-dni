@@ -6,7 +6,7 @@
 <div class="bottom">
   <div class="bottom__offset container">
     <div class="back">
-      <%= link "Back To Preferences", to: article_path(@conn, :index) %>
+      <%= link "Back To Messages", to: notification_message_path(@conn, :index) %>
     </div>
     <div class="notification-messages">
       <h2>Edit notification message</h2>
