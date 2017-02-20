@@ -1,32 +1,65 @@
-<h2>Listing notification messages</h2>
-
-<div class="notification-messages">
-<table class="table">
-  <thead>
-    <tr>
-      <th>Text</th>
-      <th>Type</th>
-      <th>Team</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for notification_message <- @notification_messages do %>
-    <tr>
-      <td><%= notification_message.text %></td>
-      <td><%= notification_message.type %></td>
-      <td><%= notification_message.team_id %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: notification_message_path(@conn, :show, notification_message), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: notification_message_path(@conn, :edit, notification_message), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: notification_message_path(@conn, :delete, notification_message), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New notification message", to: notification_message_path(@conn, :new) %>
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Notification Messages</h1>
 </div>
+
+
+<div class="bottom">
+  <div class="bottom__offset container">
+    <div class="back">
+      <%= link "Back To Preferences", to: article_path(@conn, :index) %>
+    </div>
+    <div class="notification-messages">
+      <h2 class="bottom__title">View Count Spike Messages</h2>
+      <div class="team-management">
+        <div class="messages">
+          <table class="table">
+            <tbody>
+              <%= for notification_message <- view_count_messages(@notification_messages) do %>
+                <tr class="table__row">
+                  <td class="table__cell"><%= notification_message.text %></td>
+                  <td class="table__cell messages__action">
+                    <%= link "Edit", to: notification_message_path(@conn, :edit, notification_message), class: "btn btn-default btn-xs" %>
+                    <%= link "Delete", to: notification_message_path(@conn, :delete, notification_message), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 class="bottom__title">Source Spike Messages</h2>
+      <div class="team-management">
+        <div class="messages">
+          <table class="table">
+            <tbody>
+              <%= for notification_message <- source_messages(@notification_messages) do %>
+                <tr class="table__row">
+                  <td class="table__cell"><%= notification_message.text %></td>
+                  <td class="table__cell messages__action">
+                    <%= link "Edit", to: notification_message_path(@conn, :edit, notification_message), class: "btn btn-default btn-xs" %>
+                    <%= link "Delete", to: notification_message_path(@conn, :delete, notification_message), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+      </div>
+    </div>
+    <div class="action__buttons">
+      <div class="action">
+        <%= link to: notification_message_path(@conn, :new) do %>
+            <div class="button">
+              Add Notification Message
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <footer>
+      <%= render EspiDni.SharedView, "feedback_link.html" %>
+    </footer>
+  </div>
+</div>
+

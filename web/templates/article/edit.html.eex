@@ -5,6 +5,10 @@
 
 <div class="bottom">
   <div class="bottom__offset container">
+    <div class="back">
+      <%= link "Back To Articles", to: article_path(@conn, :index) %>
+    </div>
+    <h2>Edit article</h2>
     <%= render "form.html", changeset: @changeset,
                             action: article_path(@conn, :update, @article) %>
 

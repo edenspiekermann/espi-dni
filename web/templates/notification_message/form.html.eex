@@ -1,3 +1,4 @@
+<div class="form">
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
@@ -5,14 +6,20 @@
     </div>
   <% end %>
 
+  <div>
+    <p>The values `%{article_url}` and `%{count}` will be replaced by the URL of the article and the number of view counts.</p>
+    <p>For example, the following text: <em>Congratulations, your article %{article_url} has had an increase of %{count} views.</em></p>
+    <p>Will result in the message: <em>Congratulations, your article http://www.example.com/article/my-article has had an increase of 75 views.</em></p>
+  </div>
+
   <div class="form-group">
-    <%= label f, :text, class: "control-label" %>
-    <%= text_input f, :text, class: "form-control" %>
+    <%= label f, :text, class: "form__label" %>
+    <%= textarea f, :text, class: "form__input" %>
     <%= error_tag f, :text %>
   </div>
 
   <div class="form-group">
-    <%= label f, :type, class: "control-label" %>
+    <%= label f, :type, class: "form__label" %>
     <%= select f, :type, notification_types, class: "form-control", prompt: "Select notification type" %>
     <%= error_tag f, :type %>
   </div>
@@ -21,3 +28,4 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+</div>
