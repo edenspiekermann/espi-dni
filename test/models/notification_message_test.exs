@@ -3,7 +3,7 @@ defmodule EspiDni.NotificationMessageTest do
 
   alias EspiDni.NotificationMessage
 
-  @valid_attrs %{text: "some content", type: "some content"}
+  @valid_attrs %{text: "some content", type: "some content", team_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

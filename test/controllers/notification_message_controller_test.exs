@@ -5,7 +5,7 @@ defmodule EspiDni.NotificationMessageControllerTest do
 
   alias EspiDni.NotificationMessage
   @valid_attrs %{text: "some content", type: "some content"}
-  @invalid_attrs %{}
+  @invalid_attrs %{text: ''}
 
   setup do
     team = insert(:team)
