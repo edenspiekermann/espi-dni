@@ -13,4 +13,3 @@
     action: notification_message_path(@conn, :create) %>
   </div>
 </div>
-

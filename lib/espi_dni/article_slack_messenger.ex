@@ -45,7 +45,7 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
-  defp source_spike_message(%{url: url}, source, user) do
+  defp source_spike_message(%{url: url}, %{source: source}, user) do
     custom_text = get_custom_text(user.team_id, "source_spike")
 
     if is_nil(custom_text) do
@@ -107,6 +107,5 @@ defmodule EspiDni.ArticleSlackMessenger do
       _ -> nil
     end
   end
-
 
 end
