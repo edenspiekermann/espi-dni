@@ -1,5 +1,10 @@
 defmodule EspiDni.NotificationMessage do
+
   use EspiDni.Web, :model
+  alias EspiDni.{
+    Repo,
+    NotificationMessage
+  }
 
   schema "notification_messages" do
     field :text, :string
@@ -19,4 +24,15 @@ defmodule EspiDni.NotificationMessage do
     |> cast(params, @required_fields)
     |> validate_required(@required_fields)
   end
+
+  def random_message(team_id, type) do
+    Repo.one(
+      from notification_message in NotificationMessage,
+      where: notification_message.team_id == ^team_id,
+      where: notification_message.type == ^type,
+      order_by: fragment("RANDOM()"),
+      limit: 1
+    )
+  end
+
 end
