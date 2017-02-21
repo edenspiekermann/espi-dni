@@ -15,8 +15,8 @@ defmodule EspiDni.ArticleSlackMessenger do
   end
 
   def send_source_spike_message(article, source) do
-    message = source_spike_message(article, source)
     user    = article_user(article)
+    message = source_spike_message(article, source, user)
 
     send_message(user, message)
   end
@@ -45,11 +45,28 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
-  defp get_custom_text(team_id, type) do
-    case NotificationMessage.random_message(team_id, type) do
-      %NotificationMessage{text: custom_text} -> custom_text
-      _ -> nil
+  defp source_spike_message(%{url: url}, source, user) do
+    custom_text = get_custom_text(user.team_id, "source_spike")
+
+    if is_nil(custom_text) do
+      source_spike_message(%{url: url}, %{source: source})
+    else
+      case Gettext.Interpolation.interpolate(custom_text, %{article_url: url, source_name: source}) do
+        {:ok, text} -> text
+        _ -> source_spike_message(%{url: url}, %{source: source})
+      end
     end
+  end
+
+  defp source_spike_message(%{url: url}, %{source: source}) do
+    string_number = :rand.uniform(2)
+
+    Gettext.gettext(
+      EspiDni.Gettext,
+      "Generic Source Spike #{string_number}",
+      article_url: url,
+      source_name: source
+    )
   end
 
   defp source_spike_message(%{url: url}, %{source: "Twitter"}) do
@@ -68,17 +85,6 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
-  defp source_spike_message(%{url: url}, %{source: source}) do
-    string_number = :rand.uniform(2)
-
-    Gettext.gettext(
-      EspiDni.Gettext,
-      "Generic Source Spike #{string_number}",
-      article_url: url,
-      source_name: source
-    )
-  end
-
   defp article_user(article) do
     Repo.preload(article, :user).user
   end
@@ -94,5 +100,13 @@ defmodule EspiDni.ArticleSlackMessenger do
     parsed_url = URI.parse(url)
     parsed_url.host <> parsed_url.path
   end
+
+  defp get_custom_text(team_id, type) do
+    case NotificationMessage.random_message(team_id, type) do
+      %NotificationMessage{text: custom_text} -> custom_text
+      _ -> nil
+    end
+  end
+
 
 end
