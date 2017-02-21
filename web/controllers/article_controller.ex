@@ -3,7 +3,7 @@ defmodule EspiDni.ArticleController do
 
   alias EspiDni.Article
 
-  plug :authenticate
+  use Plug.ErrorHandler
   plug :scrub_params, "article" when action in [:create, :update]
 
   def index(conn, _params) do
@@ -81,17 +81,6 @@ defmodule EspiDni.ArticleController do
       where: article.id == ^id,
       where: article.user_id == ^user_id
     )
-  end
-
-  defp authenticate(conn, _opts) do
-    if conn.assigns.current_team && conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must be logged in to access that page")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
-    end
   end
 
   defp get_article(id) do

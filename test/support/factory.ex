@@ -25,6 +25,13 @@ defmodule EspiDni.Factory do
     }
   end
 
+  def notification_message_factory do
+    %EspiDni.NotificationMessage{
+      text: "Your article `%{article_url}` is very popular at the moment, the pageviews increased by %{count} in the last half an hour.",
+      type: "view_count_spike"
+    }
+  end
+
   def view_count_factory do
     %EspiDni.ViewCount{}
   end

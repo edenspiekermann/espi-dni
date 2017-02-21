@@ -66,6 +66,7 @@ textarea {
 body {
   font: 16px/26px 'RealText', 'Helvetica', 'Arial', sans-serif;
   background-color: #F6F6F6;
+  color: #31b0e2;
 }
 
 ul {
@@ -74,7 +75,7 @@ ul {
 }
 
 a {
-  color: white;
+  color: #31b0e2;
 }
 
 /* ===============
@@ -163,6 +164,7 @@ a {
   text-align: center;
   font-size: 34px;
   line-height: 1.4em;
+  color: white;
 }
 
 .bottom {
@@ -292,7 +294,7 @@ a {
 
 .team-management {
   color: #31b0e2;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .preferences__input {
@@ -323,6 +325,28 @@ a {
 
 .preferences__submit button:hover {
   cursor: pointer;
+}
+
+.messages {
+  font-size: 16px;
+}
+
+.messages__action a {
+  color: #9f9f9f;
+}
+.messages tr:nth-child(even) {
+  background-color: #F6F6F6;
+}
+
+.articles__action form {
+  display: inline-block;
+}
+
+.articles {
+  font-size: 16px;
+}
+.articles tr:nth-child(even) {
+  background-color: #F6F6F6;
 }
 
 .articles__action a {
@@ -381,6 +405,10 @@ a {
 
 .form {
   padding: 20px;
+}
+
+.form-group{
+  padding: 10px 0;
 }
 
 .form__label {
@@ -549,6 +577,10 @@ footer {
 }
 
 footer p {
+  color: white;
+}
+
+footer a {
   color: white;
 }
 

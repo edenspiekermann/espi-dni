@@ -28,6 +28,10 @@
         <% end %>
       </div>
     </div>
+    <div class="team-management">
+      <h3>Customise notification messages</h3>
+      <p>You can customise your notification messages <%= link "here", to: notification_message_path(@conn, :index) %></p>
+    </div>
 
     <h2 class="bottom__title">Your registered articles</h2>
     <div class="team-management">

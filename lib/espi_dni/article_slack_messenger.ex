@@ -2,22 +2,36 @@ defmodule EspiDni.ArticleSlackMessenger do
 
   alias EspiDni.{
     SlackWeb,
-    Repo
+    Repo,
+    NotificationMessage
   }
   import EspiDni.Gettext
 
   def send_view_spike_message(article, count_increase) do
-    message = view_spike_message(article, count_increase)
     user    = article_user(article)
+    message = view_spike_message(article, count_increase, user)
 
     send_message(user, message)
   end
 
   def send_source_spike_message(article, source) do
-    message = source_spike_message(article, source)
     user    = article_user(article)
+    message = source_spike_message(article, source, user)
 
     send_message(user, message)
+  end
+
+  defp view_spike_message(%{url: url}, count_increase, user) do
+    custom_text = get_custom_text(user.team_id, "view_count_spike")
+
+    if is_nil(custom_text) do
+      view_spike_message(%{url: url}, count_increase)
+    else
+      case Gettext.Interpolation.interpolate(custom_text, %{article_url: url, count: count_increase}) do
+        {:ok, text} -> text
+        _ -> view_spike_message(%{url: url}, count_increase)
+      end
+    end
   end
 
   defp view_spike_message(%{url: url}, count_increase) do
@@ -28,6 +42,30 @@ defmodule EspiDni.ArticleSlackMessenger do
       "Message Spike #{string_number}",
       article_url: url,
       count: count_increase
+    )
+  end
+
+  defp source_spike_message(%{url: url}, %{source: source}, user) do
+    custom_text = get_custom_text(user.team_id, "source_spike")
+
+    if is_nil(custom_text) do
+      source_spike_message(%{url: url}, %{source: source})
+    else
+      case Gettext.Interpolation.interpolate(custom_text, %{article_url: url, source_name: source}) do
+        {:ok, text} -> text
+        _ -> source_spike_message(%{url: url}, %{source: source})
+      end
+    end
+  end
+
+  defp source_spike_message(%{url: url}, %{source: source}) do
+    string_number = :rand.uniform(2)
+
+    Gettext.gettext(
+      EspiDni.Gettext,
+      "Generic Source Spike #{string_number}",
+      article_url: url,
+      source_name: source
     )
   end
 
@@ -47,17 +85,6 @@ defmodule EspiDni.ArticleSlackMessenger do
     )
   end
 
-  defp source_spike_message(%{url: url}, %{source: source}) do
-    string_number = :rand.uniform(2)
-
-    Gettext.gettext(
-      EspiDni.Gettext,
-      "Generic Source Spike #{string_number}",
-      article_url: url,
-      source_name: source
-    )
-  end
-
   defp article_user(article) do
     Repo.preload(article, :user).user
   end
@@ -72,6 +99,13 @@ defmodule EspiDni.ArticleSlackMessenger do
   defp url_without_protocol(url) do
     parsed_url = URI.parse(url)
     parsed_url.host <> parsed_url.path
+  end
+
+  defp get_custom_text(team_id, type) do
+    case NotificationMessage.random_message(team_id, type) do
+      %NotificationMessage{text: custom_text} -> custom_text
+      _ -> nil
+    end
   end
 
 end

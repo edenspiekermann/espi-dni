@@ -1,0 +1,32 @@
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Notification Messages</h1>
+</div>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <div class="back">
+      <%= link "Back", to: article_path(@conn, :index) %>
+    </div>
+    <ul>
+
+      <li>
+        <strong>Text:</strong>
+        <%= @notification_message.text %>
+      </li>
+
+      <li>
+        <strong>Type:</strong>
+        <%= @notification_message.type %>
+      </li>
+
+      <li>
+        <strong>Team:</strong>
+        <%= @notification_message.team_id %>
+      </li>
+
+    </ul>
+
+    <%= link "Edit", to: notification_message_path(@conn, :edit, @notification_message) %>
+    <%= link "Back", to: notification_message_path(@conn, :index) %>
+  </div>
+</div>

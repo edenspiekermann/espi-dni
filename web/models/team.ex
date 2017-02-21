@@ -15,6 +15,7 @@ defmodule EspiDni.Team do
     field :min_source_count_increase, :integer
     field :source_count_threshold,    :integer
     has_many :users,                  EspiDni.User
+    has_many :notification_messages,  EspiDni.NotificationMessage
 
     timestamps
   end

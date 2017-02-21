@@ -1,0 +1,15 @@
+<div class="hero">
+  <img class="hero__logo" src="/images/post_logo.png" alt="POST logo - Meet POST Bot"/>
+  <h1 class="hero__text">Notification Messages</h1>
+</div>
+<div class="bottom">
+  <div class="bottom__offset container">
+    <div class="back">
+      <%= link "Back To Messages", to: notification_message_path(@conn, :index) %>
+    </div>
+    <h2>New notification message</h2>
+
+    <%= render "form.html", changeset: @changeset,
+    action: notification_message_path(@conn, :create) %>
+  </div>
+</div>
