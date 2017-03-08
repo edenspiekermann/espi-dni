@@ -49,6 +49,9 @@ defmodule EspiDni.GoogleRealtimeClient do
         Enum.map(rows, fn(row) ->
           parse_viewcount(headers, row)
         end)
+      %{"columnHeaders" => headers} ->
+        Logger.info "No view count data found."
+        []
       _ ->
         Logger.error "Pageview response in unexpected format: #{inspect response}"
         []
