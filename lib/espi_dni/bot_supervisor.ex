@@ -1,4 +1,10 @@
 defmodule EspiDni.BotSupervisor do
+
+  @moduledoc """
+  Manages Slack realtime connections to teams.
+  Each team connection is created as a child process
+  """
+
   use Supervisor
   require Logger
   alias EspiDni.SlackRtm
@@ -18,7 +24,7 @@ defmodule EspiDni.BotSupervisor do
   end
 
   @doc """
-  Starts child `EspiDni.SlackRtm` process which opens a websocket connection to 
+  Starts child `EspiDni.SlackRtm` process which opens a websocket connection to
   connect a slackbot to a team using the provided token
   """
   def start_bot(token) do
