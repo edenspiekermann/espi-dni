@@ -1,4 +1,10 @@
 defmodule EspiDni.Team do
+
+  @moduledoc """
+  A module representing a team
+  A team has many users and holds the notification settings
+  """
+
   use EspiDni.Web, :model
 
   schema "teams" do
@@ -44,6 +50,10 @@ defmodule EspiDni.Team do
     |> cast(params, @required_fields, @optional_fields)
   end
 
+  @doc """
+  Returns a collection of all article paths belonging to a team
+  e.g. ["/articles/foo", "/articles/bar"]
+  """
   def article_paths(team) do
     EspiDni.Repo.all(
       from article in EspiDni.Article,
@@ -53,6 +63,9 @@ defmodule EspiDni.Team do
     )
   end
 
+  @doc """
+  Returns an atom representing how far along the setup process the team is
+  """
   def current_state(team) do
     case team  do
       %{slack_token: nil, google_token: nil, google_refresh_token: nil, google_property_id: nil} ->

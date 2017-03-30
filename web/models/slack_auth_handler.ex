@@ -1,13 +1,20 @@
 defmodule EspiDni.SlackAuthHandler do
 
   @moduledoc """
-  Create or retreive the team and user from an auth request
+  Create or retrieve the team and user from a slack oauth response
   """
+
   alias Ueberauth.Auth
   alias EspiDni.TeamFromAuth
   alias EspiDni.UserFromAuth
   import EspiDni.Gettext
 
+
+  @doc """
+  Finds or creates a team form a Slack oauth2 response.
+  If the team does not exist it will be created
+  If the user does not exist it will be created
+  """
   def init_from_auth(%Auth{} = auth) do
     with {:ok, team} <- TeamFromAuth.find_or_create(auth),
          {:ok, user} <- UserFromAuth.find_or_create(auth, team),
@@ -28,6 +35,8 @@ defmodule EspiDni.SlackAuthHandler do
     end
   end
 
+  # builds the message for the team based on what state the team is in with
+  # the setup process
   defp team_message(team) do
     case EspiDni.Team.current_state(team) do
       :new -> gettext "Initial Greeting"

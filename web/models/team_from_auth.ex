@@ -1,18 +1,24 @@
 defmodule EspiDni.TeamFromAuth do
 
   @moduledoc """
-  Create or retreive the team from an auth request
+  Create or retrieve the team from a Slack oauth request
   """
+
   alias Ueberauth.Auth
   alias EspiDni.Repo
   alias EspiDni.Team
 
+
+  @doc """
+  Returns or creates a team form a Slack oauth request
+  """
   def find_or_create(%Auth{} = auth) do
     auth
     |> team_params
     |> create_or_update
   end
 
+  # extracts the team params from the oauth response
   defp team_params(auth) do
     %{
       slack_id:    auth.credentials.other.team_id,
@@ -22,6 +28,7 @@ defmodule EspiDni.TeamFromAuth do
     }
   end
 
+  # creates or updates the team from the params
   defp create_or_update(%{slack_id: slack_id} = params) do
     team_params = scrubbed_params(params)
 
@@ -45,6 +52,7 @@ defmodule EspiDni.TeamFromAuth do
     auth.extra.raw_info.token.other_params["bot"]["bot_access_token"]
   end
 
+  # removes any nil values
   def scrubbed_params(params) do
     params
     |> Enum.filter(fn {_, value} -> !is_nil(value) end)

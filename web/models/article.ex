@@ -31,6 +31,10 @@ defmodule EspiDni.Article do
     |> unique_constraint(:url, name: :unique_user_article)
   end
 
+  @doc """
+  Returns team articles that have new view counts created within the last
+  5 minutes. Preloads users in result-set.
+  """
   def recently_active(team) do
     Repo.all(
       from article in Article,
@@ -57,6 +61,7 @@ defmodule EspiDni.Article do
     end
   end
 
+  # sets the article path by extracting it from the url
   defp set_path(changeset) do
     if url = get_change(changeset, :url) do
       put_change(changeset, :path, extract_path(url))

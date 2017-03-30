@@ -1,13 +1,19 @@
 defmodule EspiDni.GoogleAuthHandler do
 
-  @expected_param_count 3
   @moduledoc """
-  Upadte a team with goole credentials from auth response
+  Update a team with Google credentials from oauth response
   """
+
+  @expected_param_count 3
   alias EspiDni.Team
   alias EspiDni.Repo
   use Timex
 
+  @doc """
+  Updates the team with the oauth response from Google.
+  Save the new credentials to the team, and then enqueues a job to refresh the
+  teams google oauth token
+  """
   def update_from_auth(team, %{credentials: credentials}) do
     params =  params_from_auth(credentials)
 
@@ -31,6 +37,7 @@ defmodule EspiDni.GoogleAuthHandler do
   end
   def queue_for_refresh(_), do: {:error}
 
+  # the params we expect to receive from the google oauth repsonse
   defp params_from_auth(%{token: token, refresh_token: refresh_token, expires_at: expires_at}) do
     %{
       google_token: token,

@@ -1,4 +1,12 @@
 defmodule EspiDni.ViewCount do
+
+  @moduledoc """
+  A module to represent an article viewcount
+  A viewcount holds the number of viewcounts for a source for a 30 minute
+  period
+  """
+
+
   use EspiDni.Web, :model
 
   schema "view_counts" do
