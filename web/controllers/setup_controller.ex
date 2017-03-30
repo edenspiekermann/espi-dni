@@ -38,7 +38,7 @@ defmodule EspiDni.SetupController do
   end
 
   defp setup_complete?(team) do
-    !!(team.google_token && team.google_property_id && team.google_refresh_token)
+    Team.current_state(team) == :complete
   end
 
   defp queue_analytics(team) do
