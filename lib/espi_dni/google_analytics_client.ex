@@ -13,7 +13,7 @@ defmodule EspiDni.GoogleAnalyticsClient do
   @client_id Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_id]
   @client_secret Application.get_env(:ueberauth, Ueberauth.Strategy.Google.OAuth)[:client_secret]
 
-  @doc"""
+  @doc """
   Returns the google anlaytics web properties for a team's oauth2 token
   Returns properties as a collection of GoogleWebPeoperty structs:
   [%GoogleWebProperty{}]
@@ -31,7 +31,7 @@ defmodule EspiDni.GoogleAnalyticsClient do
     end
   end
 
-  @doc"""
+  @doc """
   Returns a new oauth2 token for a teams google account
   Uses a teams refresh_token and oauth2 access token to retrieve a new
   oauth token (These tokens expire after about 60 minutes)
@@ -71,13 +71,11 @@ defmodule EspiDni.GoogleAnalyticsClient do
     %{"access_token" => team.google_token}
   end
 
-  # the params required to refresh a google oauth2 token
-  # refresh_token: A token required to request new oaut2 tokens
-  # client_id: The google client_id of the appilcation making the request
-  # (this app)
-  # client_secret: The google client_secret of the appilcation making the
-  # request (this app)
-  # grant_type: the type of authorisation request being made
+  # the params required to refresh a Google oauth2 token
+  # refresh_token:  A token required to request new oaut2 tokens
+  # client_id:      The google client_id of the application making the request (this app)
+  # client_secret:  The google client_secret of the application making the request (this app)
+  # grant_type:     The type of authorisation request being made
   defp refresh_form(team) do
     [
       refresh_token: team.google_refresh_token,

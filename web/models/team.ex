@@ -64,7 +64,7 @@ defmodule EspiDni.Team do
   end
 
   @doc """
-  Returns an atom representing how far along the setup process the team is
+  Returns an atom representing how far along the setup process of the team is
   """
   def current_state(team) do
     case team  do

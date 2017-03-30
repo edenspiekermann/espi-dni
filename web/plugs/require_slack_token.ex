@@ -2,7 +2,7 @@ defmodule EspiDni.Plugs.RequireSlackToken do
 
   @moduledoc """
   Checks if the Slack token is present (a secret token that should be present
-  on all requests coming from slack verifying it is a real requeat)
+  on all requests coming from Slack verifying it is a real requeat)
   Passes through if it's present, halts otherwise
   """
 

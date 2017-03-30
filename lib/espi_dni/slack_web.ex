@@ -11,7 +11,7 @@ defmodule EspiDni.SlackWeb do
   alias EspiDni.Repo
   alias EspiDni.Team
 
-  @doc"""
+  @doc """
   Sends a user a message
   """
   def send_message(user, message) do

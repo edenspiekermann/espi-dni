@@ -1,7 +1,7 @@
 defmodule EspiDni.Plugs.SetSlackUser do
 
   @moduledoc """
-  Finds the team from the slack params
+  Finds the team from the Slack params
   If the team does not exist, returns a 404
   If the team exits, a user is found or creates from the slack params and
   added to the conn

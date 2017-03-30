@@ -11,9 +11,9 @@ defmodule EspiDni do
       supervisor(EspiDni.Endpoint, []),
       # Start the Ecto repository
       supervisor(EspiDni.Repo, []),
-      # Start supervisor for all bots
+      # Start supervisor for all slack connections
       supervisor(EspiDni.BotSupervisor, []),
-      # run task to connect exiting team
+      # run task to connect existing teams
       worker(EspiDni.TeamSetup, [], restart: :temporary)
     ]
 

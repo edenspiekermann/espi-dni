@@ -12,7 +12,7 @@ defmodule EspiDni.GoogleAuthHandler do
   @doc """
   Updates the team with the oauth response from Google.
   Save the new credentials to the team, and then enqueues a job to refresh the
-  teams google oauth token
+  teams Google oauth token
   """
   def update_from_auth(team, %{credentials: credentials}) do
     params =  params_from_auth(credentials)
@@ -37,7 +37,7 @@ defmodule EspiDni.GoogleAuthHandler do
   end
   def queue_for_refresh(_), do: {:error}
 
-  # the params we expect to receive from the google oauth repsonse
+  # the params we expect to receive from the Google oauth response
   defp params_from_auth(%{token: token, refresh_token: refresh_token, expires_at: expires_at}) do
     %{
       google_token: token,

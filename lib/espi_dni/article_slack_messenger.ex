@@ -12,7 +12,7 @@ defmodule EspiDni.ArticleSlackMessenger do
   import EspiDni.Gettext
 
   @doc """
-  Sends a view spike message to an articles user
+  Sends a view spike message to an article's user
   """
   def send_view_spike_message(article, count_increase) do
     user    = article_user(article)

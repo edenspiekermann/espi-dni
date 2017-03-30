@@ -41,7 +41,7 @@ defmodule EspiDni.ArticleViewCountNotifier do
     )
   end
 
-  # Decides if the different between the current and previous view counts
+  # Decides if the difference between the current and previous view counts
   # is a view count spike.
   # Is the difference a big enough view count increase
   # AND is the difference a big enough percentage increase
