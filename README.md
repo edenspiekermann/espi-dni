@@ -107,3 +107,34 @@ We are using [Codeship](https://www.codeship.io/projects/169763) for continuous 
 ### Deployment
 
 Deployment to production is automatically carried out as part of the codeship build process. When changes are pushed to `master`, all tests are run, and if the build passes, the current state of `master` is deployed to heroku ([https://espi-dni.herokuapp.com](https://espi-dni.herokuapp.com). As part of the deployment process, any pending migrations will be run, and the server will be restarted.
+
+## API Keys
+
+The application requires API integration with both the Google Analytics API and Slack API.
+
+### Google API Keys
+To use any of the Google Analytics APIs a Google Client ID and Client Secret are required. In production these are added as environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. In development the keys can be added directly to the dev.secret.exs file which is is not added to git.
+
+### Google Analytics API
+
+The application is using Google Analytics [Realtime API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/). This API is currently in limited beta and access must be requested to use the API.
+
+### Google Oauth2
+
+The application is using [Google's Oauth2 API](https://developers.google.com/identity/protocols/OAuth2) to retrieve Google Oauth2 access tokens to view Google Analytics on a users behalf.
+
+### Slack API Keys
+
+To use any of the Slack APIs a Slack Client ID and Client Secret are required. In production these are added as environment variables `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`. In development the keys can be added directly to the dev.secret.exs file which is is not added to git. This Slack ClientID and Secret are obtained in the Slack [App Management Console](https://api.slack.com/apps/).
+
+Any requests that are received from slack must contain a token from slack verifying the request is actually coming from slack. The token is stored as an environment variable `SLACK_TOKEN` on production and in dev.secrets.exs on development. The token can be obtained in the Slack [App Management Console](https://api.slack.com/apps/).
+
+
+### Slack Realtime API
+
+The slackbot connects to a slack team using the Slack [Realtime API](https://api.slack.com/rtm). This opens a real-time web socket connection that is managed by the `BotSupervisor` module
+
+### Slack Web API
+
+Notifications are sent via the [Slack Web API](https://api.slack.com/web).
+
