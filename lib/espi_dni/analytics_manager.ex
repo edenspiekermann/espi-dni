@@ -1,5 +1,10 @@
 defmodule EspiDni.AnalyticsManager do
 
+  @moduledoc """
+  A module that retrieves analytics for a team and sends notifications if
+  the analytics retrieve have caused a spike
+  """
+
   require Logger
   alias EspiDni.{
     GoogleRealtimeClient,
@@ -9,6 +14,17 @@ defmodule EspiDni.AnalyticsManager do
     ArticleViewSourceNotifier
   }
 
+  @doc """
+  Makes a call to Google analytics using GoogleRealtimeClient to get the recent
+  pageviews for all articles belonging to a team.
+
+  The viewcounts retrieved from Google Analytics are processed, and saved
+  if the corresponding article is found.
+
+  Once all viewcounts have been processed, the recently_active articles
+  (articles that have received view_counts in the past 2 hours) are analysed
+  to see if there has been a spike and a notification is sent accordingly
+  """
   def retrieve_anlaytics(team) do
     Logger.info "Retrieving analytics for team: #{team.id}"
     results = GoogleRealtimeClient.get_pageviews(team)

@@ -1,5 +1,9 @@
 defmodule EspiDni.TeamSetup do
 
+  @moduledoc """
+  A module for setting up slackbot connections for existing teams
+  """
+
   require Logger
   alias EspiDni.Repo
   alias EspiDni.Team
@@ -14,6 +18,7 @@ defmodule EspiDni.TeamSetup do
     for team <- slack_teams, do: start_bot(team)
   end
 
+  # Returns all teams with a slack oauth2 token
   defp slack_teams do
     Repo.all(
       from team in EspiDni.Team,
@@ -21,6 +26,8 @@ defmodule EspiDni.TeamSetup do
     )
   end
 
+  # Asks the BotSupervisor to start and supervise a realtime messaging
+  # connection for a team
   defp start_bot(team) do
     case EspiDni.BotSupervisor.start_bot(team.slack_token) do
       {:ok, _pid} ->

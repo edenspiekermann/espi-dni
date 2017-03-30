@@ -1,10 +1,19 @@
 defmodule EspiDni.SlackWeb do
+
+  @moduledoc """
+  A module for dealing with slacks web API
+  Uses https://github.com/BlakeWilliams/Elixir-Slack
+  """
+
   use Slack
 
   import Ecto.Query, only: [from: 1, from: 2]
   alias EspiDni.Repo
   alias EspiDni.Team
 
+  @doc """
+  Sends a user a message
+  """
   def send_message(user, message) do
     Slack.Web.Chat.post_message(
       user.slack_id,

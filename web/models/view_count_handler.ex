@@ -1,10 +1,19 @@
 defmodule EspiDni.ViewCountHandler do
 
+  @moduledoc """
+  A module process and save new view count data
+  """
+
   require Logger
   alias EspiDni.Repo
   alias EspiDni.ViewCount
   import Ecto.Query
 
+  @doc """
+  Accepts a team and a struct containing view count data in the form:
+  %{path: "/fooo", count: 42, source: "Twitter}.
+  It finds the team article with the matching path and creates the view count
+  """
   def process_view_count(view_count_data, team) do
     article_id = get_article_id(view_count_data.path, team)
 

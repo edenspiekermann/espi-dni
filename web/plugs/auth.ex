@@ -1,5 +1,10 @@
 defmodule EspiDni.Plugs.Auth do
 
+  @moduledoc """
+  Ensure that the current team and current user set on the conn
+  Passes through it they are set, halts otherwise
+  """
+
   import Plug.Conn
   import Phoenix.Controller, only: [put_flash: 3, redirect: 2]
 

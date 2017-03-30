@@ -1,5 +1,10 @@
 defmodule EspiDni.NotificationMessage do
 
+  @moduledoc """
+  A custom notification message for a team that can be used for view count and
+  view source notifications
+  """
+
   use EspiDni.Web, :model
   alias EspiDni.{
     Repo,
@@ -25,6 +30,9 @@ defmodule EspiDni.NotificationMessage do
     |> validate_required(@required_fields)
   end
 
+  @doc """
+  Returns a random notification message of specific type for a team
+  """
   def random_message(team_id, type) do
     Repo.one(
       from notification_message in NotificationMessage,

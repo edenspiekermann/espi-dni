@@ -1,4 +1,10 @@
 defmodule EspiDni.User do
+
+  @moduledoc """
+  A module representing a user
+  A user has many articles and belongs to a team
+  """
+
   use EspiDni.Web, :model
 
   schema "users" do

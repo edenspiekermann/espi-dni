@@ -1,12 +1,16 @@
 defmodule EspiDni.UserFromAuth do
 
   @moduledoc """
-  Create or retreive the user from an auth request
+  Create or retrieve the user from a Slack oauth response
   """
+
   alias Ueberauth.Auth
   alias EspiDni.Repo
   alias EspiDni.User
 
+  @doc """
+  Returns an new or exiting user from a slack oauth response and team
+  """
   def find_or_create(%Auth{} = auth, team) do
     auth
     |> user_params
@@ -14,6 +18,7 @@ defmodule EspiDni.UserFromAuth do
     |> create_or_update
   end
 
+  # Extracts the user param from the slack oauth response
   defp user_params(auth) do
     %{
       slack_id: auth.credentials.other.user_id,
@@ -24,6 +29,7 @@ defmodule EspiDni.UserFromAuth do
     }
   end
 
+  # creates or updates a user from slack params
   defp create_or_update(%{slack_id: slack_id} = params) do
     case user_by_slack_id(slack_id) do
       nil ->
@@ -41,6 +47,7 @@ defmodule EspiDni.UserFromAuth do
     Repo.get_by(User, slack_id: slack_id)
   end
 
+  # Pulls out a name from the slack oauth response
   defp name_from_auth(auth) do
     if auth.info.name do
       auth.info.name
