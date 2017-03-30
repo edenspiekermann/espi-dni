@@ -1,5 +1,11 @@
 defmodule EspiDni.Plugs.SetSessionData do
 
+  @moduledoc """
+  assigns the current user and team to the conn so they can be easily accessed
+  Note: does not check if they exist or not, if the team or user are not found,
+  "nil" is assigned. Use the Auth plug to ensure they exist
+  """
+
   import Plug.Conn
 
   def init(opts) do

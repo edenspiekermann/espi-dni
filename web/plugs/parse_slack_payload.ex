@@ -1,5 +1,9 @@
 defmodule EspiDni.Plugs.ParseSlackPayload do
 
+  @moduledoc """
+  Parses slack "payload" JSON param and assigns it to the conn
+  """
+
   import Plug.Conn
 
   def init(default), do: default
