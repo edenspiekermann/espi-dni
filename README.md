@@ -107,3 +107,64 @@ We are using [Codeship](https://www.codeship.io/projects/169763) for continuous 
 ### Deployment
 
 Deployment to production is automatically carried out as part of the codeship build process. When changes are pushed to `master`, all tests are run, and if the build passes, the current state of `master` is deployed to heroku ([https://espi-dni.herokuapp.com](https://espi-dni.herokuapp.com). As part of the deployment process, any pending migrations will be run, and the server will be restarted.
+
+## API Keys
+
+The application requires API integration with both the Google Analytics API and Slack API.
+
+### Google API Keys
+To use any of the Google Analytics APIs a Google Client ID and Client Secret are required. In production these are added as environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. In development the keys can be added directly to the dev.secret.exs file which is is not added to git.
+
+### Google Analytics API
+
+The application is using Google Analytics [Realtime API](https://developers.google.com/analytics/devguides/reporting/realtime/v3/). This API is currently in limited beta and access must be requested to use the API.
+
+### Google Oauth2
+
+The application is using [Google's Oauth2 API](https://developers.google.com/identity/protocols/OAuth2) to retrieve Google Oauth2 access tokens to view Google Analytics on a users behalf.
+
+### Slack API Keys
+
+To use any of the Slack APIs a Slack Client ID and Client Secret are required. In production these are added as environment variables `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET`. In development the keys can be added directly to the dev.secret.exs file which is is not added to git. This Slack ClientID and Secret are obtained in the Slack [App Management Console](https://api.slack.com/apps/).
+
+Any requests that are received from slack must contain a token from slack verifying the request is actually coming from slack. The token is stored as an environment variable `SLACK_TOKEN` on production and in dev.secrets.exs on development. The token can be obtained in the Slack [App Management Console](https://api.slack.com/apps/).
+
+
+### Slack Realtime API
+
+The slackbot connects to a slack team using the Slack [Realtime API](https://api.slack.com/rtm). This opens a real-time web socket connection that is managed by the `BotSupervisor` module
+
+### Slack Web API
+
+Spike notifications are sent via the [Slack Web API](https://api.slack.com/web).
+
+### Local Development
+
+To work on a local version of the project, it makes sense to create a personal slackbot that can send requests to your local environment using a tool like [ngrok](https://ngrok.com/).
+
+#### To set up a slackbot for development
+
+* Before you start, install ngrok (or a similar tool) and take note of the public URL your application is running at e.g. `https://foobar.eu.ngrok.io`
+* Visit https://api.slack.com/apps and hit 'Create New App'
+* Give the app a name (let's say `post-dev`) and pick the team you want to use it with.
+* Next click on 'Interactive Messages' and click 'Enable Interactive Messages'. 
+* Go to 'Slack Commands' and create a new commad, let's call it `add-dev`
+* Set the Request URL for the slash command to your local ngrok `/slack/articles/new` path. e.g. `https://foobar.eu.ngrok.io/slack/articles/new`
+* Add a bot user to your application, give it name, (e.g. 'post-dev')
+* Set the Request URL for interactive messages to the `/slack/messages/new` path of your local environment. e.g. `https://foobar.eu.ngrok.io/slack/messages/new`
+* Save the Client ID, Client Secret and Verification Token to your local environment and restart your application.
+* Add another method in your SlackArticleController module to respond to the new `add-dev` slash command you added
+
+e.g. Add a second `new` method to match the slash command locally (or just change the existing one __locally only__)
+```elixir
+  def new(conn, %{"command" => "/add-dev", "text" => url}) do
+    changeset = Article.changeset(%Article{}, %{url: url, user_id: conn.assigns.current_user.id})
+    if changeset.valid? do
+      render(conn, "confirm.json", url: url)
+    else
+      text conn, error_string(changeset)
+    end
+  end
+```
+
+You should now be able to use your newly created slackbot with your local environment. Note, if your ngrok endpoint changes, you will need to update the endpoints you've set in your slackbot for the slash command and interactive messages
