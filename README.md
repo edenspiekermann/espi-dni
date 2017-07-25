@@ -26,7 +26,21 @@ The user flow is as follows:
 
 ## Development Setup
 
-### Prerequisites
+There are two ways to set up this application – using Docker or install everything natively on macOS.
+In either case you will have to:
+
+* Clone this repository and
+* Copy the `dev.secret.exs.sample` file to `dev.secret.exs` and add the appropriate values
+
+### Option 1: Use Docker
+
+* Get [Docker Community Edition for your platform](https://store.docker.com/search?type=edition&offering=community)
+* Run `docker-compose up web`.
+* Open http://localhost:4000 in your browser
+
+### Option 2: Native Installation on macOS
+
+#### Prerequisites
 
 The app is built using:
 
@@ -36,7 +50,7 @@ The app is built using:
 * PostgreSQL `9.4`
 * Redis `3.2`
 
-#### Homebrew
+##### Homebrew
 
 Homebrew is a package manger for OSX, we'll use this install `node` and `elixir`.
 
@@ -44,7 +58,7 @@ Homebrew is a package manger for OSX, we'll use this install `node` and `elixir`
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-#### Elixir
+##### Elixir
 
 Install Elixir via Homebrew
 
@@ -52,11 +66,11 @@ Install Elixir via Homebrew
 brew install elixir
 ```
 
-#### Postgresql
+##### Postgresql
 
 Install PostgreSQL using the [Postgres.app](http://postgresapp.com)
 
-#### Node.js
+##### Node.js
 
 Install noedejs via Homebrew
 
@@ -64,7 +78,7 @@ Install noedejs via Homebrew
 brew install nodejs
 ```
 
-#### Redis
+##### Redis
 
 Install redis via Homebrew
 
@@ -72,16 +86,14 @@ Install redis via Homebrew
 brew install redis
 ```
 
-### Setup
+#### Setup
 
-* Clone the repo
-* Copy the `dev.secret.exs.sample` file to `dev.secret.exs` and add the appropriate values
 * Install dependencies with `mix deps.get`
   * If you get errors here, open a new terminal window. Some commands don't yet have proper binding if you've just installed `elixir` from Homebrew.
 * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
 * Install Node.js dependencies with `npm install`
 
-### Running the App
+#### Running the App
 
 To start the app locally:
 
