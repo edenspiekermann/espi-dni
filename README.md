@@ -75,7 +75,7 @@ brew install redis
 ### Setup
 
 * Clone the repo
-* Copy the `dev.secret.exs.sample` file to `dev.secret.ext` and add the appropriate values
+* Copy the `dev.secret.exs.sample` file to `dev.secret.exs` and add the appropriate values
 * Install dependencies with `mix deps.get`
   * If you get errors here, open a new terminal window. Some commands don't yet have proper binding if you've just installed `elixir` from Homebrew.
 * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
