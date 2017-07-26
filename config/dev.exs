@@ -36,7 +36,9 @@ config :phoenix, :stacktrace_depth, 20
 config :espi_dni, EspiDni.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "espi_dni_dev",
-  hostname: "localhost",
+  hostname: System.get_env("DATABASE_HOST") || "localhost",
+  username: System.get_env("DATABASE_USER") || "postgres",
+  password: System.get_env("DATABASE_PASSWORD"),
   pool_size: 10
 
 config :rollbax,
@@ -48,7 +50,7 @@ config :rollbax, enabled: :log
 
 # configure exq for background jobs with redis
 config :exq,
-  host: "127.0.0.1",
+  host: System.get_env("REDIS_HOST") || "localhost",
   port: 6379,
   namespace: "exq",
   concurrency: 1000,

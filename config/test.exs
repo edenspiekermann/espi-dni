@@ -13,7 +13,9 @@ config :logger, level: :warn
 config :espi_dni, EspiDni.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "espi_dni_test",
-  hostname: "localhost",
+  hostname: System.get_env("DATABASE_HOST") || "localhost",
+  username: System.get_env("DATABASE_USER") || "postgres",
+  password: System.get_env("DATABASE_PASSWORD"),
   pool: Ecto.Adapters.SQL.Sandbox,
   ownership_timeout: 50_0000
 
@@ -23,6 +25,14 @@ config :rollbax,
 
 # Set rollbar erorrs to just log locally
 config :rollbax, enabled: :log
+
+# configure exq for background jobs with redis
+config :exq,
+  host: System.get_env("REDIS_HOST") || "localhost",
+  port: 6379,
+  namespace: "exq-test",
+  concurrency: 1000,
+  queues: ["default"]
 
 config :espi_dni, EspiDni.Plugs.RequireSlackToken,
   slack_token: "test-slack-token"
